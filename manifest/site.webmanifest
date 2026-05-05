@@ -1,0 +1,22 @@
+{
+  "name": "Euro Detailing",
+  "short_name": "Euro Detailing",
+  "description": "Premium mobile car detailing in Newton, Massachusetts and surrounding areas.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#090c12",
+  "theme_color": "#0d1017",
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
