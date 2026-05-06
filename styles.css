@@ -225,17 +225,12 @@ button {
 
 .button:hover,
 .button:focus-visible,
-.slide-card-book:hover,
-.slide-card-book:focus-visible,
-.slider-arrow:hover,
-.slider-arrow:focus-visible,
 .reviews-link:hover,
 .reviews-link:focus-visible {
   transform: translateY(-1px);
 }
 
 .button-primary,
-.slide-card-book,
 .reviews-link {
   background: #ffffff;
   color: #101521;
@@ -319,40 +314,6 @@ button {
   margin-top: 1.7rem;
 }
 
-.hero-points,
-.check-list,
-.slide-card-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.hero-points {
-  margin-top: 1.5rem;
-  display: grid;
-  gap: 0.65rem;
-}
-
-.hero-points li,
-.check-list li,
-.slide-card-list li {
-  position: relative;
-  padding-left: 1.2rem;
-  color: var(--muted);
-}
-
-.hero-points li::before,
-.check-list li::before,
-.slide-card-list li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.68rem;
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 50%;
-  background: #fff;
-}
 
  .reassurance-section {
     padding: 20px 0;
@@ -948,11 +909,6 @@ button {
 
 .faq-list {
   display: grid;
-  gap: 1rem;
-}
-
-.faq-list {
-  display: grid;
   gap: 0.85rem;
   margin-top: 2.5rem;
 }
@@ -1153,19 +1109,10 @@ button {
     justify-content: flex-start;
   }
 
-  .services-slider {
-    max-width: 980px;
-  }
-
-  .slide-card {
-    width: 320px;
-  }
-
   .extra-services-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .service-summary-grid,
   .value-grid {
     grid-template-columns: 1fr;
   }
@@ -1216,40 +1163,6 @@ button {
     padding: 72px 0;
   }
 
-  .services-container {
-    width: min(100% - 24px, 1400px);
-  }
-
-  .services-slider-wrap {
-    min-height: auto;
-  }
-
-  .services-slider {
-    height: auto;
-    max-width: 100%;
-  }
-
-  .slide-card {
-    position: relative;
-    width: 100%;
-    left: auto !important;
-    right: auto !important;
-    transform: none !important;
-    display: none;
-    opacity: 0;
-  }
-
-  .slide-card.center {
-    display: block;
-    opacity: 1;
-  }
-
-  .slide-card.left,
-  .slide-card.right,
-  .slide-card.hidden-left,
-  .slide-card.hidden-right {
-    display: none;
-  }
 }
 
 @media (max-width: 720px) {
@@ -1269,22 +1182,15 @@ button {
     max-width: 100%;
   }
 
-  .slide-card-meta,
   .contact-grid {
     grid-template-columns: 1fr;
   }
 
-  .vehicle-selector-options,
-  .slide-card-toggle,
   .contact-actions {
     flex-direction: column;
   }
 
-  .vehicle-option-btn,
-  .slide-toggle-btn,
-  .maintenance-btn,
-  .button,
-  .slide-card-book {
+  .button {
     width: 100%;
   }
 
@@ -1328,48 +1234,11 @@ button {
     border-radius: 22px;
   }
 
-  .comparison-card,
-  .slide-card {
+  .comparison-card {
     border-radius: 22px;
   }
 }
 
-.slide-card {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%) scale(0.85);
-  opacity: 0;
-  transition: all 0.4s ease;
-}
-
-.slide-card.center {
-  transform: translateX(-50%) scale(1);
-  opacity: 1;
-  z-index: 3;
-}
-
-.slide-card.left {
-  transform: translateX(-150%) scale(0.9);
-  opacity: 0.5;
-  z-index: 2;
-}
-
-.slide-card.right {
-  transform: translateX(50%) scale(0.9);
-  opacity: 0.5;
-  z-index: 2;
-}
-
-.slide-card.hidden-left {
-  transform: translateX(-220%) scale(0.8);
-  opacity: 0;
-}
-
-.slide-card.hidden-right {
-  transform: translateX(220%) scale(0.8);
-  opacity: 0;
-}
 
 /* ================= Services section ================= */
 
@@ -1530,7 +1399,7 @@ button {
 
 .detail-hero {
   position: relative;
-  min-height: 420px;
+  min-height: 300px;
   background-size: cover;
   background-position: center;
   border-bottom: 1px solid var(--accent);
@@ -1555,7 +1424,7 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 420px;
+  min-height: 300px;
   padding: 2rem 0 3rem;
 }
 
@@ -1619,7 +1488,7 @@ button {
 }
 
 .tier-section {
-  padding: 4.5rem 0 6rem;
+  padding: 2rem 0 2.5rem;
   background-image: url("images/Swirling dark liquid pattern.png");
   background-size: cover;
   background-position: center;
@@ -1635,11 +1504,10 @@ button {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 2rem 2rem 2rem;
+  padding: 1.4rem 1.5rem 1.5rem;
   border-radius: var(--radius-xl);
   background: linear-gradient(180deg, rgba(20, 26, 40, 0.92), rgba(12, 16, 26, 0.96));
   border: 1px solid rgba(255, 255, 255, 0.08);
-  min-height: 560px;
   transition: border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1656,7 +1524,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.65rem;
 }
 
 .tier-card-label {
@@ -1678,24 +1546,25 @@ button {
 }
 
 .tier-card h2 {
-  margin: 0 0 0.5rem;
-  font-size: clamp(1.8rem, 3vw, 2.3rem);
+  margin: 0 0 0.35rem;
+  font-size: clamp(1.5rem, 2.5vw, 1.9rem);
   letter-spacing: -0.02em;
   line-height: 1.05;
 }
 
 .tier-card-description {
-  margin: 0 0 1.5rem;
+  margin: 0 0 0.85rem;
   color: var(--muted);
-  line-height: 1.65;
+  line-height: 1.5;
+  font-size: 0.95rem;
 }
 
 .size-selector {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.4rem;
-  margin: 0 0 1.5rem;
-  padding: 0.35rem;
+  margin: 0 0 0.85rem;
+  padding: 0.3rem;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1710,7 +1579,7 @@ button {
   font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  padding: 0.55rem 0.5rem;
+  padding: 0.4rem 0.5rem;
   border-radius: 999px;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
@@ -1736,22 +1605,23 @@ button {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: rgba(244, 247, 251, 0.55);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.45rem;
 }
 
 .tier-included {
   list-style: none;
   padding: 0;
-  margin: 0 0 1.75rem;
+  margin: 0 0 1rem;
   display: grid;
-  gap: 0.65rem;
+  gap: 0.4rem;
 }
 
 .tier-included li {
   position: relative;
   padding-left: 1.5rem;
   color: rgba(244, 247, 251, 0.88);
-  line-height: 1.45;
+  line-height: 1.35;
+  font-size: 0.95rem;
 }
 
 .tier-included li::before {
@@ -1767,13 +1637,14 @@ button {
 }
 
 .tier-card-footer {
+  position: relative;
   margin-top: auto;
-  padding-top: 1.5rem;
+  padding-top: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
   display: grid;
   grid-template-columns: auto auto 1fr;
   align-items: end;
-  gap: 1.25rem;
+  gap: 1rem;
 }
 
 .tier-price {
@@ -1791,9 +1662,11 @@ button {
 }
 
 .tier-price-value {
-  font-size: 1.65rem;
+  display: inline-block;
+  font-size: 1.45rem;
   font-weight: 700;
   letter-spacing: -0.01em;
+  transition: color 0.25s ease;
 }
 
 .tier-time {
@@ -1826,10 +1699,6 @@ button {
 }
 
 /* ============ Maintenance toggle ============ */
-
-.tier-card-footer {
-  position: relative;
-}
 
 .tier-maint-btn {
   position: relative;
@@ -1969,11 +1838,6 @@ button {
 }
 
 /* Price flip animation */
-.tier-price-value {
-  display: inline-block;
-  transition: color 0.25s ease;
-}
-
 .tier-price-value.is-flipping {
   animation: priceFlip 0.45s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
@@ -2043,12 +1907,12 @@ button {
 /* ============ Maintenance Info Banner ============ */
 
 .maintenance-info {
-  margin-top: 2.5rem;
+  margin-top: 1.5rem;
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 1.75rem;
+  gap: 1.25rem;
   align-items: start;
-  padding: 2rem 2.25rem;
+  padding: 1.5rem 1.75rem;
   border: 1px solid rgba(36, 196, 132, 0.28);
   border-radius: var(--radius-lg);
   background:
