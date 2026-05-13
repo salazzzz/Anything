@@ -1120,33 +1120,65 @@ button {
 
 @media (max-width: 920px) {
   :root {
-    --header-height: 86px;
+    --header-height: 64px;
+  }
+
+  .site-header {
+    min-height: var(--header-height);
   }
 
   .header-inner {
-    grid-template-columns: 1fr;
-    justify-items: start;
-    padding: 0.95rem 0;
+    min-height: var(--header-height);
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "brand . actions"
+      "nav   nav nav";
+    align-items: center;
+    padding: 0.45rem 0;
+    row-gap: 0;
+    column-gap: 0.75rem;
   }
 
+  .brand        { grid-area: brand; gap: 0.55rem; }
+  .header-actions { grid-area: actions; flex-wrap: nowrap; gap: 0.4rem; justify-content: flex-end; }
+
   .site-nav {
+    grid-area: nav;
     position: static;
     left: auto;
     transform: none;
     justify-content: flex-start;
-    gap: 1rem;
+    gap: 1.1rem;
     overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
     width: 100%;
-    padding-bottom: 0.15rem;
+    padding: 0.3rem 0 0.35rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    scrollbar-width: none;
   }
+  .site-nav::-webkit-scrollbar { display: none; }
+  .site-nav a { flex: 0 0 auto; font-size: 0.9rem; white-space: nowrap; }
 
-  .header-actions {
-    justify-content: flex-start;
-    flex-wrap: wrap;
+  /* Social icons are too large for mobile header — hide them */
+  .social-link,
+  .social-link1 { display: none; }
+
+  /* Compact logo */
+  .logo-image { width: 42px; height: 42px; }
+  .brand-name { font-size: 1rem; }
+  .brand-subtitle { font-size: 0.75rem; }
+
+  /* Book Now stays inline, never full-width */
+  .header-actions .button {
+    width: auto !important;
+    min-height: 40px;
+    padding: 0.45rem 1rem;
+    font-size: 0.88rem;
   }
 
   .reassurance-section {
-    padding: 72px 0;
+    padding: 56px 0;
   }
 
   .reassurance-container {
@@ -1160,7 +1192,7 @@ button {
   }
 
   .services-section {
-    padding: 72px 0;
+    padding: 56px 0;
   }
 
 }
@@ -1192,6 +1224,11 @@ button {
 
   .button {
     width: 100%;
+  }
+
+  /* Keep header Book Now inline even when .button is full-width */
+  .header-actions .button {
+    width: auto !important;
   }
 
   .extra-services-grid {
@@ -2116,5 +2153,145 @@ button {
 
   .tier-maint-btn {
     width: 100%;
+  }
+}
+
+/* ================================================================
+   MOBILE OPTIMIZATION — phones ≤ 480px
+   ================================================================ */
+@media (max-width: 480px) {
+  body {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
+  }
+
+  .container {
+    width: min(calc(100% - 1.25rem), var(--container));
+  }
+
+  /* Fine-tune header for smallest phones */
+  .logo-image { width: 38px; height: 38px; }
+  .brand-name { font-size: 0.92rem; line-height: 1.15; }
+  .brand-subtitle { font-size: 0.68rem; }
+  .header-actions .button {
+    padding: 0.4rem 0.85rem;
+    font-size: 0.82rem;
+  }
+
+  /* Hero */
+  .hero-grid { padding: 2.25rem 0 2.75rem; min-height: auto; gap: 1.1rem; }
+  .hero-eyebrow { font-size: 0.7rem; }
+  .location-pill { font-size: 0.8rem; padding: 0.4rem 0.8rem; margin-bottom: 0.85rem; }
+  .hero-copy h1 {
+    font-size: clamp(2rem, 9vw, 2.6rem);
+    line-height: 1.05;
+    margin-bottom: 0.85rem;
+    max-width: 100%;
+    letter-spacing: -0.025em;
+  }
+  .hero-description { font-size: 0.98rem; line-height: 1.55; }
+  .hero-buttons { flex-direction: column; gap: 0.6rem; margin-top: 1.2rem; }
+  .hero-buttons .button { width: 100%; }
+
+  /* Sections */
+  .section { padding: 3rem 0; }
+  .section-header { margin-bottom: 1.5rem; }
+  .section-header h2, .glass-card h2 {
+    font-size: clamp(1.55rem, 6vw, 2.1rem);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+  .section-header p { font-size: 0.95rem; line-height: 1.55; }
+
+  /* Review + comparison */
+  .reassurance-section { padding: 2.75rem 0; }
+  .section-tag { font-size: 0.8rem; padding: 7px 14px; }
+  .reassurance-title { font-size: clamp(1.65rem, 6.5vw, 2.2rem); line-height: 1.08; }
+  .google-review-card { padding: 1.1rem 1.15rem; border-radius: 18px; }
+  .google-badge { width: 40px; height: 40px; }
+  .google-rating-number { font-size: 1.25rem; }
+  .google-review-quote { font-size: 0.95rem; line-height: 1.6; }
+  .comparison-wrapper { aspect-ratio: 4 / 3; }
+  .comparison-card { border-radius: 18px; }
+  .comparison-handle { width: 44px; height: 44px; }
+
+  /* Services */
+  .services-section { padding: 2.75rem 0; }
+  .services-section .section-header h2 { white-space: normal; font-size: clamp(1.55rem, 6vw, 2rem); }
+  .services-cards { gap: 0.9rem; margin-top: 1.5rem; }
+  .service-card { aspect-ratio: 4 / 3; border-radius: 22px; }
+  .service-card-content { padding: 1rem 1.15rem 1.2rem; }
+  .service-card-content h3 { font-size: 1.25rem; max-width: 14ch; }
+  .service-card-arrow { width: 40px; height: 40px; font-size: 1rem; }
+
+  /* Extras + value */
+  .section-extra, .section-value { padding: 2.5rem 0; }
+  .section-extra .section-header h2, .section-value .section-header h2 {
+    white-space: normal;
+    font-size: clamp(1.4rem, 5.5vw, 1.85rem);
+  }
+  .extra-service-card { padding: 1.1rem 1.15rem; gap: 0.45rem; }
+  .extra-service-card h3 { font-size: 1rem; }
+  .extra-service-card p { font-size: 0.9rem; line-height: 1.5; }
+  .value-grid { gap: 0.85rem; margin-top: 1.5rem; }
+  .value-card { padding: 1.4rem 1.3rem 1.35rem; }
+  .value-card h3 { font-size: 1.15rem; }
+  .value-num { width: 38px; height: 38px; font-size: 0.82rem; margin-bottom: 0.85rem; }
+
+  /* Service area + map */
+  .section-service-area { padding: 2.5rem 0; }
+  .section-service-area .glass-card { padding: 1.2rem 1.15rem; }
+  .section-service-area .glass-card h2 { font-size: clamp(1.3rem, 5.5vw, 1.6rem); }
+  .section-service-area .service-area-tags span { padding: 0.35rem 0.7rem; font-size: 0.82rem; }
+  .section-service-area .location-map-wide .location-map-image,
+  .location-map-image { height: 240px; }
+
+  /* FAQ */
+  .section-faq { padding: 2.75rem 0; }
+  .faq-list { gap: 0.6rem; margin-top: 1.75rem; }
+  .faq-item summary { padding: 1rem 1.1rem; font-size: 1rem; min-height: 44px; }
+  .faq-item p { padding: 0 1.1rem 1.1rem; font-size: 0.95rem; line-height: 1.6; }
+
+  /* Contact */
+  .section-contact { padding: 2.75rem 0; }
+  .contact-grid { grid-template-columns: 1fr; gap: 0.6rem; }
+  .contact-card { padding: 0.95rem 1rem !important; }
+  .contact-actions { gap: 0.55rem; margin-top: 1.1rem; }
+  .contact-actions .button { width: 100%; padding: 0.7rem 1rem; }
+
+  /* Footer */
+  .footer-inner { grid-template-columns: 1fr; gap: 0.9rem; padding: 1.4rem 0; }
+  .footer-nav, .footer-contact { justify-content: flex-start; gap: 0.85rem; }
+  .footer-nav a, .footer-contact a { font-size: 0.92rem; }
+  .footer-bottom p { font-size: 0.82rem; }
+}
+
+/* Ultra-small phones (≤ 360px) */
+@media (max-width: 360px) {
+  .container { width: min(calc(100% - 1rem), var(--container)); }
+  .brand-subtitle { display: none; }
+  .brand-name { font-size: 0.88rem; }
+  .logo-image { width: 34px; height: 34px; }
+  .hero-copy h1 { font-size: 1.85rem; }
+}
+
+/* Landscape phones — stop hero eating the whole viewport */
+@media (max-height: 500px) and (orientation: landscape) {
+  .site-header { min-height: 52px; }
+  :root { --header-height: 52px; }
+  .hero-grid { min-height: auto; padding: 2rem 0 2.5rem; }
+  .hero-copy h1 { font-size: clamp(1.85rem, 5vw, 2.4rem); }
+}
+
+/* Safe-area insets for notched iPhones */
+@supports (padding: env(safe-area-inset-left)) {
+  .site-header .container,
+  .site-footer .container {
+    padding-left: max(1rem, env(safe-area-inset-left));
+    padding-right: max(1rem, env(safe-area-inset-right));
+  }
+  .site-footer .footer-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
   }
 }
