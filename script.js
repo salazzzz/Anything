@@ -1,3 +1,31 @@
+/* ---------- Mobile nav toggle ---------- */
+const menuToggle = document.querySelector(".menu-toggle");
+const siteHeader = document.querySelector(".site-header");
+const siteNav = document.querySelector(".site-nav");
+
+if (menuToggle && siteHeader && siteNav) {
+  menuToggle.addEventListener("click", () => {
+    const isOpen = siteHeader.classList.toggle("menu-open");
+    menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  });
+
+  // Close menu when a nav link is tapped
+  siteNav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      siteHeader.classList.remove("menu-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!siteHeader.contains(e.target)) {
+      siteHeader.classList.remove("menu-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+}
+
 /* ---------- Before / After comparison slider ---------- */
 const comparisonSlider = document.getElementById("comparisonSlider");
 const comparisonWrapper = document.getElementById("comparisonWrapper");
