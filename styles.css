@@ -452,8 +452,8 @@ button {
     text-decoration: none;
     padding: 11px 18px;
     border-radius: 999px;
-    background: white;
-    color: black;
+    background: oklch(98.5% 0.006 255);
+    color: var(--bg-card-strong);
     font-weight: 600;
     transition: transform 0.2s ease, opacity 0.2s ease;
   }
