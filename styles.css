@@ -500,6 +500,10 @@ button {
     overflow: hidden;
   }
 
+  #afterWrapper { width: 50%; }
+  #comparisonLine { left: 50%; }
+  #comparisonHandle { left: 50%; }
+
   .comparison-wrapper {
     cursor: ew-resize;
   }
@@ -1360,6 +1364,10 @@ button {
   transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
   will-change: transform;
 }
+
+.service-card-interior { --card-image: url('images/interior-service.png'); }
+.service-card-exterior { --card-image: url('images/exterior-service.png'); }
+.service-card-bundle   { --card-image: url('images/bundle-service.png'); }
 
 .service-card-bg {
   position: absolute;

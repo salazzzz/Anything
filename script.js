@@ -58,6 +58,15 @@ if (comparisonWrapper) {
 const footerYear = document.getElementById("footer-year");
 if (footerYear) footerYear.textContent = new Date().getFullYear();
 
+/* ---------- Email protection ---------- */
+document.querySelectorAll(".js-email").forEach(function (el) {
+  var addr = el.dataset.e + "@" + el.dataset.d;
+  el.href = "mailto:" + addr;
+  if (el.textContent === "Email Us" || el.textContent === "Email Euro Detailing") {
+    el.textContent = addr;
+  }
+});
+
 /* ---------- Vehicle size selector (service detail pages) ---------- */
 document.querySelectorAll(".tier-card").forEach((card) => {
   const buttons = card.querySelectorAll(".size-option");
