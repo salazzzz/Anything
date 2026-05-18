@@ -87,7 +87,7 @@ button {
   min-height: var(--header-height);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  background-image: url("images/Swirling dark liquid pattern.png");
+  background-image: url("images/swirling-pattern.webp");
   background-size: cover;
   background-position: center;
   border-bottom: 1px solid var(--accent);
@@ -263,7 +263,7 @@ button {
   overflow: hidden;
   background:
     linear-gradient(90deg, rgba(5, 5, 5, 0.82) 0%, rgba(5, 5, 5, 0.62) 34%, rgba(5, 5, 5, 0.18) 58%, rgba(5, 5, 5, 0.08) 100%),
-    url("images/hero.png") center / cover no-repeat;
+    url("images/hero.webp") center / cover no-repeat;
   border-bottom: 1px solid var(--accent);
 }
 
@@ -333,7 +333,7 @@ button {
 
 .reassurance-section {
   padding: clamp(3rem, 6vw, 5rem) 0;
-  background-image: url("images/Swirling dark liquid pattern.png");
+  background-image: url("images/swirling-pattern.webp");
   border-bottom: 1px solid var(--accent);
 }
 
@@ -627,7 +627,7 @@ button {
 .section-contact,
 .section-faq {
   background:
-    url("images/Swirling dark liquid pattern.png") center / cover no-repeat;
+    url("images/swirling-pattern.webp") center / cover no-repeat;
   border-bottom: 1px solid var(--accent);
 }
 
@@ -1322,7 +1322,7 @@ button {
 .services-section {
   position: relative;
   padding: 1.5rem 0 1.75rem;
-  background-image: url("images/Swirling dark liquid pattern.png");
+  background-image: url("images/swirling-pattern.webp");
   background-size: cover;
   background-position: center;
 }
@@ -1365,9 +1365,9 @@ button {
   will-change: transform;
 }
 
-.service-card-interior { --card-image: url('images/interior-service.png'); }
-.service-card-exterior { --card-image: url('images/exterior-service.png'); }
-.service-card-bundle   { --card-image: url('images/bundle-service.png'); }
+.service-card-interior { --card-image: url('images/interior-service.webp'); }
+.service-card-exterior { --card-image: url('images/exterior-service.webp'); }
+.service-card-bundle   { --card-image: url('images/bundle-service.webp'); }
 
 .service-card-bg {
   position: absolute;
@@ -1570,7 +1570,7 @@ button {
 
 .tier-section {
   padding: 2rem 0 2.5rem;
-  background-image: url("images/Swirling dark liquid pattern.png");
+  background-image: url("images/swirling-pattern.webp");
   background-size: cover;
   background-position: center;
 }
