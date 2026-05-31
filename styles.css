@@ -261,9 +261,8 @@ button {
 .hero-section {
   position: relative;
   overflow: hidden;
-  background:
-    linear-gradient(90deg, rgba(5, 5, 5, 0.82) 0%, rgba(5, 5, 5, 0.62) 34%, rgba(5, 5, 5, 0.18) 58%, rgba(5, 5, 5, 0.08) 100%),
-    url("images/hero.webp") center / cover no-repeat;
+  background-color: #0a0a0a;
+  background-image: radial-gradient(ellipse at 40% 50%, #1a1a1a 0%, #0a0a0a 70%);
   border-bottom: 1px solid var(--accent);
 }
 
