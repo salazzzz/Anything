@@ -87,9 +87,8 @@ button {
   min-height: var(--header-height);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  background-image: url("images/swirling-pattern.webp");
-  background-size: cover;
-  background-position: center;
+  background-color: #0a0a0a;
+  background-image: radial-gradient(ellipse at 40% 50%, #1a1a1a 0%, #0a0a0a 70%);
   border-bottom: 1px solid var(--accent);
 }
 
@@ -261,8 +260,9 @@ button {
 .hero-section {
   position: relative;
   overflow: hidden;
-  background-color: #0a0a0a;
-  background-image: radial-gradient(ellipse at 40% 50%, #1a1a1a 0%, #0a0a0a 70%);
+  background:
+    linear-gradient(90deg, rgba(5, 5, 5, 0.82) 0%, rgba(5, 5, 5, 0.62) 34%, rgba(5, 5, 5, 0.18) 58%, rgba(5, 5, 5, 0.08) 100%),
+    url("images/hero.webp") center / cover no-repeat;
   border-bottom: 1px solid var(--accent);
 }
 
@@ -332,7 +332,8 @@ button {
 
 .reassurance-section {
   padding: clamp(3rem, 6vw, 5rem) 0;
-  background-image: url("images/swirling-pattern.webp");
+  background-color: #0a0a0a;
+  background-image: radial-gradient(ellipse at 40% 50%, #1a1a1a 0%, #0a0a0a 70%);
   border-bottom: 1px solid var(--accent);
 }
 
@@ -625,8 +626,8 @@ button {
 .section-service-area,
 .section-contact,
 .section-faq {
-  background:
-    url("images/swirling-pattern.webp") center / cover no-repeat;
+  background-color: #0a0a0a;
+  background-image: radial-gradient(ellipse at 40% 50%, #1a1a1a 0%, #0a0a0a 70%);
   border-bottom: 1px solid var(--accent);
 }
 
@@ -1321,9 +1322,8 @@ button {
 .services-section {
   position: relative;
   padding: 1.5rem 0 1.75rem;
-  background-image: url("images/swirling-pattern.webp");
-  background-size: cover;
-  background-position: center;
+  background-color: #0a0a0a;
+  background-image: radial-gradient(ellipse at 40% 50%, #1a1a1a 0%, #0a0a0a 70%);
 }
 
 .services-section .section-header {
@@ -1569,9 +1569,8 @@ button {
 
 .tier-section {
   padding: 2rem 0 2.5rem;
-  background-image: url("images/swirling-pattern.webp");
-  background-size: cover;
-  background-position: center;
+  background-color: #0a0a0a;
+  background-image: radial-gradient(ellipse at 40% 50%, #1a1a1a 0%, #0a0a0a 70%);
 }
 
 .tier-cards {
