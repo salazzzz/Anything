@@ -183,3 +183,40 @@ document.querySelectorAll(".tier-card").forEach((card) => {
 function capitalize(s) {
   return s ? s.charAt(0).toUpperCase() + s.slice(1) : "";
 }
+
+/* ---------- Scroll reveal (Rise & Fade) ---------- */
+(function () {
+  var root = document.documentElement;
+  // js-anim is set in <head> only when motion is allowed; bail otherwise.
+  if (!root.classList.contains("js-anim")) return;
+
+  var targets = document.querySelectorAll("[data-reveal], [data-reveal-group]");
+  if (!targets.length) return;
+
+  function revealEl(el) {
+    if (el.hasAttribute("data-reveal-group")) {
+      var kids = el.children;
+      for (var i = 0; i < kids.length; i++) {
+        kids[i].style.transitionDelay = Math.min(i * 80, 640) + "ms";
+        kids[i].classList.add("is-visible");
+      }
+    } else {
+      el.classList.add("is-visible");
+    }
+  }
+
+  if (!("IntersectionObserver" in window)) {
+    targets.forEach(revealEl);
+    return;
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      revealEl(e.target);
+      io.unobserve(e.target);
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+
+  targets.forEach(function (el) { io.observe(el); });
+})();

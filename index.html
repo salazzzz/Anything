@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("js-anim")}</script>
   <title>Mobile Car Detailing in Newton, MA | Euro Detailing</title>
   <meta name="description" content="Euro Detailing provides professional mobile car detailing in Newton, MA and surrounding areas, including interior, exterior, bundle, and maintenance detailing.">
   <meta name="keywords" content="mobile car detailing Newton MA, car detailing Newton, auto detailing Newton Massachusetts, mobile detailing Brookline, car wash Newton, interior detailing Newton, exterior detailing Newton, paint decontamination Newton, Eric Salas detailing, Euro Detailing">
@@ -81,8 +82,12 @@
   <main id="main-content">
     <section class="hero-section">
       <div class="hero-overlay"></div>
+      <a href="#reviews" class="scroll-cue" aria-label="Scroll to content">
+        <span class="scroll-cue-label">Scroll</span>
+        <span class="scroll-cue-ring"><span class="scroll-cue-dot"></span></span>
+      </a>
       <div class="container hero-grid">
-        <div class="hero-copy">
+        <div class="hero-copy" data-reveal-group>
           <div class="hero-eyebrow">Mobile Detailing • Newton, Massachusetts</div>
           <div class="location-pill">Serving Newton &amp; surrounding areas</div>
 
@@ -101,7 +106,7 @@
     </section>
 
     <section class="reassurance-section" id="reviews">
-      <div class="reassurance-container">
+      <div class="reassurance-container" data-reveal-group>
         <div class="review-side">
           <h2 class="reassurance-title">Results that demonstrate quality and reviews that back it up.</h2>
 
@@ -160,13 +165,13 @@
 
     <section class="services-section" id="services">
       <div class="container">
-        <div class="section-header section-header-centered">
+        <div class="section-header section-header-centered" data-reveal-group>
           <div class="section-kicker">Our Services</div>
           <h2>Choose the detail that fits your needs.</h2>
           <p>Tap a service to see basic and professional tiers along with our most popular maintenance options.</p>
         </div>
 
-        <div class="services-cards">
+        <div class="services-cards" data-reveal-group>
           <a href="services/interior.html" class="service-card service-card-interior">
             <div class="service-card-bg" aria-hidden="true"></div>
             <div class="service-card-content">
@@ -205,13 +210,13 @@
 
     <section class="section section-extra" id="extras">
       <div class="container">
-        <div class="section-header section-header-centered">
+        <div class="section-header section-header-centered" data-reveal-group>
           <div class="section-kicker">Add-ons</div>
           <h2>A little extra when your car needs it.</h2>
           <p>Pair any of these with your appointment. Mention them in the booking notes or when you reach out.</p>
         </div>
 
-        <div class="extra-services-grid">
+        <div class="extra-services-grid" data-reveal-group>
           <article class="extra-service-card">
             <div class="extra-service-top">
               <h3>Plastic Mat Restoration</h3>
@@ -249,13 +254,13 @@
 
     <section class="section section-value">
       <div class="container">
-        <div class="section-header section-header-centered">
+        <div class="section-header section-header-centered" data-reveal-group>
           <div class="section-kicker">Why Euro Detailing</div>
           <h2>The Detail Starts Before You Know It</h2>
           <p>Mobile convenience, real attention to the work, and a process that feels easy from the first message to the finished result.</p>
         </div>
 
-        <div class="value-grid">
+        <div class="value-grid" data-reveal-group>
           <article class="value-card">
             <div class="value-num">01</div>
             <h3>We come to you</h3>
@@ -279,7 +284,7 @@
 
     <section class="section section-service-area" id="service-area">
       <div class="container">
-        <div class="service-area-grid">
+        <div class="service-area-grid" data-reveal-group>
           <article class="glass-card about-card">
             <h2>A cleaner, more personal way to detail.</h2>
             <p>
@@ -316,7 +321,7 @@
           </article>
         </div>
 
-        <div class="location-map-wrap location-map-wide">
+        <div class="location-map-wrap location-map-wide" data-reveal>
           <img src="images/location-map.png" alt="Map showing Euro Detailing service coverage around Newton, Massachusetts" class="location-map-image" width="1200" height="800" loading="lazy" decoding="async">
         </div>
       </div>
@@ -324,14 +329,14 @@
 
     <section class="section section-faq" id="faq">
       <div class="container faq-shell">
-        <div class="section-header">
+        <div class="section-header" data-reveal-group>
           <h2>Mobile detailing questions, answered</h2>
           <p>
             These are the questions most drivers ask before booking a detail in Newton or a nearby area.
           </p>
         </div>
 
-        <div class="faq-list">
+        <div class="faq-list" data-reveal-group>
           <details class="faq-item" open>
             <summary>What do I need to provide?</summary>
             <p>
@@ -394,7 +399,7 @@
 
     <section class="section section-contact" id="contact">
       <div class="container contact-shell">
-        <div class="section-header section-header-centered">
+        <div class="section-header section-header-centered" data-reveal-group>
           <h2>Ready to book your detail?</h2>
           <p>
             For booking questions, service-area checks, or help choosing a package, reach out directly. Eric responds quickly and can confirm availability, walk through the service options, or answer any questions about what to expect before you commit.
@@ -403,7 +408,7 @@
 
         <div class="contact-owner">Eric Salas, Owner</div>
 
-        <div class="contact-grid">
+        <div class="contact-grid" data-reveal-group>
           <article class="contact-card">
             <span class="contact-label">Phone</span>
             <a href="tel:+17812903040" class="contact-value">+1 781-290-3040</a>
@@ -415,7 +420,7 @@
           </article>
         </div>
 
-        <div class="contact-actions">
+        <div class="contact-actions" data-reveal-group>
           <a href="#services" class="button button-primary">Choose a Package</a>
           <a href="#" class="button button-secondary js-email" data-e="eurodetailinginfo" data-d="gmail.com">Email Euro Detailing</a>
         </div>

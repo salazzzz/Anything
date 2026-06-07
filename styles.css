@@ -2669,3 +2669,95 @@ body.lightbox-open {
     font-size: 1.6rem;
   }
 }
+
+/* ================= Scroll reveal animations ================= */
+/* Hidden state applies only when JS is active (html.js-anim) AND the user
+   has not requested reduced motion. No JS or reduce-motion = always visible. */
+@media (prefers-reduced-motion: no-preference) {
+  .js-anim [data-reveal],
+  .js-anim [data-reveal-group] > * {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .js-anim [data-reveal].is-visible,
+  .js-anim [data-reveal-group] > *.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Gallery tiles: opacity-only fade so it never fights the hover transform */
+  .js-anim .gallery-item { opacity: 0; }
+  .js-anim .gallery-item.is-visible { animation: galleryTileIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+}
+
+@keyframes galleryTileIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ================= Hero scroll cue ================= */
+.scroll-cue {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--muted);
+}
+
+.scroll-cue-label {
+  font-size: 0.66rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.scroll-cue-ring {
+  width: 28px;
+  height: 46px;
+  border: 1.5px solid rgba(255, 255, 255, 0.32);
+  border-radius: 999px;
+  position: relative;
+}
+
+.scroll-cue-dot {
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  width: 4px;
+  height: 8px;
+  border-radius: 99px;
+  background: #fff;
+  transform: translateX(-50%);
+}
+
+.scroll-cue:hover .scroll-cue-ring,
+.scroll-cue:focus-visible .scroll-cue-ring {
+  border-color: var(--accent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-cue-dot { animation: cueDot 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+  .scroll-cue { animation: cueFloat 2.6s ease-in-out infinite; }
+}
+
+@keyframes cueDot {
+  0% { opacity: 0; top: 8px; }
+  30% { opacity: 1; }
+  70% { opacity: 1; }
+  100% { opacity: 0; top: 26px; }
+}
+
+@keyframes cueFloat {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(5px); }
+}
+
+@media (max-width: 560px) {
+  .scroll-cue { bottom: 14px; }
+  .scroll-cue-label { font-size: 0.6rem; }
+}
