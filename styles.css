@@ -87,8 +87,9 @@ button {
   min-height: var(--header-height);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  background-color: #0a0a0a;
-  background-image: radial-gradient(ellipse at 40% 50%, #1a1a1a 0%, #0a0a0a 70%);
+  background-color: #060606;
+  background-image: url("images/bg-texture.webp");
+  background-repeat: repeat;
   border-bottom: 1px solid var(--accent);
 }
 
@@ -332,8 +333,9 @@ button {
 
 .reassurance-section {
   padding: clamp(3rem, 6vw, 5rem) 0;
-  background-color: #0a0a0a;
-  background-image: radial-gradient(ellipse at 40% 50%, #1a1a1a 0%, #0a0a0a 70%);
+  background-color: #060606;
+  background-image: url("images/bg-texture.webp");
+  background-repeat: repeat;
   border-bottom: 1px solid var(--accent);
 }
 
@@ -626,8 +628,9 @@ button {
 .section-service-area,
 .section-contact,
 .section-faq {
-  background-color: #0a0a0a;
-  background-image: radial-gradient(ellipse at 40% 50%, #1a1a1a 0%, #0a0a0a 70%);
+  background-color: #060606;
+  background-image: url("images/bg-texture.webp");
+  background-repeat: repeat;
   border-bottom: 1px solid var(--accent);
 }
 
@@ -1322,8 +1325,9 @@ button {
 .services-section {
   position: relative;
   padding: 1.5rem 0 1.75rem;
-  background-color: #0a0a0a;
-  background-image: radial-gradient(ellipse at 40% 50%, #1a1a1a 0%, #0a0a0a 70%);
+  background-color: #060606;
+  background-image: url("images/bg-texture.webp");
+  background-repeat: repeat;
 }
 
 .services-section .section-header {
@@ -1569,8 +1573,9 @@ button {
 
 .tier-section {
   padding: 2rem 0 2.5rem;
-  background-color: #0a0a0a;
-  background-image: radial-gradient(ellipse at 40% 50%, #1a1a1a 0%, #0a0a0a 70%);
+  background-color: #060606;
+  background-image: url("images/bg-texture.webp");
+  background-repeat: repeat;
 }
 
 .tier-cards {
