@@ -2903,7 +2903,23 @@ body.lightbox-open {
 .nav-more-menu a:hover, .nav-more-menu a:focus-visible { background: rgba(255, 255, 255, 0.07); }
 
 @media (max-width: 920px) {
-  .site-nav { overflow: visible; }                 /* don't clip the dropdown */
+  .site-nav { overflow: visible; justify-content: center; gap: 1.15rem; }
   .nav-hideable { display: none; }                 /* Service Area + Reviews move into More */
   .nav-more-wrap { display: inline-flex; position: relative; flex: 0 0 auto; }
+  /* match the links exactly so "More" isn't a different size or off-baseline */
+  .site-nav a, .nav-more { font-size: 0.83rem; line-height: 1.2; }
 }
+
+/* ===== "View Full Gallery" CTA ===== */
+.gallery-view-btn {
+  gap: 0.55rem;
+  padding-left: 1.4rem;
+  padding-right: 1.4rem;
+}
+.gallery-view-icon { flex-shrink: 0; opacity: 0.9; }
+.gallery-view-arrow {
+  font-size: 1.1em;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.gallery-view-btn:hover .gallery-view-arrow,
+.gallery-view-btn:focus-visible .gallery-view-arrow { transform: translateX(4px); }
