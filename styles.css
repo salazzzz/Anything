@@ -2923,3 +2923,73 @@ body.lightbox-open {
 }
 .gallery-view-btn:hover .gallery-view-arrow,
 .gallery-view-btn:focus-visible .gallery-view-arrow { transform: translateX(4px); }
+
+/* ================= Add-ons page ================= */
+.addons-section { padding-top: clamp(2rem, 5vw, 3.5rem); }
+
+.addons-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  margin: 2.5rem auto 0;
+  max-width: 880px;
+}
+
+.addon-card {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(20, 26, 40, 0.7), rgba(12, 16, 26, 0.85));
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.addon-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(24, 75, 194, 0.5);
+  box-shadow: var(--shadow);
+}
+
+.addon-media { position: relative; min-height: 190px; background: #0d1119; }
+.addon-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.addon-media-ph {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(24, 75, 194, 0.28), rgba(12, 16, 26, 0.65));
+  color: rgba(255, 255, 255, 0.55);
+}
+.addon-media-ph svg { width: 50px; height: 50px; }
+
+.addon-body {
+  padding: 1.3rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  justify-content: center;
+}
+.addon-top { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.addon-title { margin: 0; font-size: 1.3rem; letter-spacing: -0.01em; }
+.addon-price { font-weight: 700; color: #fff; font-size: 1.15rem; white-space: nowrap; }
+.addon-desc { margin: 0; color: var(--muted); line-height: 1.6; font-size: 0.97rem; }
+.addon-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.25rem; }
+.addon-tag {
+  font-size: 0.76rem;
+  padding: 0.32rem 0.72rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+.addon-tag-time { background: var(--accent-soft); border-color: rgba(24, 75, 194, 0.4); color: #cfe0ff; }
+
+.addons-page-cta { text-align: center; margin-top: 2.5rem; }
+.addons-page-cta p { color: var(--muted); margin: 0 0 0.9rem; }
+
+/* homepage "view all add-ons" button */
+.addons-cta { display: flex; justify-content: center; margin-top: 2rem; }
+
+@media (max-width: 620px) {
+  .addon-card { grid-template-columns: 1fr; }
+  .addon-media { min-height: 170px; }
+  .addon-title { font-size: 1.18rem; }
+}
