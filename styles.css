@@ -2850,3 +2850,60 @@ body.lightbox-open {
   .reviews-aggregate { padding: 1.4rem; }
   .reviews-aggregate-number { font-size: 2.6rem; }
 }
+
+/* ================= Mobile "More" nav menu ================= */
+.nav-more-wrap { display: none; }            /* desktop: all links inline, no More button */
+
+.nav-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+.nav-more:hover, .nav-more:focus-visible { color: #fff; outline: none; }
+
+.nav-more-caret {
+  width: 6px;
+  height: 6px;
+  border: solid currentColor;
+  border-width: 0 1.5px 1.5px 0;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+  margin-top: -3px;
+}
+.nav-more[aria-expanded="true"] .nav-more-caret { transform: rotate(-135deg); margin-top: 1px; }
+
+.nav-more-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 170px;
+  padding: 0.4rem;
+  background: #0d1119;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  z-index: 60;
+}
+.nav-more-menu[hidden] { display: none; }
+.nav-more-menu a {
+  padding: 0.62rem 0.7rem;
+  border-radius: 9px;
+  font-size: 0.9rem;
+}
+.nav-more-menu a:hover, .nav-more-menu a:focus-visible { background: rgba(255, 255, 255, 0.07); }
+
+@media (max-width: 920px) {
+  .site-nav { overflow: visible; }                 /* don't clip the dropdown */
+  .nav-hideable { display: none; }                 /* Service Area + Reviews move into More */
+  .nav-more-wrap { display: inline-flex; position: relative; flex: 0 0 auto; }
+}

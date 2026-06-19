@@ -220,3 +220,22 @@ function capitalize(s) {
 
   targets.forEach(function (el) { io.observe(el); });
 })();
+
+/* ---------- Mobile "More" nav menu ---------- */
+(function () {
+  var btn = document.querySelector(".nav-more");
+  var menu = document.getElementById("navMoreMenu");
+  if (!btn || !menu) return;
+  function close() { menu.hidden = true; btn.setAttribute("aria-expanded", "false"); }
+  btn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    var willOpen = menu.hidden;
+    menu.hidden = !willOpen;
+    btn.setAttribute("aria-expanded", willOpen ? "true" : "false");
+  });
+  document.addEventListener("click", function (e) {
+    if (!menu.hidden && !menu.contains(e.target) && e.target !== btn) close();
+  });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+  menu.querySelectorAll("a").forEach(function (a) { a.addEventListener("click", close); });
+})();

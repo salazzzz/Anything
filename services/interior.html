@@ -9,7 +9,7 @@
   <meta name="theme-color" content="#0d1017" />
   <link rel="canonical" href="https://www.eurodetailing.com/services/interior" />
   <link rel="icon" type="image/png" href="../images/favicon.png" />
-  <link rel="stylesheet" href="../styles.css?v=3" />
+  <link rel="stylesheet" href="../styles.css?v=4" />
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to content</a>
@@ -26,11 +26,18 @@
 
       <nav class="site-nav" aria-label="Primary">
         <a href="../index.html#services">Services</a>
-        <a href="../index.html#service-area">Service Area</a>
+        <a href="../index.html#service-area" class="nav-hideable">Service Area</a>
         <a href="../gallery.html">Gallery</a>
-        <a href="../testimonials.html">Reviews</a>
+        <a href="../testimonials.html" class="nav-hideable">Reviews</a>
         <a href="../index.html#faq">FAQ</a>
         <a href="../index.html#contact">Contact</a>
+        <div class="nav-more-wrap">
+          <button type="button" class="nav-more" aria-expanded="false" aria-controls="navMoreMenu">More<span class="nav-more-caret" aria-hidden="true"></span></button>
+          <div class="nav-more-menu" id="navMoreMenu" hidden>
+            <a href="../index.html#service-area">Service Area</a>
+            <a href="../testimonials.html">Reviews</a>
+          </div>
+        </div>
       </nav>
 
       <div class="header-actions">
