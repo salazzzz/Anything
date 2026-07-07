@@ -1,6 +1,18 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/ExteriorBasic",
+      "destination": "/services/exterior",
+      "permanent": true
+    },
+    {
+      "source": "/InteriorPremium",
+      "destination": "/services/interior",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/images/(.*)",

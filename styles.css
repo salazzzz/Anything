@@ -1207,8 +1207,8 @@ button {
 
   .header-actions .button {
     width: auto !important;
-    min-height: 34px;
-    padding: 0.32rem 0.85rem;
+    min-height: 42px;
+    padding: 0.5rem 0.95rem;
     font-size: 0.82rem;
     white-space: nowrap;
   }
@@ -1225,12 +1225,13 @@ button {
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     width: 100%;
-    padding: 0.48rem 0 0.42rem;
+    padding: 0.1rem 0 0.05rem;
     border-top: 1px solid rgba(255,255,255,0.08);
     scrollbar-width: none;
   }
   .site-nav::-webkit-scrollbar { display: none; }
-  .site-nav a { flex: 0 0 auto; font-size: 0.83rem; white-space: nowrap; }
+  .site-nav a { flex: 0 0 auto; font-size: 0.83rem; white-space: nowrap; padding: 0.6rem 0; }
+  .site-nav .nav-more { padding: 0.6rem 0; }
 
   .reassurance-section { padding: 56px 0; }
   .reassurance-container {
@@ -1720,6 +1721,17 @@ button {
   color: var(--accent);
   font-weight: 700;
   font-size: 0.95rem;
+}
+
+.tier-size-note {
+  margin: -0.35rem 0 0.9rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: rgba(244, 247, 251, 0.55);
+}
+
+.tier-size-note + .tier-size-note {
+  margin-top: -0.75rem;
 }
 
 .tier-card-footer {
@@ -2229,11 +2241,11 @@ button {
   .social-link1   { width: 28px; height: 24px; }
   .header-actions { gap: 0.28rem; }
   .header-actions .button {
-    padding: 0.32rem 0.75rem;
+    padding: 0.45rem 0.85rem;
     font-size: 0.78rem;
-    min-height: 32px;
+    min-height: 42px;
   }
-  .site-nav { gap: 1.1rem; padding: 0.42rem 0 0.38rem; }
+  .site-nav { gap: 1.1rem; padding: 0.08rem 0 0.05rem; }
   .site-nav a { font-size: 0.8rem; }
 
   /* ── Hero ── */
