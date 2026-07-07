@@ -87,7 +87,6 @@ document.querySelectorAll(".tier-card").forEach((card) => {
 
     saveChipEl = document.createElement("span");
     saveChipEl.className = "tier-save-chip";
-    saveChipEl.textContent = "Save $25";
     priceEl.parentNode.appendChild(saveChipEl);
   }
 
@@ -125,12 +124,12 @@ document.querySelectorAll(".tier-card").forEach((card) => {
       priceEl.textContent = next;
     }
 
-    if (originalEl && regular) {
-      originalEl.textContent = regular;
+    if (originalEl) {
+      originalEl.textContent = maintenanceMode && regular ? regular : "";
     }
-    if (saveChipEl && regular && maint) {
+    if (saveChipEl) {
       const diff = priceToNumber(regular) - priceToNumber(maint);
-      saveChipEl.textContent = diff > 0 ? "Save $" + diff : "";
+      saveChipEl.textContent = maintenanceMode && diff > 0 ? "Save $" + diff : "";
     }
   }
 
