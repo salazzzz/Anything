@@ -3267,3 +3267,11 @@ body.lightbox-open {
   .mem-hero { min-height: auto; }
   .mem-hero .scroll-cue { display: none; }
 }
+
+
+/* Membership hero: keep the scroll cue clear of the hero copy */
+.mem-hero { padding-bottom: clamp(6.5rem, 6vw, 8rem); }
+@media (max-height: 720px) {
+  .mem-hero { min-height: auto; }
+  .mem-hero .scroll-cue { display: none; }
+}
