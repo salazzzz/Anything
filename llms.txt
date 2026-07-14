@@ -6,9 +6,9 @@ Euro Detailing is a mobile car detailing business based in Newton, Massachusetts
 
 ## Services
 
-- [Interior Detailing](https://eurodetailing.com/services/interior.html): Professional interior cleaning including vacuuming, steam cleaning, leather conditioning, and surface detailing. Starting at $90 basic, $160 premium.
-- [Exterior Detailing](https://eurodetailing.com/services/exterior.html): Full exterior wash, clay bar treatment, and protective finish. Starting at $60 basic, $120 premium.
-- [Interior + Exterior Bundle](https://eurodetailing.com/services/bundle.html): Complete interior and exterior detail. Starting at $135 basic, $270 premium.
+- [Interior Detailing](https://eurodetailing.com/services/interior.html): Professional interior cleaning including vacuuming, steam cleaning, leather conditioning, and surface detailing. Starting at $105 basic, $165 premium.
+- [Exterior Detailing](https://eurodetailing.com/services/exterior.html): Full exterior wash, clay bar treatment, and protective finish. Starting at $70 basic, $105 premium.
+- [Interior + Exterior Bundle](https://eurodetailing.com/services/bundle.html): Complete interior and exterior detail. Starting at $150 basic, $230 premium.
 
 ## Add-on Services
 
