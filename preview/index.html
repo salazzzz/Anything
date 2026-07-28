@@ -195,6 +195,32 @@
     font-family: Georgia, serif;
     font-size: 0.63rem; letter-spacing: 0.3em; text-transform: uppercase;
     color: rgba(244,247,251,.72);
+    transition: all .35s ease;
+  }
+
+  /* once the loop is running, get out of the way of the footage */
+  .frame.is-playing .frame-play {
+    background: linear-gradient(180deg, transparent 52%, rgba(6,8,12,.62) 100%);
+  }
+  .frame.is-playing .frame-play:hover { background: linear-gradient(180deg, rgba(6,8,12,.2) 0%, rgba(6,8,12,.7) 100%); }
+  .frame.is-playing .frame-play-dot {
+    opacity: 0;
+    transform: scale(.7);
+    pointer-events: none;
+  }
+  .frame.is-playing .frame-play:hover .frame-play-dot { opacity: 1; transform: scale(1); }
+  .frame.is-playing .frame-play-label {
+    left: 50%; right: auto;
+    transform: translateX(-50%);
+    display: inline-flex; align-items: center;
+    padding: 7px 15px;
+    border-radius: 999px;
+    letter-spacing: 0.17em;
+    background: rgba(10,13,19,.55);
+    border: 1px solid rgba(255,255,255,.17);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: rgba(244,247,251,.88);
   }
 
   /* ---------- full-size player ---------- */
@@ -387,18 +413,18 @@
             <span class="tick tl"></span><span class="tick tr"></span>
             <span class="tick bl"></span><span class="tick br"></span>
 
-            <!-- #t=0.5 makes the browser paint a real frame without a poster file -->
-            <video class="frame-clip" src="../videos/hero-vertical.mp4#t=0.5"
-                   preload="metadata" muted playsinline disablepictureinpicture
-                   aria-hidden="true" tabindex="-1"></video>
+            <!-- muted is required — browsers refuse autoplay with sound -->
+            <video class="frame-clip" id="heroClip" src="../videos/hero-vertical.mp4"
+                   autoplay muted loop playsinline preload="auto"
+                   disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
 
-            <button type="button" class="frame-play" id="framePlay" aria-label="Play the Euro Detailing video">
+            <button type="button" class="frame-play" id="framePlay" aria-label="Watch the Euro Detailing video with sound">
               <span class="frame-play-dot">
                 <svg width="17" height="19" viewBox="0 0 17 19" fill="none" aria-hidden="true">
                   <path d="M2 1.7v15.6a1 1 0 0 0 1.53.85l12.5-7.8a1 1 0 0 0 0-1.7L3.53.85A1 1 0 0 0 2 1.7Z" fill="#fff"/>
                 </svg>
               </span>
-              <span class="frame-play-label">Watch &middot; 0:25</span>
+              <span class="frame-play-label">Watch with sound</span>
             </button>
           </div>
         </div>
@@ -446,6 +472,34 @@
 <script src="../script.js" defer></script>
 
 <script>
+/* ---------- hero clip: silent autoplay loop in the card ---------- */
+(function () {
+  var clip  = document.getElementById("heroClip");
+  var frame = clip && clip.closest(".frame");
+  if (!clip || !frame) return;
+
+  // don't autoplay at people who asked for less motion, or who are on a
+  // metered / slow connection — this file is 17.6 MB
+  var reduce  = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var conn    = navigator.connection || navigator.webkitConnection || {};
+  var thrifty = conn.saveData === true || /(^|-)2g$/.test(conn.effectiveType || "");
+
+  if (reduce || thrifty) {
+    clip.removeAttribute("autoplay");
+    clip.removeAttribute("loop");
+    clip.preload = "metadata";
+    clip.pause();
+    return;
+  }
+
+  clip.addEventListener("playing", function () { frame.classList.add("is-playing"); });
+  clip.addEventListener("pause",   function () { frame.classList.remove("is-playing"); });
+
+  // Safari sometimes ignores the attribute until asked directly
+  var p = clip.play();
+  if (p && p.catch) p.catch(function () { /* left paused, play button still works */ });
+})();
+
 (function () {
   var openBtn = document.getElementById("framePlay");
   var lb      = document.getElementById("lightbox");
@@ -459,6 +513,8 @@
     lastFocus = document.activeElement;
     lb.hidden = false;
     document.body.style.overflow = "hidden";
+    var bg = document.getElementById("heroClip");
+    if (bg) bg.pause();                       // don't run two clips at once
     try { vid.currentTime = 0; } catch (e) {}
     var p = vid.play();
     if (p && p.catch) p.catch(function () {});   // autoplay may be refused; controls still work
@@ -469,6 +525,8 @@
     vid.pause();
     lb.hidden = true;
     document.body.style.overflow = "";
+    var bg = document.getElementById("heroClip");
+    if (bg && bg.hasAttribute("loop")) bg.play().catch(function () {});
     if (lastFocus && lastFocus.focus) lastFocus.focus();
   }
 
