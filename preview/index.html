@@ -31,8 +31,11 @@
 
   .hero-inner {
     display: grid;
-    grid-template-columns: minmax(0, 1.12fr) minmax(258px, 322px);
-    gap: clamp(1.75rem, 3.2vw, 2.9rem);
+    /* fixed columns + centered pair: leftover space goes to the outer
+       margins, not into a void between the two blocks */
+    grid-template-columns: minmax(0, 442px) 306px;
+    justify-content: center;
+    gap: clamp(1.75rem, 3.4vw, 3rem);
     align-items: center;
     width: 100%;
   }
@@ -62,14 +65,14 @@
     font-size: clamp(2.15rem, 4.1vw, 3.5rem);
     line-height: 0.98;
     letter-spacing: -0.032em;
-    max-width: 13ch;
+    max-width: 100%;
     color: #f7f9fc;
   }
   .hero-title em { font-style: italic; color: #ffffff; }
 
   .hero-sub {
     margin: 1.05rem 0 0;
-    max-width: 41ch;
+    max-width: 100%;
     font-size: 0.985rem;
     line-height: 1.58;
     color: rgba(244, 247, 251, 0.64);
@@ -84,7 +87,7 @@
     justify-content: space-between;
     gap: 1.25rem;
     width: 100%;
-    max-width: 356px;
+    max-width: 100%;
     margin-top: 1.6rem;
     min-height: 54px;
     padding: 0 1.3rem 0 1.4rem;
@@ -116,7 +119,7 @@
   .bar-btn:hover .bar-btn-arrow { transform: translateX(5px); opacity: 1; }
 
   /* ---------- right column ---------- */
-  .hero-right { justify-self: end; width: 100%; max-width: 322px; }
+  .hero-right { width: 100%; max-width: 306px; }
 
   .frame-stack { position: relative; }
   .frame-stack::before {
@@ -240,10 +243,8 @@
 
   /* ---------- responsive ---------- */
   @media (max-width: 900px) {
-    .hero-inner { grid-template-columns: 1fr; gap: 2.4rem; }
-    .hero-title { max-width: 15ch; }
-    .hero-right { justify-self: center; max-width: 300px; }
-    .bar-btn { max-width: none; }
+    .hero-inner { grid-template-columns: minmax(0, 442px); gap: 2.4rem; }
+    .hero-right { justify-self: start; max-width: 306px; }
   }
   @media (max-width: 520px) {
     .hero-shell { padding: 2.25rem 0; }
