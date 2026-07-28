@@ -377,3 +377,33 @@ h1 {
   .cue-dot { animation: none; opacity: .8; }
   .ba-handle, .ba-hint { transition: none !important; }
 }
+
+/* ---------- Basic: included beside not-included, so the card stays short ---------- */
+.tier-cols {
+  flex: 1;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0 1.1rem;
+  margin-top: .5rem;
+}
+.col-lbl {
+  display: block; margin-bottom: .35rem;
+  font-size: .58rem; letter-spacing: .18em; text-transform: uppercase;
+  color: rgba(244,247,251,.4);
+}
+.col-lbl-no { color: rgba(255,120,120,.62); }
+
+.tier-cols .ticks li { padding: .28rem 0 .28rem 1.35rem; font-size: .79rem; line-height: 1.45; }
+.tier-cols .ticks li::before { top: .72em; }
+
+/* not included: a red cross, drawn from the two pseudo-elements */
+.ticks li.no { color: rgba(255,128,128,.72); }
+.ticks li.no::before,
+.ticks li.no::after {
+  content: ""; position: absolute;
+  left: 1px; top: .95em;
+  width: 10px; height: 1.5px;
+  background: #ff6b6b;
+  border: 0; border-radius: 1px;
+}
+.ticks li.no::before { transform: rotate(45deg); }
+.ticks li.no::after  { transform: rotate(-45deg); }
