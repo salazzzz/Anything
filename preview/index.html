@@ -380,6 +380,132 @@
     .js-anim .hero-right > .frame-stack.is-visible { transform: none; }
   }
 
+
+  /* ================= FAQ + contact ================= */
+  .faq-shell {
+    padding: clamp(1.3rem, 2.1vw, 1.75rem) 0 clamp(2.25rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--accent);   /* the divider */
+  }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.86fr);
+    gap: clamp(2rem, 4vw, 3.5rem);
+    align-items: start;
+  }
+
+  /* ---------- FAQ pills ---------- */
+  .faq-title {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400;
+    font-size: clamp(1.32rem, 2vw, 1.72rem);
+    line-height: 1.15; letter-spacing: -0.022em; color: #f7f9fc;
+  }
+  .faq-lede { margin: 0.55rem 0 0; font-size: 0.86rem; color: rgba(244,247,251,.45); }
+
+  .faq-pills { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1.35rem; }
+  .faq-pill {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.7rem 0.95rem 0.7rem 1.1rem;
+    border-radius: 999px; cursor: pointer;
+    font-family: Georgia, serif; font-size: 0.9rem; letter-spacing: .01em;
+    color: rgba(244,247,251,.82);
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.14);
+    transition: background-color .22s ease, border-color .22s ease,
+                color .22s ease, transform .22s cubic-bezier(.2,.7,.3,1);
+  }
+  .faq-pill:hover {
+    color: #fff;
+    background: rgba(255,255,255,.07);
+    border-color: rgba(47,107,255,.6);
+    transform: translateY(-2px);
+  }
+  .faq-pill:active { transform: translateY(0); }
+  /* the plus is drawn, so it can rotate into a cross on hover */
+  .faq-pill i {
+    position: relative; flex: none; width: 13px; height: 13px;
+    transition: transform .3s cubic-bezier(.2,.7,.3,1);
+  }
+  .faq-pill i::before, .faq-pill i::after {
+    content: ""; position: absolute; background: rgba(47,107,255,.9); border-radius: 1px;
+  }
+  .faq-pill i::before { top: 6px; left: 0; width: 13px; height: 1.4px; }
+  .faq-pill i::after  { left: 6px; top: 0; height: 13px; width: 1.4px; }
+  .faq-pill:hover i { transform: rotate(90deg); }
+
+  /* ---------- contact ---------- */
+  .contact-title {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", Times, serif; font-weight: 400;
+    font-size: clamp(1.32rem, 2vw, 1.72rem);
+    line-height: 1.15; letter-spacing: -0.022em; color: #f7f9fc;
+  }
+  .contact-lede {
+    margin: 0.7rem 0 0; max-width: 46ch;
+    font-size: 0.875rem; line-height: 1.58; color: rgba(244,247,251,.58);
+  }
+
+  .contact-rows { display: grid; gap: 0.55rem; margin-top: 1.35rem; }
+  .contact-row {
+    display: flex; align-items: center; gap: 0.85rem;
+    padding: 0.85rem 1.05rem;
+    border-radius: 10px; text-decoration: none;
+    background: rgba(255,255,255,.026);
+    border: 1px solid rgba(255,255,255,.12);
+    transition: background-color .22s ease, border-color .22s ease, transform .22s cubic-bezier(.2,.7,.3,1);
+  }
+  .contact-row:hover {
+    background: rgba(255,255,255,.055);
+    border-color: rgba(47,107,255,.55);
+    transform: translateY(-2px);
+  }
+  .contact-ico {
+    width: 34px; height: 34px; flex: none;
+    display: grid; place-items: center; border-radius: 50%;
+    color: #8fbaff;
+    background: rgba(47,107,255,.13);
+    border: 1px solid rgba(47,107,255,.3);
+  }
+  .contact-txt { display: flex; flex-direction: column; min-width: 0; }
+  .contact-lbl {
+    font-size: 0.66rem; letter-spacing: .18em; text-transform: uppercase;
+    color: rgba(244,247,251,.4);
+  }
+  .contact-val {
+    font-family: Georgia, serif; font-size: 1rem; color: #f4f7fb;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+
+  .contact-meta { margin: 1.15rem 0 0; display: grid; gap: 0.7rem; }
+  .contact-meta > div {
+    display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 0.75rem;
+    padding-top: 0.7rem; border-top: 1px solid rgba(255,255,255,.08);
+  }
+  .contact-meta dt {
+    font-size: 0.66rem; letter-spacing: .18em; text-transform: uppercase;
+    color: rgba(244,247,251,.38);
+  }
+  .contact-meta dd { margin: 0; font-size: 0.845rem; line-height: 1.5; color: rgba(244,247,251,.62); }
+
+  .contact-cta { display: flex; align-items: center; gap: 0.6rem; margin-top: 1.4rem; }
+  .contact-cta .cta { flex: 1; }
+  .contact-social {
+    width: 44px; height: 44px; flex: none;
+    display: grid; place-items: center; border-radius: 50%;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.13);
+    transition: background-color .22s ease, border-color .22s ease, transform .22s cubic-bezier(.2,.7,.3,1);
+  }
+  .contact-social:hover { background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.34); transform: translateY(-2px); }
+  .contact-social img { width: 26px; height: 26px; object-fit: contain; }
+
+  @media (max-width: 900px) {
+    .faq-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .faq-pill, .faq-pill i, .contact-row, .contact-social { transition: none !important; }
+  }
+
   /* ---------- service-area modal ---------- */
   .modal[hidden] { display: none; }
   .modal {
@@ -1151,6 +1277,79 @@
     </div>
   </section>
 
+  <section class="faq-shell" id="faq">
+    <div class="container faq-grid">
+
+      <!-- ---------- left: FAQ ---------- -->
+      <div class="faq-side" data-reveal-group>
+        <span class="sec-rule" aria-hidden="true"></span>
+        <h2 class="faq-title">The things people ask first.</h2>
+        <p class="faq-lede">Tap any of these for the answer.</p>
+        <div class="faq-pills">
+          <button type="button" class="faq-pill" data-q="What do I need to provide for a mobile detail?" data-a="Just a spot for your vehicle and access to a water source and outdoor outlet if possible. If your location doesn&#x27;t have either, let us know in advance — we can usually work around it."><span>What do I need to provide?</span><i aria-hidden="true"></i></button>
+          <button type="button" class="faq-pill" data-q="How long does a detail take?" data-a="A basic interior or exterior usually takes 1–2 hours. Professional tiers run 3–4 hours, and a full professional bundle can take most of the day. Each service page lists a clear time estimate."><span>How long does it take?</span><i aria-hidden="true"></i></button>
+          <button type="button" class="faq-pill" data-q="How much does a mobile car detail cost?" data-a="Pricing depends on the package and the size of your vehicle. Each service page lists clear starting prices for both basic and professional tiers, plus any add-ons. Reach out for a quick quote."><span>What does it cost?</span><i aria-hidden="true"></i></button>
+          <button type="button" class="faq-pill" data-q="Do I need to be home during the detail?" data-a="Not at all. As long as we have access to the vehicle and the keys, you&#x27;re free to go about your day. We&#x27;ll send updates and let you know once it&#x27;s finished."><span>Do I need to be home?</span><i aria-hidden="true"></i></button>
+          <button type="button" class="faq-pill" data-q="What payment methods do you accept?" data-a="Cash, Venmo, Zelle, Cash App and Checks. Payment is collected after the service so you can see the finished result first."><span>How do I pay?</span><i aria-hidden="true"></i></button>
+          <button type="button" class="faq-pill" data-q="Which detailing package should I choose?" data-a="If your car is already maintained regularly, a Basic tier is plenty. If it has been a while or you feel your car is dirty, a Professional is recommended."><span>Which package should I pick?</span><i aria-hidden="true"></i></button>
+          <button type="button" class="faq-pill" data-q="Do you serve only Newton, MA?" data-a="Newton is the primary area, but we also serve nearby communities including Brookline, Watertown, Wellesley, Needham, Belmont, Brighton, and Allston when the location and job are a good fit. Reach out if you are unsure whether you are inside the service range."><span>Where do you go?</span><i aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <!-- ---------- right: contact ---------- -->
+      <div class="contact-side" data-reveal-group>
+        <span class="sec-kicker">Get in touch</span>
+        <h2 class="contact-title">Ready to book your detail?</h2>
+        <p class="contact-lede">
+          Booking questions, service-area checks, or help picking a package &mdash;
+          reach out and Eric will get back to you quickly.
+        </p>
+
+        <div class="contact-rows">
+          <a class="contact-row" href="tel:+17812903040">
+            <span class="contact-ico">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M5.2 2.2 6.8 5 5.4 6.6a8.4 8.4 0 0 0 4 4L11 9.2l2.8 1.6v2.4a1 1 0 0 1-1.1 1A11.6 11.6 0 0 1 2.1 3.3a1 1 0 0 1 1-1.1h2.1Z"
+                      stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="contact-txt"><span class="contact-lbl">Call or text</span><span class="contact-val">+1 781-290-3040</span></span>
+          </a>
+
+          <a class="contact-row js-email" href="#" data-e="eurodetailinginfo" data-d="gmail.com">
+            <span class="contact-ico">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <rect x="1.8" y="3.4" width="12.4" height="9.2" rx="1.6" stroke="currentColor" stroke-width="1.4"/>
+                <path d="m2.4 4.6 5.6 4 5.6-4" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="contact-txt"><span class="contact-lbl">Email</span><span class="contact-val">Email Us</span></span>
+          </a>
+        </div>
+
+        <dl class="contact-meta">
+          <div><dt>Hours</dt><dd>Mon&ndash;Sun, 8am&ndash;8pm</dd></div>
+          <div><dt>Payment</dt><dd>Cash, Venmo, Zelle, Cash App, Check &mdash; after the job</dd></div>
+        </dl>
+
+        <div class="contact-cta">
+          <a href="#services" class="cta"><span>Choose a package</span>
+            <svg class="arw" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/euro_detailingg" target="_blank" rel="noopener noreferrer" class="contact-social" aria-label="Euro Detailing on Instagram">
+            <img src="../images/instagram.webp" alt="" width="26" height="26" loading="lazy" decoding="async">
+          </a>
+          <a href="https://www.tiktok.com/@eurodetailing" target="_blank" rel="noopener noreferrer" class="contact-social" aria-label="Euro Detailing on TikTok">
+            <img src="../images/tiktok.webp" alt="" width="26" height="26" loading="lazy" decoding="async">
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <div class="canvas">
     <!-- blank canvas -->
   </div>
@@ -1221,6 +1420,30 @@
         <a href="tel:+17812903040" class="cta"><span>Call Eric</span></a>
         <button type="button" class="cta-ghost" id="areaRetry"><span>Try another</span></button>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ---------- FAQ answer ---------- -->
+<div class="modal" id="faqModal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="faqTitle">
+    <button type="button" class="modal-x" id="faqClose" aria-label="Close">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <path d="m1 1 12 12M13 1 1 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <div class="modal-icon ask">
+      <svg width="20" height="20" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+        <path d="M8.2 8.1a2.9 2.9 0 1 1 3.6 2.8c-.6.2-.9.7-.9 1.3v.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+        <path d="M11 16.2h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="11" cy="11" r="8.2" stroke="currentColor" stroke-width="1.4"/>
+      </svg>
+    </div>
+    <h3 class="modal-title" id="faqTitle"></h3>
+    <p class="modal-body" id="faqBody"></p>
+    <div class="modal-actions">
+      <a href="tel:+17812903040" class="cta-ghost"><span>Still unsure? Call Eric</span></a>
     </div>
   </div>
 </div>
@@ -1485,6 +1708,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
   targets.forEach(function (el) { io.observe(el); });
 });
+
+/* ---------- FAQ popups ---------- */
+(function () {
+  var modal = document.getElementById("faqModal");
+  var title = document.getElementById("faqTitle");
+  var body  = document.getElementById("faqBody");
+  var closeBtn = document.getElementById("faqClose");
+  var pills = document.querySelectorAll(".faq-pill");
+  if (!modal || !pills.length) return;
+
+  var lastFocus = null;
+
+  function open(pill) {
+    lastFocus = pill;
+    title.textContent = pill.dataset.q;
+    body.textContent  = pill.dataset.a;
+    modal.hidden = false;
+    document.body.style.overflow = "hidden";
+    closeBtn.focus();
+  }
+  function close() {
+    modal.hidden = true;
+    document.body.style.overflow = "";
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+
+  pills.forEach(function (p) { p.addEventListener("click", function () { open(p); }); });
+  closeBtn.addEventListener("click", close);
+  // anywhere outside the card dismisses it
+  modal.addEventListener("click", function (e) { if (e.target === modal) close(); });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !modal.hidden) close();
+  });
+})();
 
 </script>
 </body>
