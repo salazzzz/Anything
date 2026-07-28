@@ -1,0 +1,108 @@
+/* ================= gallery ================= */
+.gal-head { padding: clamp(1.75rem, 3.5vw, 2.75rem) 0 0; }
+.gal-head h1 { max-width: none; }
+
+.filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.5rem; }
+.fchip {
+  display: inline-flex; align-items: baseline; gap: .45rem;
+  padding: .55rem 1.05rem; border-radius: 999px; cursor: pointer;
+  font-family: Georgia, serif; font-size: .88rem;
+  color: rgba(244,247,251,.7);
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.13);
+  transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+}
+.fchip i { font-style: normal; font-size: .7rem; color: rgba(244,247,251,.35); }
+.fchip:hover { color: #fff; border-color: rgba(255,255,255,.3); }
+.fchip.is-on {
+  color: #fff; background: rgba(47,107,255,.16); border-color: var(--accent);
+}
+.fchip.is-on i { color: rgba(255,255,255,.6); }
+
+/* masonry via columns — the shots run 0.56 to 1.5 in ratio, so a uniform
+   grid would crop most of them */
+.gal-body { padding: clamp(1.5rem, 3vw, 2.25rem) 0 clamp(2rem, 4vw, 3rem); }
+.grid { columns: 3; column-gap: .85rem; }
+.tile {
+  position: relative; display: block; width: 100%;
+  margin: 0 0 .85rem; padding: 0; border: 0; cursor: pointer;
+  break-inside: avoid;
+  border-radius: 10px; overflow: hidden;
+  background: #0b0f16;
+  border: 1px solid rgba(255,255,255,.1);
+  transition: border-color .28s ease, transform .28s cubic-bezier(.2,.7,.3,1);
+}
+/* .tile sets display:block, which beats the UA sheet's [hidden]{display:none};
+   without this the filter hides nothing */
+.tile[hidden] { display: none; }
+.tile img { display: block; width: 100%; height: auto; transition: transform .5s cubic-bezier(.2,.7,.3,1); }
+.tile::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(6,8,12,.5) 100%);
+  opacity: 0; transition: opacity .28s ease;
+}
+.tile:hover { border-color: rgba(47,107,255,.55); transform: translateY(-3px); }
+.tile:hover img { transform: scale(1.035); }
+.tile:hover::after { opacity: 1; }
+.tile:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+.tile-vid {
+  position: absolute; left: 10px; bottom: 10px; z-index: 2;
+  display: inline-flex; align-items: center; gap: .38rem;
+  padding: 4px 9px; border-radius: 999px;
+  font-size: .66rem; letter-spacing: .06em;
+  color: #fff; background: rgba(10,13,19,.66);
+  border: 1px solid rgba(255,255,255,.2);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+}
+
+.gal-empty { margin: 2rem 0 0; font-size: .9rem; color: rgba(244,247,251,.4); }
+
+.gal-cta {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1.5rem;
+}
+.gal-cta-btns { display: flex; flex-wrap: wrap; gap: .6rem; }
+
+/* ---------- lightbox ---------- */
+.lb[hidden] { display: none; }
+.lb {
+  position: fixed; inset: 0; z-index: 300;
+  display: grid; grid-template-rows: 1fr auto;
+  padding: clamp(2.5rem, 5vw, 3.5rem) clamp(3rem, 7vw, 5rem) clamp(1rem, 2vw, 1.5rem);
+  background: rgba(4,6,10,.94);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.lb-stage { margin: 0; display: grid; place-items: center; min-height: 0; }
+.lb-stage img, .lb-stage video {
+  max-width: 100%; max-height: 100%;
+  border-radius: 8px; display: block;
+  border: 1px solid rgba(255,255,255,.14);
+  box-shadow: 0 30px 80px rgba(0,0,0,.7);
+}
+.lb-cap {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem 1.5rem;
+  margin-top: 1rem;
+  font-size: .84rem; color: rgba(244,247,251,.55);
+}
+.lb-count { font-family: Georgia, serif; color: rgba(244,247,251,.38); white-space: nowrap; }
+
+.lb-x, .lb-nav {
+  position: absolute; z-index: 2;
+  display: grid; place-items: center;
+  border-radius: 50%; cursor: pointer; color: #fff;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.18);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+.lb-x:hover, .lb-nav:hover { background: rgba(255,255,255,.16); border-color: rgba(255,255,255,.4); }
+.lb-nav:active { transform: translateY(-50%) scale(.94); }
+.lb-x { top: 16px; right: 16px; width: 38px; height: 38px; }
+.lb-nav { top: 50%; transform: translateY(-50%); width: 44px; height: 44px; }
+.lb-prev { left: clamp(.6rem, 2vw, 1.4rem); }
+.lb-next { right: clamp(.6rem, 2vw, 1.4rem); }
+
+@media (max-width: 1100px) { .grid { columns: 2; } }
+@media (prefers-reduced-motion: reduce) {
+  .tile, .tile img, .tile::after, .fchip, .lb-x, .lb-nav { transition: none !important; }
+}
