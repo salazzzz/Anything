@@ -254,6 +254,94 @@
     .svc-card, .svc-shot, .svc-arw { transition: none !important; }
   }
 
+
+  /* ================= about + why ================= */
+  .about-shell {
+    padding: clamp(2.75rem, 5vw, 4rem) 0;
+    border-bottom: 1px solid var(--accent);   /* the divider */
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+    gap: clamp(2.25rem, 5vw, 4.5rem);
+    align-items: start;
+  }
+
+  /* shared section marks */
+  .sec-rule { display: block; width: 38px; height: 1px; background: var(--accent); margin-bottom: 1rem; }
+  .sec-kicker {
+    display: block; margin-bottom: 0.9rem;
+    font-family: Georgia, serif; font-size: 0.7rem;
+    letter-spacing: 0.26em; text-transform: uppercase;
+    color: rgba(244,247,251,.42);
+  }
+
+  /* ---------- left: Eric ---------- */
+  .about-title, .why-title {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: 400;
+    font-size: clamp(1.5rem, 2.5vw, 2.05rem);
+    line-height: 1.15; letter-spacing: -0.022em;
+    color: #f7f9fc;
+  }
+  .about-lede {
+    margin: 1.15rem 0 0;
+    font-family: Georgia, serif; font-size: 1.02rem;
+    color: rgba(244,247,251,.86);
+  }
+  .about-text {
+    margin: 0.9rem 0 0;
+    font-size: 0.94rem; line-height: 1.68;
+    color: rgba(244,247,251,.6);
+  }
+  .about-sign {
+    display: flex; flex-direction: column; gap: 0.15rem;
+    margin: 1.6rem 0 0; padding-top: 1.1rem;
+    border-top: 1px solid rgba(255,255,255,.1);
+    font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(244,247,251,.4);
+  }
+  .about-sign span {
+    font-family: Georgia, serif; font-style: italic;
+    font-size: 1.12rem; letter-spacing: 0; text-transform: none;
+    color: #f4f7fb;
+  }
+
+  /* ---------- right: why ---------- */
+  .why-lede {
+    margin: 0.85rem 0 0; max-width: 48ch;
+    font-size: 0.94rem; line-height: 1.62;
+    color: rgba(244,247,251,.58);
+  }
+  .why-list { margin: 1.75rem 0 0; padding: 0; list-style: none; counter-reset: none; }
+  .why-item {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 0 1.15rem;
+    padding: 1.15rem 0;
+    border-top: 1px solid rgba(255,255,255,.09);
+  }
+  .why-item:last-child { padding-bottom: 0; }
+  .why-num {
+    font-family: Georgia, serif; font-size: 0.94rem;
+    color: rgba(47,107,255,.85);
+    letter-spacing: 0.04em; padding-top: 0.1rem;
+  }
+  .why-body h3 {
+    margin: 0 0 0.4rem;
+    font-family: Georgia, serif; font-weight: 400;
+    font-size: 1.06rem; color: #f4f7fb; letter-spacing: -0.005em;
+  }
+  .why-body p { margin: 0; font-size: 0.885rem; line-height: 1.62; color: rgba(244,247,251,.56); }
+
+  @media (max-width: 900px) {
+    .about-grid { grid-template-columns: 1fr; gap: 2.75rem; }
+  }
+  @media (max-width: 520px) {
+    .why-item { grid-template-columns: 34px minmax(0, 1fr); gap: 0 0.85rem; }
+  }
+
   /* ---------- service-area modal ---------- */
   .modal[hidden] { display: none; }
   .modal {
@@ -951,6 +1039,77 @@
           </span>
         </a>
       </div>
+    </div>
+  </section>
+
+  <section class="about-shell" id="about">
+    <div class="container about-grid">
+
+      <!-- ---------- left: Eric ---------- -->
+      <div class="about-side">
+        <span class="sec-rule" aria-hidden="true"></span>
+        <h2 class="about-title">A cleaner, more personal way to detail.</h2>
+
+        <p class="about-lede">Hey, I'm Eric &mdash; owner of Euro Detailing.</p>
+
+        <p class="about-text">
+          I started this because I genuinely love cars and I love the moment someone sees
+          their car clean for the first time in months or even years. That reaction never
+          gets old. Detailing gave me a way to do work I care about, build real connections
+          with clients, and treat every car like it's my own &mdash; because when it's in my
+          hands, it is.
+        </p>
+
+        <p class="about-text">
+          Originally from Spain and currently a junior in high school, I run this whole thing
+          myself and look forward to treating every client like family, making sure your car
+          always leaves better than it arrived.
+        </p>
+
+        <p class="about-sign"><span>Eric Salas</span>Owner</p>
+      </div>
+
+      <!-- ---------- right: why ---------- -->
+      <div class="why-side">
+        <span class="sec-kicker">Why Euro Detailing</span>
+        <h2 class="why-title">The Detail Starts Before You Know It</h2>
+        <p class="why-lede">
+          Mobile convenience, real attention to the work, and a process that feels easy
+          from the first message to the finished result.
+        </p>
+
+        <ol class="why-list">
+          <li class="why-item">
+            <span class="why-num">01</span>
+            <span class="why-body">
+              <h3>We come to you</h3>
+              <p>Driveway, office lot, apartment garage &mdash; wherever your car is, that is
+                 where we work. No waiting rooms, no drop-offs, no day off needed. All we ask
+                 for is a spot and ideally access to water and power. We handle the rest.</p>
+            </span>
+          </li>
+          <li class="why-item">
+            <span class="why-num">02</span>
+            <span class="why-body">
+              <h3>Owner-operated standard</h3>
+              <p>Every detail and client is handled with the same care, the same products, and
+                 the same eye for the small things that separate a wash from a real detail.
+                 When you book with Euro Detailing, you work directly with Eric &mdash; not a
+                 franchise or a rotating crew.</p>
+            </span>
+          </li>
+          <li class="why-item">
+            <span class="why-num">03</span>
+            <span class="why-body">
+              <h3>Simple, honest services</h3>
+              <p>Clear packages, transparent pricing, and direct booking links. You know what
+                 you're getting and what it costs before we show up. No surprise charges after
+                 the fact &mdash; what you book is what you pay for.</p>
+            </span>
+          </li>
+        </ol>
+      </div>
+
     </div>
   </section>
 
