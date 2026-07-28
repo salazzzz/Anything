@@ -1454,6 +1454,38 @@
 })();
 
 
+/* ---------- replay reveals on the way back up ----------
+   script.js reveals each element once and then unobserves it, which is the
+   right default for the live site — so this does not touch that file.
+   A second observer runs alongside it here and toggles the class both ways.
+   Both can watch the same node; script.js simply drops out after its first
+   pass and this one keeps going. */
+document.addEventListener("DOMContentLoaded", function () {
+  if (!document.documentElement.classList.contains("js-anim")) return;   // reduced motion
+  if (!("IntersectionObserver" in window)) return;
+
+  var targets = document.querySelectorAll("[data-reveal], [data-reveal-group]");
+  if (!targets.length) return;
+
+  function membersOf(el) {
+    return el.hasAttribute("data-reveal-group") ? [].slice.call(el.children) : [el];
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      var showing = entry.isIntersecting;
+      membersOf(entry.target).forEach(function (el, i) {
+        // stagger on the way in, but leave together — a staggered exit reads
+        // as lag rather than choreography
+        el.style.transitionDelay = showing ? Math.min(i * 80, 640) + "ms" : "0ms";
+        el.classList.toggle("is-visible", showing);
+      });
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+
+  targets.forEach(function (el) { io.observe(el); });
+});
+
 </script>
 </body>
 </html>
