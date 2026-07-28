@@ -414,9 +414,8 @@
 <script>
 /* ---------- hero clip: silent autoplay loop in the card ---------- */
 (function () {
-  var clip  = document.getElementById("heroClip");
-  var frame = clip && clip.closest(".frame");
-  if (!clip || !frame) return;
+  var clip = document.getElementById("heroClip");
+  if (!clip) return;
 
   // don't autoplay at people who asked for less motion, or who are on a
   // metered / slow connection — this file is 17.6 MB
@@ -432,50 +431,33 @@
     return;
   }
 
-  clip.addEventListener("playing", function () { frame.classList.add("is-playing"); });
-  clip.addEventListener("pause",   function () { frame.classList.remove("is-playing"); });
-
   // Safari sometimes ignores the attribute until asked directly
   var p = clip.play();
-  if (p && p.catch) p.catch(function () { /* left paused, play button still works */ });
+  if (p && p.catch) p.catch(function () { /* stays paused; the toggle still works */ });
 })();
 
+/* ---------- mute / unmute ---------- */
 (function () {
-  var openBtn = document.getElementById("framePlay");
-  var lb      = document.getElementById("lightbox");
-  var vid     = document.getElementById("lbVideo");
-  var closeBtn= document.getElementById("lbClose");
-  if (!openBtn || !lb || !vid || !closeBtn) return;
+  var clip = document.getElementById("heroClip");
+  var btn  = document.getElementById("muteBtn");
+  if (!clip || !btn) return;
 
-  var lastFocus = null;
-
-  function show() {
-    lastFocus = document.activeElement;
-    lb.hidden = false;
-    document.body.style.overflow = "hidden";
-    var bg = document.getElementById("heroClip");
-    if (bg) bg.pause();                       // don't run two clips at once
-    try { vid.currentTime = 0; } catch (e) {}
-    var p = vid.play();
-    if (p && p.catch) p.catch(function () {});   // autoplay may be refused; controls still work
-    closeBtn.focus();
+  function sync() {
+    var muted = clip.muted;
+    btn.setAttribute("aria-pressed", muted ? "true" : "false");
+    btn.setAttribute("aria-label", muted ? "Unmute video" : "Mute video");
+    btn.title = muted ? "Unmute" : "Mute";
   }
 
-  function hide() {
-    vid.pause();
-    lb.hidden = true;
-    document.body.style.overflow = "";
-    var bg = document.getElementById("heroClip");
-    if (bg && bg.hasAttribute("loop")) bg.play().catch(function () {});
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
-  }
-
-  openBtn.addEventListener("click", show);
-  closeBtn.addEventListener("click", hide);
-  lb.addEventListener("click", function (e) { if (e.target === lb) hide(); });
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !lb.hidden) hide();
+  btn.addEventListener("click", function () {
+    clip.muted = !clip.muted;
+    // a clip only allowed to play because it was silent can stall on unmute
+    if (!clip.muted && clip.paused) clip.play().catch(function () {});
+    sync();
   });
+
+  clip.addEventListener("volumechange", sync);
+  sync();
 })();
 </script>
 </body>
