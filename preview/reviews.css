@@ -1,0 +1,88 @@
+/* ================= reviews ================= */
+.rv-head { padding: clamp(1.75rem, 3.5vw, 2.75rem) 0 0; }
+.rv-head-in {
+  display: grid; grid-template-columns: minmax(0,1fr) 300px;
+  gap: clamp(1.75rem, 4vw, 3.5rem); align-items: start;
+}
+.rv-head h1 { max-width: 14ch; }
+
+/* ---------- score panel ---------- */
+.score {
+  padding: 1.4rem 1.35rem;
+  border-radius: 14px;
+  background: linear-gradient(178deg, #141b28, #0b1017);
+  border: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 20px 46px rgba(0,0,0,.5);
+}
+.score-top { display: flex; align-items: center; gap: .5rem; }
+.score-src { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(244,247,251,.42); }
+.score-n { margin: .8rem 0 0; font-family: Georgia, serif; font-size: 3.2rem; line-height: 1; color: #fff; }
+.score-stars { margin: .35rem 0 0; color: #fbbf24; letter-spacing: 3px; font-size: 1rem; }
+.score-count { margin: .45rem 0 0; font-size: .8rem; color: rgba(244,247,251,.45); }
+
+.bars { margin: 1.25rem 0 0; display: grid; gap: .3rem; }
+.bars > div { display: grid; grid-template-columns: 30px 1fr; align-items: center; gap: .55rem; }
+.bars dt { font-size: .72rem; color: rgba(244,247,251,.45); white-space: nowrap; }
+.bars dt span { color: #fbbf24; margin-left: 1px; }
+.bars dd { margin: 0; display: grid; grid-template-columns: 1fr 18px; align-items: center; gap: .5rem; }
+.bar { display: block; height: 5px; border-radius: 3px; background: rgba(255,255,255,.08); overflow: hidden; }
+.bar i { display: block; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #fbbf24, #f0a500); }
+.bars b { font-size: .72rem; font-weight: 400; color: rgba(244,247,251,.4); text-align: right; }
+
+.score-link { width: 100%; margin-top: 1.25rem; min-height: 44px; font-size: .86rem; }
+
+/* ---------- the reviews ---------- */
+.rv-body { padding: clamp(1.75rem, 3.5vw, 2.75rem) 0 clamp(2rem, 4vw, 3rem); }
+.rv-grid { columns: 2; column-gap: 1rem; }
+@media (min-width: 1180px) { .rv-grid { columns: 3; } }
+
+.rv {
+  break-inside: avoid;
+  margin: 0 0 1rem;
+  padding: 1.25rem 1.3rem;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 14px 34px rgba(0,0,0,.42);
+}
+.rv-top { display: flex; align-items: center; gap: .6rem; }
+.rv-av {
+  width: 34px; height: 34px; flex: none; border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: Georgia, serif; font-size: .92rem; color: #fff;
+  background: linear-gradient(180deg, #4a80ff, #1743b8);
+}
+.rv-who { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.rv-name { font-family: Georgia, serif; font-size: .98rem; color: #14171c; }
+.rv-meta { font-size: .7rem; color: #6b7280; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.rv-rate { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: .7rem; }
+.rv-stars { color: #fbbc04; letter-spacing: 1.4px; font-size: .82rem; }
+.rv-when { font-size: .72rem; color: #6b7280; }
+.rv-new {
+  font-size: .58rem; letter-spacing: .1em; text-transform: uppercase;
+  color: #1743b8; padding: 1px 6px; border-radius: 999px;
+  background: rgba(47,107,255,.1); border: 1px solid rgba(47,107,255,.28);
+}
+
+.rv-text { margin: .7rem 0 0; font-size: .86rem; line-height: 1.6; color: #3f4550; }
+.rv-none { font-style: italic; color: #8b919c; }
+
+/* the owner's reply, tucked under its review */
+.rv-reply {
+  margin: .9rem 0 0; padding: .8rem .9rem;
+  border-radius: 10px;
+  background: #f4f6fa;
+  border-left: 2px solid #1743b8;
+}
+.rv-reply-h {
+  display: block; margin-bottom: .3rem;
+  font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: #1743b8;
+}
+.rv-reply p { margin: 0; font-size: .81rem; line-height: 1.55; color: #4a505c; }
+
+@media (max-width: 900px) {
+  .rv-head-in { grid-template-columns: 1fr; }
+  .score { max-width: 340px; }
+  .rv-grid { columns: 1; }
+}
