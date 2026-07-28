@@ -20,7 +20,16 @@
     background-repeat: repeat;
   }
 
-  .canvas { min-height: 60vh; }
+  /* ================= reassurance — structure only ================= */
+  .reassure-shell {
+    padding: clamp(3rem, 6vw, 5rem) 0;
+    min-height: 38vh;
+    border-bottom: 1px solid var(--accent);   /* the divider */
+  }
+  /* the live section repaints bg-texture on itself; here the body's texture
+     runs straight through, which avoids a seam where the tile would restart */
+
+  .canvas { min-height: 45vh; }
 
   /* ================= hero ================= */
   .hero-shell {
@@ -417,6 +426,10 @@
       </div>
 
     </div>
+  </section>
+
+  <section class="reassure-shell" id="reviews">
+    <!-- nothing inside -->
   </section>
 
   <div class="canvas">
