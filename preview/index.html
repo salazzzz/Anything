@@ -797,6 +797,29 @@
     display: block;
   }
 
+  /* shown only when the browser refuses to autoplay, so a blocked clip reads
+     as a deliberate play control instead of Safari's grey placeholder */
+  .tap-play {
+    position: absolute; inset: 0; z-index: 4;
+    display: grid; place-items: center;
+    padding: 0; border: 0; cursor: pointer;
+    background: linear-gradient(180deg, rgba(6,8,12,.25), rgba(6,8,12,.55));
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s ease;
+  }
+  .frame.needs-tap .tap-play { opacity: 1; pointer-events: auto; }
+  .tap-play-dot {
+    width: 62px; height: 62px; border-radius: 50%;
+    display: grid; place-items: center; padding-left: 4px;
+    background: linear-gradient(180deg, #3d78ff 0%, #1743b8 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 10px 30px rgba(24,75,194,.6);
+    transition: transform .25s cubic-bezier(.2,.7,.3,1);
+  }
+  .tap-play:hover .tap-play-dot { transform: scale(1.07); }
+
+  /* Safari paints a grey box behind a video it has not started */
+  .frame-clip { background: #0a0d13; }
+
   /* mute / unmute toggle, sitting on the clip */
   .mute-btn {
     position: absolute;
@@ -993,6 +1016,14 @@
             <video class="frame-clip" id="heroClip" src="../videos/hero-vertical-v2.mp4"
                    autoplay muted loop playsinline preload="auto"
                    disablepictureinpicture aria-hidden="true" tabindex="-1"></video>
+
+            <button type="button" class="tap-play" id="tapPlay" aria-label="Play video" tabindex="-1">
+              <span class="tap-play-dot">
+                <svg width="19" height="21" viewBox="0 0 17 19" fill="none" aria-hidden="true">
+                  <path d="M2 1.7v15.6a1 1 0 0 0 1.53.85l12.5-7.8a1 1 0 0 0 0-1.7L3.53.85A1 1 0 0 0 2 1.7Z" fill="#fff"/>
+                </svg>
+              </span>
+            </button>
 
             <button type="button" class="mute-btn" id="muteBtn" aria-pressed="true" aria-label="Unmute video" title="Unmute">
               <!-- muted -->
@@ -1512,10 +1543,27 @@
     return;
   }
 
+  var frame = clip.closest(".frame");
+  var tap   = document.getElementById("tapPlay");
+
   function attempt() {
     var p = clip.play();
-    if (p && p.catch) p.catch(function () { /* stays paused; the toggle still works */ });
+    if (p && p.catch) {
+      p.then(function () {
+        if (frame) frame.classList.remove("needs-tap");
+      }).catch(function () {
+        // blocked — Low Power Mode, a per-site autoplay setting, or similar.
+        // Show our own control rather than leaving Safari's grey placeholder.
+        if (frame) frame.classList.add("needs-tap");
+      });
+    }
   }
+
+  if (tap) tap.addEventListener("click", function () {
+    // a real tap is a user gesture, so this is always allowed
+    clip.play();
+    if (frame) frame.classList.remove("needs-tap");
+  });
 
   // Safari sometimes ignores the attribute until asked directly, and an 18 MB
   // file is rarely ready at first ask — so try again once it can actually play
