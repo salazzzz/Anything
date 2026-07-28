@@ -6,29 +6,72 @@
 <title>Euro Detailing — Canvas</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="../images/favicon.png">
+
+<!-- the real site stylesheet, so the header is exactly the live one -->
+<link rel="stylesheet" href="../styles.css">
+
 <style>
-  *{box-sizing:border-box}
+  /* canvas overrides — the grainy black, everywhere, not just the header */
+  html, body { min-height: 100%; }
 
-  html,body{
-    height:100%;
-    margin:0;
+  body {
+    background-color: #060606;
+    background-image: url("../images/bg-texture.webp");
+    background-repeat: repeat;
   }
 
-  body{
-    /* the grainy black, exactly as it is on the live site */
-    background-color:#060606;
-    background-image:url("../images/bg-texture.webp");
-    background-repeat:repeat;
-
-    color:#f4f7fb;
-    font-family:Georgia,"Times New Roman",Times,serif;
-    -webkit-font-smoothing:antialiased;
-  }
+  /* empty space under the header so the canvas is visible */
+  .canvas { min-height: 78vh; }
 </style>
 </head>
 <body>
 
-<!-- blank canvas -->
+<a class="skip-link" href="#main-content">Skip to content</a>
 
+<header class="site-header" id="top">
+  <div class="container header-inner">
+    <a href="#top" class="brand">
+      <img src="../images/logo.webp" alt="Euro Detailing logo" class="logo-image" width="72" height="72" decoding="async">
+      <span class="brand-text">
+        <span class="brand-name">Euro Detailing</span>
+        <span class="brand-subtitle">Mobile car detailing in Newton, MA</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      <a href="#services">Services</a>
+      <a href="../membership.html">Membership</a>
+      <a href="#service-area" class="nav-hideable">Service Area</a>
+      <a href="../gallery.html">Gallery</a>
+      <a href="../testimonials.html" class="nav-hideable">Reviews</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <div class="nav-more-wrap">
+        <button type="button" class="nav-more" aria-expanded="false" aria-controls="navMoreMenu">More<span class="nav-more-caret" aria-hidden="true"></span></button>
+        <div class="nav-more-menu" id="navMoreMenu" hidden>
+          <a href="#service-area">Service Area</a>
+          <a href="../testimonials.html">Reviews</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <a href="https://www.instagram.com/euro_detailingg" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Euro Detailing on Instagram">
+        <img src="../images/instagram.webp" alt="Euro Detailing on Instagram" width="60" height="60" decoding="async">
+      </a>
+      <a href="https://www.tiktok.com/@eurodetailing" target="_blank" rel="noopener noreferrer" class="social-link1" aria-label="Euro Detailing on TikTok">
+        <img src="../images/tiktok.webp" alt="Euro Detailing on TikTok" width="87" height="74" decoding="async">
+      </a>
+      <a href="#services" class="button button-primary">Book Now</a>
+    </div>
+  </div>
+</header>
+
+<main id="main-content" class="canvas">
+  <!-- blank canvas -->
+</main>
+
+<!-- real site script: powers the mobile "More" dropdown -->
+<script src="../script.js" defer></script>
 </body>
 </html>
