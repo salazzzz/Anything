@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="../styles.css">
 
 <style>
-  /* ---------- canvas ---------- */
+  /* ================= canvas ================= */
   html, body { min-height: 100%; }
 
   body {
@@ -20,71 +20,250 @@
     background-repeat: repeat;
   }
 
-  /* ---------- hero shell — structure only, nothing in it ---------- */
+  .canvas { min-height: 60vh; }
+
+  /* ================= hero ================= */
   .hero-shell {
     position: relative;
     min-height: calc(100vh - var(--header-height));
+    display: flex;
+    align-items: center;
     border-bottom: 1px solid var(--accent);   /* the divider */
+    padding: 4.5rem 0;
   }
 
-  /* blank space under it so the divider reads as a divider */
-  .canvas { min-height: 60vh; }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(300px, 392px);
+    gap: clamp(2.5rem, 5vw, 5.5rem);
+    align-items: center;
+    width: 100%;
+  }
 
-  /* ---------- primary CTA — "Wet Gloss" ---------- */
-  .cta {
+  /* ---------- left column ---------- */
+  .hero-rule {
+    width: 46px;
+    height: 1px;
+    background: var(--accent);
+    margin-bottom: 1.4rem;
+  }
+
+  .hero-eyebrow-x {
+    display: block;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 0.74rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: rgba(244, 247, 251, 0.5);
+    margin-bottom: 1.6rem;
+  }
+
+  .hero-title {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: 400;
+    font-size: clamp(2.7rem, 5.6vw, 4.9rem);
+    line-height: 0.94;
+    letter-spacing: -0.035em;
+    max-width: 11ch;
+    color: #f7f9fc;
+  }
+  /* the one word that carries the idea */
+  .hero-title em {
+    font-style: italic;
+    color: #ffffff;
+  }
+
+  .hero-sub {
+    margin: 1.55rem 0 0;
+    max-width: 44ch;
+    font-size: clamp(1rem, 1.25vw, 1.09rem);
+    line-height: 1.62;
+    color: rgba(244, 247, 251, 0.66);
+  }
+
+  /* ---------- the long bar button ---------- */
+  .bar-btn {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 430px;
+    margin-top: 2.5rem;
+    min-height: 62px;
+    padding: 0 1.5rem 0 1.65rem;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 4px;
+    text-decoration: none;
+    color: #f4f7fb;
+    background: rgba(255, 255, 255, 0.022);
+    transition: border-color .3s ease, background-color .3s ease;
+  }
+  .bar-btn-label {
+    position: relative;
+    z-index: 2;
+    font-family: Georgia, serif;
+    font-size: 1.02rem;
+    letter-spacing: 0.012em;
+  }
+  .bar-btn-arrow { position: relative; z-index: 2; flex: none; opacity: .55; transition: transform .3s cubic-bezier(.2,.7,.3,1), opacity .3s ease; }
+  /* accent wipes in from the left edge */
+  .bar-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 2px;
+    background: var(--accent);
+    transition: width .34s cubic-bezier(.2,.7,.3,1);
+  }
+  .bar-btn:hover { border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.04); }
+  .bar-btn:hover::before { width: 100%; opacity: .16; }
+  .bar-btn:hover .bar-btn-arrow { transform: translateX(5px); opacity: 1; }
+
+  /* ---------- right column: video frame ---------- */
+  .frame-stack { position: relative; }
+
+  /* offset hairline frame sitting behind — depth without a drop shadow */
+  .frame-stack::before {
+    content: "";
+    position: absolute;
+    inset: 18px -18px -18px 18px;
+    border: 1px solid rgba(24, 75, 194, 0.55);
+    border-radius: 6px;
+    pointer-events: none;
+  }
+
+  .frame {
+    position: relative;
+    aspect-ratio: 9 / 16;               /* portrait — matches your phone-shot clips */
+    border-radius: 6px;
+    overflow: hidden;
+    background: linear-gradient(165deg, #12161f 0%, #0a0d13 55%, #070a0f 100%);
+    border: 1px solid rgba(255, 255, 255, 0.13);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.07),
+                0 30px 70px rgba(0,0,0,.62);
+    display: grid;
+    place-items: center;
+  }
+  .frame video,
+  .frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* viewfinder corner ticks — precision cue */
+  .tick { position: absolute; width: 15px; height: 15px; pointer-events: none; }
+  .tick::before, .tick::after { content: ""; position: absolute; background: rgba(47,107,255,.85); }
+  .tick::before { width: 100%; height: 1px; }
+  .tick::after  { height: 100%; width: 1px; }
+  .tick.tl { top: 11px; left: 11px; }
+  .tick.tr { top: 11px; right: 11px; }
+  .tick.tr::before { right: 0; } .tick.tr::after { right: 0; }
+  .tick.bl { bottom: 11px; left: 11px; }
+  .tick.bl::before { bottom: 0; } .tick.bl::after { bottom: 0; }
+  .tick.br { bottom: 11px; right: 11px; }
+  .tick.br::before { bottom: 0; right: 0; } .tick.br::after { bottom: 0; right: 0; }
+
+  /* placeholder state — replaced by the real <video> */
+  .frame-empty { text-align: center; padding: 1rem; }
+  .frame-empty svg { opacity: .75; }
+  .frame-empty span {
+    display: block;
+    margin-top: 1.1rem;
+    font-family: Georgia, serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgba(244,247,251,.34);
+  }
+
+  /* ---------- the two buttons under the frame ---------- */
+  .frame-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7rem;
+    margin-top: 2.4rem;
+  }
+
+  /* shared button skeleton */
+  .cta, .cta-ghost {
     position: relative;
     overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    min-height: 46px;
-    padding: 0 1.45rem;
+    min-height: 50px;
+    padding: 0 1.15rem;
     border-radius: 999px;
     border: 1px solid transparent;
     font-family: inherit;
     font-weight: 700;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     letter-spacing: 0.015em;
     white-space: nowrap;
     text-decoration: none;
     isolation: isolate;
+    transition: transform .22s cubic-bezier(.2,.7,.3,1),
+                box-shadow .22s ease, background-color .22s ease, border-color .22s ease;
+  }
+  .cta > *, .cta-ghost > * { position: relative; z-index: 2; }
+  .cta:hover, .cta-ghost:hover { transform: translateY(-2px); }
+  .cta:active, .cta-ghost:active { transform: translateY(0) scale(.985); }
+  .arw { flex: none; transition: transform .22s cubic-bezier(.2,.7,.3,1); }
+  .cta:hover .arw, .cta-ghost:hover .arw { transform: translateX(3px); }
 
+  /* primary — wet gloss */
+  .cta {
     background: linear-gradient(180deg, #3d78ff 0%, #1743b8 100%);
-    color: #ffffff;
+    color: #fff;
     box-shadow: inset 0 1px 0 rgba(255,255,255,.32),
                 inset 0 -1px 0 rgba(0,0,0,.25),
                 0 8px 26px rgba(24,75,194,.5);
-
-    transition: transform .22s cubic-bezier(.2,.7,.3,1),
-                box-shadow .22s ease;
   }
-  .cta > * { position: relative; z-index: 2; }
-
   .cta:hover {
-    transform: translateY(-2px);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.4),
-                0 14px 36px rgba(47,107,255,.62);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.4), 0 14px 36px rgba(47,107,255,.62);
   }
-  .cta:active { transform: translateY(0) scale(.985); }
-
-  .cta .arw { flex: none; transition: transform .22s cubic-bezier(.2,.7,.3,1); }
-  .cta:hover .arw { transform: translateX(3px); }
-
-  /* wet-look highlight sweeping across on hover */
   .cta::after {
     content: "";
-    position: absolute;
-    inset: -1px;
-    z-index: 1;
+    position: absolute; inset: -1px; z-index: 1;
     background: linear-gradient(105deg, transparent 32%, rgba(255,255,255,.5) 48%, transparent 64%);
     transform: translateX(-130%);
     transition: transform .75s cubic-bezier(.2,.7,.3,1);
   }
   .cta:hover::after { transform: translateX(130%); }
 
+  /* secondary — glass */
+  .cta-ghost {
+    background: rgba(255,255,255,.05);
+    color: #fff;
+    border-color: rgba(255,255,255,.22);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+  }
+  .cta-ghost:hover {
+    background: rgba(255,255,255,.1);
+    border-color: rgba(255,255,255,.42);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 10px 28px rgba(0,0,0,.4);
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 3.25rem; }
+    .hero-title { max-width: 14ch; }
+    .frame-stack { max-width: 360px; margin: 0 auto; }
+    .frame-stack::before { inset: 14px -14px -14px 14px; }
+    .bar-btn { max-width: none; }
+  }
+  @media (max-width: 520px) {
+    .hero-shell { padding: 3rem 0; }
+    .frame-actions { grid-template-columns: 1fr; }
+  }
   @media (prefers-reduced-motion: reduce) {
-    .cta, .cta .arw, .cta::after { transition: none !important; }
+    .cta, .cta-ghost, .arw, .cta::after, .bar-btn, .bar-btn::before, .bar-btn-arrow {
+      transition: none !important;
+    }
   }
 </style>
 </head>
@@ -123,7 +302,6 @@
       <a href="https://www.tiktok.com/@eurodetailing" target="_blank" rel="noopener noreferrer" class="social-link1" aria-label="Euro Detailing on TikTok">
         <img src="../images/tiktok.webp" alt="Euro Detailing on TikTok" width="87" height="74" decoding="async">
       </a>
-
       <a href="#services" class="cta">
         <span>Book Now</span>
         <svg class="arw" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -137,7 +315,66 @@
 <main id="main-content">
 
   <section class="hero-shell">
-    <!-- nothing inside -->
+    <div class="container hero-inner">
+
+      <!-- ---------- left ---------- -->
+      <div class="hero-left">
+        <div class="hero-rule"></div>
+        <span class="hero-eyebrow-x">Newton, Massachusetts</span>
+
+        <h1 class="hero-title">We detail it <em>where it sits.</em></h1>
+
+        <p class="hero-sub">
+          Interior, exterior and full details across Newton and the towns around it.
+          No drop-off, no waiting room — and you don't need to be home. We bring the
+          water, the power and everything else.
+        </p>
+
+        <a href="#services" class="bar-btn">
+          <span class="bar-btn-label">View services &amp; pricing</span>
+          <svg class="bar-btn-arrow" width="20" height="14" viewBox="0 0 22 14" fill="none" aria-hidden="true">
+            <path d="M0 7h19M14.5 1.5 20.5 7l-6 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- ---------- right ---------- -->
+      <div class="hero-right">
+        <div class="frame-stack">
+          <div class="frame">
+            <span class="tick tl"></span><span class="tick tr"></span>
+            <span class="tick bl"></span><span class="tick br"></span>
+
+            <!-- placeholder — swap for the real <video> once you send it -->
+            <div class="frame-empty">
+              <svg width="34" height="38" viewBox="0 0 34 38" fill="none" aria-hidden="true">
+                <path d="M2 3.4v31.2a1.5 1.5 0 0 0 2.27 1.29l26.4-15.6a1.5 1.5 0 0 0 0-2.58L4.27 2.11A1.5 1.5 0 0 0 2 3.4Z"
+                      stroke="rgba(47,107,255,.9)" stroke-width="1.2" stroke-linejoin="round"/>
+              </svg>
+              <span>Video</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="frame-actions">
+          <a href="tel:+17812903040" class="cta-ghost">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M5.2 2.2 6.8 5 5.4 6.6a8.4 8.4 0 0 0 4 4L11 9.2l2.8 1.6v2.4a1 1 0 0 1-1.1 1A11.6 11.6 0 0 1 2.1 3.3a1 1 0 0 1 1-1.1h2.1Z"
+                    stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+            </svg>
+            <span>Call Eric</span>
+          </a>
+
+          <a href="#services" class="cta">
+            <span>Book Now</span>
+            <svg class="arw" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
   </section>
 
   <div class="canvas">
