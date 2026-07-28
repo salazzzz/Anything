@@ -3,6 +3,22 @@
   "items": [
     {
       "type": "image",
+      "src": "images/gallery/bmw-x5m-matte-after.webp",
+      "alt": "Matte black BMW X5 M after a full exterior detail in Newton, MA",
+      "category": "exterior",
+      "w": 1200,
+      "h": 900
+    },
+    {
+      "type": "image",
+      "src": "images/gallery/bmw-x5m-matte-before.webp",
+      "alt": "The same matte black BMW X5 M before the detail, covered in road dust",
+      "category": "exterior",
+      "w": 1200,
+      "h": 900
+    },
+    {
+      "type": "image",
       "src": "images/gallery/audi-q8-black-exterior.webp",
       "alt": "Glossy black Audi Q8 after a full exterior detail and hand wash in Newton, MA",
       "category": "exterior",
