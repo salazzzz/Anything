@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("js-anim")}</script>
 <title>Euro Detailing — Canvas</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="../images/favicon.png">
@@ -347,6 +348,36 @@
   }
   @media (max-width: 520px) {
     .why-item { grid-template-columns: 30px minmax(0, 1fr); gap: 0 0.8rem; }
+  }
+
+
+  /* ---------- motion ---------- */
+  /* Base reveal is a 28px rise, from styles.css. Two things want something
+     else, both only inside the same reduced-motion guard. */
+  @media (prefers-reduced-motion: no-preference) {
+
+    /* accent rules draw across instead of rising — they are lines, so a line
+       is what should happen */
+    .js-anim .hero-rule,
+    .js-anim .sec-rule,
+    .js-anim .svc-rule {
+      opacity: 1;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform .8s cubic-bezier(.22, 1, .36, 1);
+    }
+    .js-anim .hero-rule.is-visible,
+    .js-anim .sec-rule.is-visible,
+    .js-anim .svc-rule.is-visible { transform: scaleX(1); }
+
+    /* the video card settles in rather than sliding — a 28px rise on
+       something that size reads as heavy */
+    .js-anim .hero-right > .frame-stack {
+      transform: scale(.965);
+      transition: opacity .85s cubic-bezier(.22, 1, .36, 1),
+                  transform .85s cubic-bezier(.22, 1, .36, 1);
+    }
+    .js-anim .hero-right > .frame-stack.is-visible { transform: none; }
   }
 
   /* ---------- service-area modal ---------- */
@@ -769,7 +800,7 @@
     <div class="container hero-inner">
 
       <!-- ---------- left ---------- -->
-      <div class="hero-left">
+      <div class="hero-left" data-reveal-group>
         <div class="hero-rule"></div>
         <span class="hero-eyebrow-x">Mobile Detailing &bull; Newton, Massachusetts</span>
         <div class="location-pill">Serving Newton &amp; surrounding areas</div>
@@ -790,7 +821,7 @@
       </div>
 
       <!-- ---------- right ---------- -->
-      <div class="hero-right">
+      <div class="hero-right" data-reveal-group>
         <div class="frame-stack">
           <div class="frame">
             <span class="tick tl"></span><span class="tick tr"></span>
@@ -842,7 +873,7 @@
     <div class="container reassure-grid">
 
       <!-- ============ left: reviews ============ -->
-      <div class="rev-side">
+      <div class="rev-side" data-reveal-group>
         <div class="rating-bar">
           <span class="g-logo" aria-hidden="true"></span>
           <span class="rb-stars" aria-hidden="true">★★★★★</span>
@@ -993,7 +1024,7 @@
       </div>
 
       <!-- ============ right: service area ============ -->
-      <div class="map-side">
+      <div class="map-side" data-reveal-group>
         <figure class="panel map-card">
           <img src="../images/location-map.webp" alt="Map of the Euro Detailing service area around Newton, Massachusetts"
                width="1600" height="1104" loading="lazy" decoding="async">
@@ -1013,11 +1044,11 @@
 
   <section class="services-shell" id="services">
     <div class="container">
-      <div class="svc-head">
+      <div class="svc-head" data-reveal-group>
         <span class="svc-rule" aria-hidden="true"></span>
         <h2>Choose the detail that fits your needs.</h2>
       </div>
-      <div class="svc-grid">
+      <div class="svc-grid" data-reveal-group>
         <a class="svc-card" href="../services/interior.html">
           <img class="svc-shot" src="../images/interior-service.webp" alt="Interior detailing by Euro Detailing" loading="lazy" decoding="async">
           <span class="svc-chip">from $105</span>
@@ -1053,7 +1084,7 @@
     <div class="container about-grid">
 
       <!-- ---------- left: Eric ---------- -->
-      <div class="about-side">
+      <div class="about-side" data-reveal-group>
         <span class="sec-rule" aria-hidden="true"></span>
         <h2 class="about-title">A cleaner, more personal way to detail.</h2>
 
@@ -1077,7 +1108,7 @@
       </div>
 
       <!-- ---------- right: why ---------- -->
-      <div class="why-side">
+      <div class="why-side" data-reveal-group>
         <span class="sec-kicker">Why Euro Detailing</span>
         <h2 class="why-title">The Detail Starts Before You Know It</h2>
         <p class="why-lede">
