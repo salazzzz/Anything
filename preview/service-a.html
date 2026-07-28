@@ -44,10 +44,43 @@
     <div>
       <span class="sec-rule" aria-hidden="true"></span>
       <h1>Interior Detailing</h1>
-      <p class="lede">Seats, carpets, mats and every surface brought back — in your driveway, while you get on with your day.</p>
+
+      <div class="pitch">
+        <p>A vacuum and a wipe-down moves dirt around. It doesn't take it out.</p>
+        <p>The inside of a car is one of the dirtiest surfaces you touch all day &mdash;
+           right behind the toilet seat. Bacteria sitting in the vents, dirt worked deep
+           into the carpet, and smells that come straight back because nothing was ever
+           actually pulled out.</p>
+        <p><strong>Basic</strong> is for a car that's already kept up.
+           If it's been more than three months since the last detail, take the
+           <strong>Deep Clean</strong>.</p>
+        <p class="pitch-kicker">You don't deserve a dirty interior.</p>
+      </div>
     </div>
-    <img class="hero-a-shot" src="../images/interior-service.webp" alt="" width="800" height="500" decoding="async">
+
+    <div class="ba" id="ba">
+      <img class="ba-img" src="../images/before.webp" alt="Car interior before detailing" width="1200" height="800" decoding="async">
+      <div class="ba-after" id="baAfter">
+        <img class="ba-img" src="../images/after.webp" alt="The same interior after detailing" width="1200" height="800" decoding="async">
+      </div>
+      <span class="ba-tag ba-tag-l">Before</span>
+      <span class="ba-tag ba-tag-r">After</span>
+      <div class="ba-divider" id="baDivider">
+        <span class="ba-handle" id="baHandle" role="slider" tabindex="0"
+              aria-label="Reveal the after photo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+          <svg width="20" height="12" viewBox="0 0 22 12" fill="none" aria-hidden="true">
+            <path d="M8 1.5 3.5 6 8 10.5M14 1.5 18.5 6 14 10.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+      <span class="ba-hint">Drag</span>
+    </div>
   </div>
+
+  <a class="cue" href="#pick">
+    <span class="cue-txt">Pick your size &amp; level</span>
+    <span class="cue-rail"><span class="cue-dot"></span></span>
+  </a>
 </section>
 
 
@@ -62,7 +95,7 @@
 </div>
 
 
-<section class="sec">
+<section class="sec" id="pick">
   <div class="container">
     <span class="sec-rule" aria-hidden="true"></span>
     <h2 class="sec-h">Pick your size, then your level.</h2>
@@ -74,7 +107,7 @@
         <p class="tier-price"><sup>$</sup><span data-price="basic">105</span></p>
         <p class="tier-time" data-time="basic">~1.5–2 hrs</p>
         <p class="tier-blurb">Kept up regularly? This is plenty.</p>
-        <ul class="ticks"><li>Full interior vacuum — seats, floors, trunk</li><li>Dashboard, console and vents wiped down</li><li>Door panels cleaned</li><li>Interior windows cleaned</li><li>Floor mats cleaned</li><li>Door jambs washed</li><li>Matte satin finish</li><li>Light fragrance finish</li></ul>
+        <ul class="ticks"><li>Full interior vacuum — seats, floors, trunk</li><li>Dashboard, console and vents wiped down</li><li>Door panels cleaned</li><li>Interior windows cleaned</li><li>Floor mats cleaned</li><li>Door jambs washed</li><li>Matte satin finish</li><li>Light fragrance finish</li><li class="no">Spot and stain removal, cloth seats and carpets</li><li class="no">Full steam clean</li><li class="no">Leather cleaned and conditioned (if applicable)</li><li class="no">Light pet hair removal</li><li class="no">Plastic floor mat restoration included</li><li class="no">Deeper odour treatment and fragrance finish</li></ul>
         <a class="cta-ghost tier-cta" data-book="basic" href="#"><span>Book Basic</span></a>
       </article>
 
@@ -145,6 +178,48 @@ var DATA = {"basic": {"sedan": [105,"~1.5\u20132 hrs","basic-interior-detail"],"
     });
   });
   paint();
+})();
+/* before / after — one pointer path for mouse, touch and pen */
+(function () {
+  var box = document.getElementById("ba");
+  if (!box) return;
+  var after = document.getElementById("baAfter"),
+      divider = document.getElementById("baDivider"),
+      handle = document.getElementById("baHandle"),
+      pct = 50, dragging = false;
+
+  function set(v) {
+    pct = Math.max(0, Math.min(100, v));
+    after.style.width = pct + "%";
+    divider.style.left = pct + "%";
+    handle.style.left = pct + "%";
+    handle.setAttribute("aria-valuenow", Math.round(pct));
+    box.classList.add("touched");
+  }
+  function at(e) {
+    var r = box.getBoundingClientRect();
+    return ((e.clientX - r.left) / r.width) * 100;
+  }
+
+  box.addEventListener("pointerdown", function (e) {
+    dragging = true; box.setPointerCapture(e.pointerId); set(at(e)); e.preventDefault();
+  });
+  box.addEventListener("pointermove", function (e) { if (dragging) set(at(e)); });
+  box.addEventListener("pointerup",     function () { dragging = false; });
+  box.addEventListener("pointercancel", function () { dragging = false; });
+
+  handle.addEventListener("keydown", function (e) {
+    var step = e.shiftKey ? 10 : 2, hit = true;
+    if      (e.key === "ArrowLeft"  || e.key === "ArrowDown") set(pct - step);
+    else if (e.key === "ArrowRight" || e.key === "ArrowUp")   set(pct + step);
+    else if (e.key === "Home") set(0);
+    else if (e.key === "End")  set(100);
+    else hit = false;
+    if (hit) e.preventDefault();
+  });
+
+  after.style.width = "50%";
+  box.classList.remove("touched");
 })();
 </script>
 </body>

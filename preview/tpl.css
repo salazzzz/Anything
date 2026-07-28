@@ -261,3 +261,119 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   .cta, .cta-ghost, .arw, .cta::after, .sz, .lvl-btn { transition: none !important; }
 }
+
+/* ================= template A additions ================= */
+
+/* the longer pitch under the title */
+.pitch { margin-top: 1.15rem; max-width: 48ch; }
+.pitch p {
+  margin: 0 0 .75rem;
+  font-size: 1.02rem; line-height: 1.62;
+  color: rgba(244,247,251,.66);
+}
+.pitch strong { font-weight: 700; color: rgba(244,247,251,.95); }
+.pitch-kicker {
+  margin-top: 1.1rem !important; padding-top: .95rem;
+  border-top: 1px solid rgba(255,255,255,.1);
+  font-family: Georgia, serif; font-style: italic;
+  font-size: 1.12rem !important; color: #f4f7fb !important;
+}
+
+/* ---------- before / after ---------- */
+.ba {
+  position: relative; overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.13);
+  box-shadow: 0 20px 46px rgba(0,0,0,.5);
+  background: #000;
+  cursor: ew-resize;
+  touch-action: pan-y;
+  user-select: none; -webkit-user-select: none;
+}
+.ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ba-after { position: absolute; inset: 0 auto 0 0; width: 50%; overflow: hidden; will-change: width; }
+.ba-after .ba-img { width: auto; height: 100%; max-width: none; }
+.ba-divider {
+  position: absolute; top: 0; bottom: 0; left: 50%;
+  width: 2px; margin-left: -1px;
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 0 12px rgba(0,0,0,.65);
+  will-change: left;
+}
+.ba-handle {
+  position: absolute; top: 50%; left: 50%;
+  width: 46px; height: 46px; margin: -23px 0 0 -23px;
+  display: grid; place-items: center;
+  border-radius: 50%; cursor: ew-resize; color: #fff;
+  background: linear-gradient(180deg, #3d78ff 0%, #1743b8 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 20px rgba(0,0,0,.5);
+  transition: transform .2s cubic-bezier(.2,.7,.3,1);
+}
+.ba:hover .ba-handle { transform: scale(1.08); }
+.ba-handle:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+.ba-tag {
+  position: absolute; top: 12px; z-index: 2; pointer-events: none;
+  font-size: .62rem; letter-spacing: .16em; text-transform: uppercase;
+  padding: 5px 11px; border-radius: 999px;
+  background: rgba(10,13,19,.62); border: 1px solid rgba(255,255,255,.16);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  color: rgba(244,247,251,.88);
+}
+.ba-tag-l { left: 12px; } .ba-tag-r { right: 12px; }
+/* fades out the moment the slider is touched */
+.ba-hint {
+  position: absolute; left: 50%; bottom: 12px; transform: translateX(-50%);
+  z-index: 2; pointer-events: none;
+  font-size: .6rem; letter-spacing: .22em; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 999px;
+  background: rgba(10,13,19,.62); border: 1px solid rgba(255,255,255,.16);
+  color: rgba(244,247,251,.8);
+  transition: opacity .3s ease;
+}
+.ba.touched .ba-hint { opacity: 0; }
+
+/* ---------- scroll cue ---------- */
+.cue {
+  display: flex; flex-direction: column; align-items: center; gap: .55rem;
+  width: max-content; margin: clamp(1.5rem, 3vw, 2.5rem) auto 0;
+  text-decoration: none;
+}
+.cue-txt {
+  font-size: .64rem; letter-spacing: .22em; text-transform: uppercase;
+  color: rgba(244,247,251,.42);
+  transition: color .25s ease;
+}
+.cue:hover .cue-txt { color: rgba(244,247,251,.8); }
+.cue-rail {
+  position: relative; display: block;
+  width: 1px; height: 34px;
+  background: linear-gradient(180deg, rgba(47,107,255,.55), rgba(47,107,255,0));
+  overflow: hidden;
+}
+.cue-dot {
+  position: absolute; left: -1.5px; top: 0;
+  width: 4px; height: 8px; border-radius: 2px;
+  background: #4d81ff;
+  animation: cueRun 1.9s cubic-bezier(.5,0,.5,1) infinite;
+}
+@keyframes cueRun {
+  0%   { transform: translateY(-10px); opacity: 0; }
+  35%  { opacity: 1; }
+  100% { transform: translateY(34px); opacity: 0; }
+}
+
+/* ---------- what Basic does not cover ---------- */
+.ticks li.no { color: rgba(244,247,251,.3); }
+.ticks li.no::before {
+  /* a dash, not a tick — same footprint so the list stays aligned */
+  border: 0; transform: none;
+  top: 1.02em; left: 1px;
+  width: 10px; height: 1.4px;
+  background: rgba(244,247,251,.28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cue-dot { animation: none; opacity: .8; }
+  .ba-handle, .ba-hint { transition: none !important; }
+}
