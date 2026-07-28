@@ -20,7 +20,15 @@
     background-repeat: repeat;
   }
 
-  .canvas { min-height: 78vh; }
+  /* ---------- hero shell — structure only, nothing in it ---------- */
+  .hero-shell {
+    position: relative;
+    min-height: calc(100vh - var(--header-height));
+    border-bottom: 1px solid var(--accent);   /* the divider */
+  }
+
+  /* blank space under it so the divider reads as a divider */
+  .canvas { min-height: 60vh; }
 
   /* ---------- primary CTA — "Wet Gloss" ---------- */
   .cta {
@@ -126,8 +134,16 @@
   </div>
 </header>
 
-<main id="main-content" class="canvas">
-  <!-- blank canvas -->
+<main id="main-content">
+
+  <section class="hero-shell">
+    <!-- nothing inside -->
+  </section>
+
+  <div class="canvas">
+    <!-- blank canvas -->
+  </div>
+
 </main>
 
 <!-- real site script: powers the mobile "More" dropdown -->
