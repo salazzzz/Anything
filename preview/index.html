@@ -373,6 +373,9 @@
     /* the video card settles in rather than sliding — a 28px rise on
        something that size reads as heavy */
     .js-anim .hero-right > .frame-stack {
+      /* the reveal group sets opacity:0 on every child; that stops a muted
+         autoplay video from ever starting, so this one only scales */
+      opacity: 1;
       transform: scale(.965);
       transition: opacity .85s cubic-bezier(.22, 1, .36, 1),
                   transform .85s cubic-bezier(.22, 1, .36, 1);
@@ -382,7 +385,9 @@
 
 
   /* ================= FAQ + contact ================= */
-  .faq-shell {
+  /* NB: not .faq-shell — styles.css already uses that name and caps it
+     at max-width:920px for the live site's FAQ wrapper */
+  .qa-shell {
     padding: clamp(1.3rem, 2.1vw, 1.75rem) 0 clamp(2.25rem, 4vw, 3rem);
     border-bottom: 1px solid var(--accent);   /* the divider */
   }
@@ -1308,7 +1313,7 @@
     </div>
   </section>
 
-  <section class="faq-shell" id="faq">
+  <section class="qa-shell" id="faq">
     <div class="container faq-grid">
 
       <!-- ---------- left: FAQ ---------- -->
@@ -1507,9 +1512,16 @@
     return;
   }
 
-  // Safari sometimes ignores the attribute until asked directly
-  var p = clip.play();
-  if (p && p.catch) p.catch(function () { /* stays paused; the toggle still works */ });
+  function attempt() {
+    var p = clip.play();
+    if (p && p.catch) p.catch(function () { /* stays paused; the toggle still works */ });
+  }
+
+  // Safari sometimes ignores the attribute until asked directly, and an 18 MB
+  // file is rarely ready at first ask — so try again once it can actually play
+  attempt();
+  clip.addEventListener("loadeddata", attempt, { once: true });
+  clip.addEventListener("canplay",    attempt, { once: true });
 })();
 
 /* ---------- mute / unmute ---------- */
