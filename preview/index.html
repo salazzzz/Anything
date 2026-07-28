@@ -37,7 +37,8 @@
     justify-content: center;
     gap: clamp(1.75rem, 3.4vw, 3rem);
     align-items: center;
-    width: 100%;
+    /* no width here — .container owns it (min(100% - 2rem, 1200px)).
+       Setting width:100% would override it and bleed to the viewport edges. */
   }
 
   /* ---------- left column ---------- */
