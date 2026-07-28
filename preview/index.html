@@ -192,6 +192,158 @@
   }
   .wide-btn-lead:hover::before { width: 100%; opacity: .16; }
 
+
+  /* ================= service card variants (temporary board) ================= */
+  .sv-board { padding: clamp(2.5rem, 5vw, 4rem) 0 6rem; }
+  .sv-note {
+    margin: 0 0 2.5rem;
+    font-family: Georgia, serif; font-size: 0.8rem;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: rgba(244,247,251,.5);
+  }
+  .sv-label {
+    margin: 3rem 0 1.1rem;
+    font-size: 0.85rem; color: rgba(244,247,251,.45);
+  }
+  .sv-label:first-of-type { margin-top: 0; }
+  .sv-label b {
+    display: block; margin-bottom: .25rem;
+    font-family: Georgia, serif; font-weight: 400; font-size: 1.05rem;
+    color: rgba(244,247,251,.92); letter-spacing: .02em;
+  }
+  .sv-grid { display: grid; gap: 1rem; }
+  .sv-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  .sv-a, .sv-b, .sv-c, .sv-d { text-decoration: none; color: inherit; display: flex; }
+  .sv-arw { flex: none; opacity: .55; transition: transform .3s cubic-bezier(.2,.7,.3,1), opacity .3s ease; }
+  .sv-a:hover .sv-arw, .sv-b:hover .sv-arw,
+  .sv-c:hover .sv-arw, .sv-d:hover .sv-arw { transform: translateX(4px); opacity: 1; }
+
+  /* ---------- A · photo panel ---------- */
+  .sv-a {
+    flex-direction: column; overflow: hidden;
+    border-radius: 12px;
+    background: linear-gradient(178deg, #121824 0%, #0b1017 100%);
+    border: 1px solid rgba(255,255,255,.11);
+    box-shadow: 0 16px 38px rgba(0,0,0,.42);
+    transition: border-color .3s ease, transform .3s cubic-bezier(.2,.7,.3,1);
+  }
+  .sv-a:hover { border-color: rgba(47,107,255,.55); transform: translateY(-3px); }
+  .sv-a-shot { display: block; aspect-ratio: 16/10; overflow: hidden; }
+  .sv-a-shot img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .55s cubic-bezier(.2,.7,.3,1); }
+  .sv-a:hover .sv-a-shot img { transform: scale(1.045); }
+  .sv-a-body { display: flex; flex-direction: column; flex: 1; padding: 1.15rem 1.25rem 1.2rem; }
+  .sv-a-head { display: flex; align-items: baseline; justify-content: space-between; gap: .75rem; }
+  .sv-a-head h4 { margin: 0; font-family: Georgia, serif; font-weight: 400; font-size: 1.28rem; color: #f4f7fb; }
+  .sv-a-time { font-size: .74rem; color: rgba(244,247,251,.44); white-space: nowrap; }
+  .sv-a-list { margin: .85rem 0 0; padding: 0; list-style: none; flex: 1; }
+  .sv-a-list li {
+    position: relative; padding-left: 1.05rem; margin-bottom: .34rem;
+    font-size: .84rem; color: rgba(244,247,251,.62);
+  }
+  .sv-a-list li::before {
+    content: ""; position: absolute; left: 0; top: .52em;
+    width: 5px; height: 5px; border-radius: 50%; background: rgba(47,107,255,.85);
+  }
+  .sv-a-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 1.15rem; padding-top: .95rem; border-top: 1px solid rgba(255,255,255,.09);
+  }
+  .sv-a-price { font-family: Georgia, serif; font-size: 1.5rem; color: #fff; }
+  .sv-a-price em { font-style: normal; font-size: .68rem; letter-spacing: .13em; text-transform: uppercase;
+                   color: rgba(244,247,251,.4); margin-right: .4rem; vertical-align: .35em; }
+
+  /* ---------- B · full bleed ---------- */
+  .sv-b {
+    position: relative; overflow: hidden;
+    aspect-ratio: 3/4; border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.11);
+    box-shadow: 0 16px 38px rgba(0,0,0,.45);
+    transition: border-color .3s ease;
+  }
+  .sv-b:hover { border-color: rgba(47,107,255,.55); }
+  .sv-b-shot { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+               transition: transform .6s cubic-bezier(.2,.7,.3,1); }
+  .sv-b:hover .sv-b-shot { transform: scale(1.05); }
+  .sv-b::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(6,8,12,.15) 0%, rgba(6,8,12,.55) 45%, rgba(6,8,12,.93) 100%);
+  }
+  .sv-b-chip {
+    position: absolute; top: 13px; right: 13px; z-index: 2;
+    font-family: Georgia, serif; font-size: .84rem; color: #fff;
+    padding: 6px 13px; border-radius: 999px;
+    background: linear-gradient(180deg, #3d78ff, #1743b8);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 6px 18px rgba(24,75,194,.5);
+  }
+  .sv-b-body { position: absolute; inset: auto 0 0 0; z-index: 2; padding: 1.25rem; }
+  .sv-b-body h4 { margin: 0; font-family: Georgia, serif; font-weight: 400; font-size: 1.42rem; color: #fff; line-height: 1.1; }
+  .sv-b-body p { margin: .5rem 0 0; font-size: .84rem; line-height: 1.5; color: rgba(244,247,251,.72); }
+  .sv-b-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 1rem; padding-top: .8rem; border-top: 1px solid rgba(255,255,255,.16);
+    font-size: .76rem; color: rgba(244,247,251,.6);
+  }
+
+  /* ---------- C · split row ---------- */
+  .sv-c {
+    align-items: stretch; overflow: hidden;
+    border-radius: 12px;
+    background: linear-gradient(100deg, #121824 0%, #0b1017 100%);
+    border: 1px solid rgba(255,255,255,.11);
+    transition: border-color .3s ease, background-color .3s ease;
+  }
+  .sv-c:hover { border-color: rgba(47,107,255,.5); }
+  .sv-c-shot { flex: none; width: 168px; overflow: hidden; }
+  .sv-c-shot img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .55s cubic-bezier(.2,.7,.3,1); }
+  .sv-c:hover .sv-c-shot img { transform: scale(1.05); }
+  .sv-c-body { flex: 1; min-width: 0; padding: 1.15rem 1.35rem; display: flex; flex-direction: column; justify-content: center; }
+  .sv-c-body h4 { margin: 0; font-family: Georgia, serif; font-weight: 400; font-size: 1.3rem; color: #f4f7fb; }
+  .sv-c-body p { margin: .32rem 0 0; font-size: .87rem; color: rgba(244,247,251,.6); }
+  .sv-c-time { margin-top: .5rem; font-size: .73rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(244,247,251,.38); }
+  .sv-c-end {
+    flex: none; display: flex; align-items: center; gap: 1.1rem;
+    padding: 1.15rem 1.4rem 1.15rem 1rem;
+    border-left: 1px solid rgba(255,255,255,.08);
+  }
+  .sv-c-price { font-family: Georgia, serif; font-size: 1.55rem; color: #fff; text-align: right; line-height: 1.05; }
+  .sv-c-price em { font-style: normal; font-size: .64rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(244,247,251,.4); }
+
+  /* ---------- D · type led ---------- */
+  .sv-d {
+    position: relative; flex-direction: column; overflow: hidden;
+    padding: 1.5rem 1.35rem 1.3rem;
+    border-radius: 10px;
+    background: rgba(255,255,255,.018);
+    border: 1px solid rgba(255,255,255,.11);
+    transition: border-color .3s ease, background-color .3s ease;
+  }
+  .sv-d:hover { border-color: rgba(255,255,255,.26); background: rgba(255,255,255,.035); }
+  .sv-d-rule { position: absolute; inset: 0 auto 0 0; width: 2px; background: var(--accent);
+               transition: width .38s cubic-bezier(.2,.7,.3,1); }
+  .sv-d:hover .sv-d-rule { width: 100%; opacity: .1; }
+  .sv-d-top { position: relative; z-index: 2; display: flex; align-items: baseline; justify-content: space-between; gap: .7rem; }
+  .sv-d-top h4 { margin: 0; font-family: Georgia, serif; font-weight: 400; font-size: 1.45rem; color: #f7f9fc; letter-spacing: -.015em; }
+  .sv-d-time { font-size: .72rem; color: rgba(244,247,251,.4); white-space: nowrap; }
+  .sv-d-list { position: relative; z-index: 2; margin: 1.05rem 0 0; padding: 0; list-style: none; flex: 1; }
+  .sv-d-list li {
+    padding: .48rem 0; font-size: .845rem; color: rgba(244,247,251,.6);
+    border-top: 1px solid rgba(255,255,255,.07);
+  }
+  .sv-d-foot { position: relative; z-index: 2; display: flex; align-items: flex-end; justify-content: space-between; margin-top: 1.3rem; }
+  .sv-d-price { font-family: Georgia, serif; font-size: 1.6rem; color: #fff; line-height: 1; }
+  .sv-d-price em { font-style: normal; font-size: 1rem; color: rgba(244,247,251,.45); }
+
+  @media (max-width: 860px) {
+    .sv-grid-3 { grid-template-columns: 1fr; }
+    .sv-c-shot { width: 116px; }
+    .sv-c-end { padding: 1rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sv-a, .sv-b, .sv-c, .sv-d, .sv-arw,
+    .sv-a-shot img, .sv-b-shot, .sv-c-shot img, .sv-d-rule { transition: none !important; }
+  }
+
   /* ---------- service-area modal ---------- */
   .modal[hidden] { display: none; }
   .modal {
@@ -853,9 +1005,143 @@
     </div>
   </section>
 
-  <div class="canvas">
-    <!-- blank canvas -->
-  </div>
+
+  <section class="sv-board">
+    <div class="container">
+      <p class="sv-note">Service cards &mdash; four directions. Tell me a letter.</p>
+
+      <p class="sv-label"><b>A &middot; Photo panel</b> Photo on top, facts underneath. Most information per card.</p>
+      <div class="sv-grid sv-grid-3">
+        <a class="sv-a" href="../services/interior.html">
+          <span class="sv-a-shot"><img src="../images/interior-service.webp" alt="" loading="lazy" decoding="async"></span>
+          <span class="sv-a-body">
+            <span class="sv-a-head"><h4>Interior</h4><span class="sv-a-time">~1.5–2 hrs</span></span>
+            <ul class="sv-a-list"><li>Deep vacuum &amp; steam clean</li><li>Leather conditioned</li><li>Every surface detailed</li></ul>
+            <span class="sv-a-foot">
+              <span class="sv-a-price"><em>from</em> $105</span><svg class="sv-arw" width="18" height="12" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M0 7h19M14.5 1.5 20.5 7l-6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </span>
+        </a>
+        <a class="sv-a" href="../services/exterior.html">
+          <span class="sv-a-shot"><img src="../images/exterior-service.webp" alt="" loading="lazy" decoding="async"></span>
+          <span class="sv-a-body">
+            <span class="sv-a-head"><h4>Exterior</h4><span class="sv-a-time">~45 min – 1 hr</span></span>
+            <ul class="sv-a-list"><li>Hand wash &amp; decontamination</li><li>Clay bar treatment</li><li>Protective gloss finish</li></ul>
+            <span class="sv-a-foot">
+              <span class="sv-a-price"><em>from</em> $70</span><svg class="sv-arw" width="18" height="12" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M0 7h19M14.5 1.5 20.5 7l-6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </span>
+        </a>
+        <a class="sv-a" href="../services/bundle.html">
+          <span class="sv-a-shot"><img src="../images/bundle-service.webp" alt="" loading="lazy" decoding="async"></span>
+          <span class="sv-a-body">
+            <span class="sv-a-head"><h4>Interior + Exterior</h4><span class="sv-a-time">~2.5–3 hrs</span></span>
+            <ul class="sv-a-list"><li>Everything in both packages</li><li>Best value per hour</li><li>Our most booked detail</li></ul>
+            <span class="sv-a-foot">
+              <span class="sv-a-price"><em>from</em> $150</span><svg class="sv-arw" width="18" height="12" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M0 7h19M14.5 1.5 20.5 7l-6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </span>
+        </a>
+      </div>
+
+      <p class="sv-label"><b>B &middot; Full bleed</b> Closest to what you have now, but the price is on it.</p>
+      <div class="sv-grid sv-grid-3">
+        <a class="sv-b" href="../services/interior.html">
+          <img class="sv-b-shot" src="../images/interior-service.webp" alt="" loading="lazy" decoding="async">
+          <span class="sv-b-chip">from $105</span>
+          <span class="sv-b-body">
+            <h4>Interior</h4>
+            <p>Seats, carpets, mats and trim brought back.</p>
+            <span class="sv-b-foot"><span>~1.5–2 hrs</span><svg class="sv-arw" width="18" height="12" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M0 7h19M14.5 1.5 20.5 7l-6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </span>
+        </a>
+        <a class="sv-b" href="../services/exterior.html">
+          <img class="sv-b-shot" src="../images/exterior-service.webp" alt="" loading="lazy" decoding="async">
+          <span class="sv-b-chip">from $70</span>
+          <span class="sv-b-body">
+            <h4>Exterior</h4>
+            <p>Paint decontaminated, sealed and left glossy.</p>
+            <span class="sv-b-foot"><span>~45 min – 1 hr</span><svg class="sv-arw" width="18" height="12" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M0 7h19M14.5 1.5 20.5 7l-6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </span>
+        </a>
+        <a class="sv-b" href="../services/bundle.html">
+          <img class="sv-b-shot" src="../images/bundle-service.webp" alt="" loading="lazy" decoding="async">
+          <span class="sv-b-chip">from $150</span>
+          <span class="sv-b-body">
+            <h4>Interior + Exterior</h4>
+            <p>The full reset, inside and out, in one visit.</p>
+            <span class="sv-b-foot"><span>~2.5–3 hrs</span><svg class="sv-arw" width="18" height="12" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M0 7h19M14.5 1.5 20.5 7l-6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </span>
+        </a>
+      </div>
+
+      <p class="sv-label"><b>C &middot; Split row</b> Three rows instead of three columns. Easiest to scan.</p>
+      <div class="sv-grid">
+        <a class="sv-c" href="../services/interior.html">
+          <span class="sv-c-shot"><img src="../images/interior-service.webp" alt="" loading="lazy" decoding="async"></span>
+          <span class="sv-c-body">
+            <h4>Interior</h4>
+            <p>Seats, carpets, mats and trim brought back.</p>
+            <span class="sv-c-time">~1.5–2 hrs</span>
+          </span>
+          <span class="sv-c-end">
+            <span class="sv-c-price"><em>from</em><br>$105</span><svg class="sv-arw" width="18" height="12" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M0 7h19M14.5 1.5 20.5 7l-6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a class="sv-c" href="../services/exterior.html">
+          <span class="sv-c-shot"><img src="../images/exterior-service.webp" alt="" loading="lazy" decoding="async"></span>
+          <span class="sv-c-body">
+            <h4>Exterior</h4>
+            <p>Paint decontaminated, sealed and left glossy.</p>
+            <span class="sv-c-time">~45 min – 1 hr</span>
+          </span>
+          <span class="sv-c-end">
+            <span class="sv-c-price"><em>from</em><br>$70</span><svg class="sv-arw" width="18" height="12" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M0 7h19M14.5 1.5 20.5 7l-6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a class="sv-c" href="../services/bundle.html">
+          <span class="sv-c-shot"><img src="../images/bundle-service.webp" alt="" loading="lazy" decoding="async"></span>
+          <span class="sv-c-body">
+            <h4>Interior + Exterior</h4>
+            <p>The full reset, inside and out, in one visit.</p>
+            <span class="sv-c-time">~2.5–3 hrs</span>
+          </span>
+          <span class="sv-c-end">
+            <span class="sv-c-price"><em>from</em><br>$150</span><svg class="sv-arw" width="18" height="12" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M0 7h19M14.5 1.5 20.5 7l-6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+      </div>
+
+      <p class="sv-label"><b>D &middot; Type led</b> No photos. Restraint, and it shows the full price range.</p>
+      <div class="sv-grid sv-grid-3">
+        <a class="sv-d" href="../services/interior.html">
+          <span class="sv-d-rule" aria-hidden="true"></span>
+          <span class="sv-d-top"><h4>Interior</h4><span class="sv-d-time">~1.5–2 hrs</span></span>
+          <ul class="sv-d-list"><li>Deep vacuum &amp; steam clean</li><li>Leather conditioned</li><li>Every surface detailed</li></ul>
+          <span class="sv-d-foot">
+            <span class="sv-d-price">$105<em> &ndash; $165</em></span><svg class="sv-arw" width="18" height="12" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M0 7h19M14.5 1.5 20.5 7l-6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a class="sv-d" href="../services/exterior.html">
+          <span class="sv-d-rule" aria-hidden="true"></span>
+          <span class="sv-d-top"><h4>Exterior</h4><span class="sv-d-time">~45 min – 1 hr</span></span>
+          <ul class="sv-d-list"><li>Hand wash &amp; decontamination</li><li>Clay bar treatment</li><li>Protective gloss finish</li></ul>
+          <span class="sv-d-foot">
+            <span class="sv-d-price">$70<em> &ndash; $105</em></span><svg class="sv-arw" width="18" height="12" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M0 7h19M14.5 1.5 20.5 7l-6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+        <a class="sv-d" href="../services/bundle.html">
+          <span class="sv-d-rule" aria-hidden="true"></span>
+          <span class="sv-d-top"><h4>Interior + Exterior</h4><span class="sv-d-time">~2.5–3 hrs</span></span>
+          <ul class="sv-d-list"><li>Everything in both packages</li><li>Best value per hour</li><li>Our most booked detail</li></ul>
+          <span class="sv-d-foot">
+            <span class="sv-d-price">$150<em> &ndash; $230</em></span><svg class="sv-arw" width="18" height="12" viewBox="0 0 22 14" fill="none" aria-hidden="true"><path d="M0 7h19M14.5 1.5 20.5 7l-6 5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
 
 </main>
 
