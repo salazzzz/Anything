@@ -22,8 +22,8 @@
 
   /* ================= reassurance — structure only ================= */
   .reassure-shell {
-    padding: clamp(3rem, 6vw, 5rem) 0;
-    min-height: 38vh;
+    padding: clamp(1.35rem, 2.2vw, 1.9rem) 0 clamp(2.5rem, 5vw, 3.75rem);
+    min-height: 0;
     border-bottom: 1px solid var(--accent);   /* the divider */
   }
   /* the live section repaints bg-texture on itself; here the body's texture
@@ -33,7 +33,7 @@
   /* ---------- reassurance layout ---------- */
   .reassure-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 430px);
     gap: clamp(2rem, 4vw, 3.5rem);
     align-items: start;
   }
@@ -41,94 +41,112 @@
   /* ---------- rating bar ---------- */
   .rating-bar {
     display: flex; align-items: center; justify-content: center;
-    flex-wrap: wrap; gap: 0.55rem;
-    padding: 0.95rem 1.25rem;
+    flex-wrap: wrap; gap: 0.5rem;
+    padding: 0.72rem 1.1rem;
     border-radius: 999px;
     background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.018));
     border: 1px solid rgba(255,255,255,.14);
     box-shadow: inset 0 1px 0 rgba(255,255,255,.09);
   }
-  .rating-bar .g-logo { width: 19px; height: 19px; margin-right: 0.15rem; }
-  .rb-stars { color: #fbbf24; letter-spacing: 1.5px; font-size: 0.95rem; }
-  .rb-score { font-family: Georgia, serif; font-weight: 400; font-size: 1.12rem; color: #fff; }
-  .rb-label { font-family: Georgia, serif; font-size: 0.95rem; color: rgba(244,247,251,.8); }
+  .rating-bar .g-logo { width: 17px; height: 17px; margin-right: 0.1rem; }
+  .rb-stars { color: #fbbf24; letter-spacing: 1.4px; font-size: 0.85rem; }
+  .rb-score { font-family: Georgia, serif; font-weight: 400; font-size: 1rem; color: #fff; }
+  .rb-label { font-family: Georgia, serif; font-size: 0.88rem; color: rgba(244,247,251,.8); }
   .rb-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(244,247,251,.32); }
-  .rb-count { font-size: 0.86rem; color: rgba(244,247,251,.5); }
+  .rb-count { font-size: 0.8rem; color: rgba(244,247,251,.5); }
 
-  /* ---------- review card stack ---------- */
-  .rev-stack {
+  /* ---------- review carousel ---------- */
+  .rev-carousel {
     position: relative;
-    height: 322px;
-    margin-top: 1.15rem;
+    margin-top: 1.1rem;
+    padding: 0 34px;          /* room for the arrows on each flank */
   }
+  .rev-stage {
+    position: relative;
+    height: 196px;
+    overflow: hidden;
+  }
+
   .rev-card {
-    position: absolute; inset: 0;
+    position: absolute;
+    top: 0; left: 50%;
+    width: 268px; height: 100%;
+    margin-left: -134px;
     display: flex; flex-direction: column;
-    padding: 1.35rem 1.4rem;
-    border-radius: 14px;
-    background: linear-gradient(168deg, #121824 0%, #0c111a 100%);
-    border: 1px solid rgba(255,255,255,.11);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.06), 0 18px 40px rgba(0,0,0,.5);
+    padding: 0.95rem 1.05rem;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,.08);
+    box-shadow: 0 14px 34px rgba(0,0,0,.45);
     transition: transform .42s cubic-bezier(.2,.7,.3,1), opacity .42s ease;
     will-change: transform, opacity;
   }
-  /* front card, then two peeking out behind it */
-  .rev-card[data-pos="0"] { transform: translateY(0)    scale(1);    opacity: 1;   z-index: 4; }
-  .rev-card[data-pos="1"] { transform: translateY(13px) scale(.962); opacity: .55; z-index: 3; }
-  .rev-card[data-pos="2"] { transform: translateY(26px) scale(.924); opacity: .26; z-index: 2; }
-  .rev-card[data-pos="3"] { transform: translateY(34px) scale(.9);   opacity: 0;   z-index: 1; }
+  /* centre card flanked by one behind on each side */
+  .rev-card[data-pos="0"]  { transform: translateX(0)     scale(1);   opacity: 1;   z-index: 3; }
+  .rev-card[data-pos="-1"] { transform: translateX(-58%)  scale(.86); opacity: .38; z-index: 2; }
+  .rev-card[data-pos="1"]  { transform: translateX(58%)   scale(.86); opacity: .38; z-index: 2; }
+  .rev-card[data-pos="-2"] { transform: translateX(-78%)  scale(.78); opacity: 0;   z-index: 1; }
+  .rev-card[data-pos="2"]  { transform: translateX(78%)   scale(.78); opacity: 0;   z-index: 1; }
   .rev-card:not([data-pos="0"]) { pointer-events: none; }
 
-  .rc-top { display: flex; align-items: center; gap: 0.7rem; }
+  .rc-top { display: flex; align-items: center; gap: 0.55rem; }
   .rc-avatar {
-    width: 36px; height: 36px; flex: none;
+    width: 30px; height: 30px; flex: none;
     border-radius: 50%;
     display: grid; place-items: center;
-    font-family: Georgia, serif; font-size: 0.95rem; color: #dce6f7;
-    background: linear-gradient(180deg, rgba(47,107,255,.28), rgba(24,75,194,.16));
-    border: 1px solid rgba(255,255,255,.14);
+    font-family: Georgia, serif; font-size: 0.85rem; color: #fff;
+    background: linear-gradient(180deg, #4a80ff, #1743b8);
   }
   .rc-who { display: flex; flex-direction: column; min-width: 0; flex: 1; }
-  .rc-name { font-family: Georgia, serif; font-size: 1rem; color: #f4f7fb; }
-  .rc-meta { font-size: 0.76rem; color: rgba(244,247,251,.44); }
+  .rc-name {
+    font-family: Georgia, serif; font-size: 0.9rem; color: #14171c;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .rc-meta {
+    font-size: 0.68rem; color: #6b7280;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
   .rc-g { flex: none; }
 
-  .rc-rating { display: flex; align-items: center; gap: 0.55rem; margin-top: 0.85rem; }
-  .rc-stars { color: #fbbf24; letter-spacing: 1.5px; font-size: 0.85rem; }
-  .rc-when { font-size: 0.76rem; color: rgba(244,247,251,.42); }
+  .rc-stars { display: block; margin-top: 0.6rem; color: #fbbc04; letter-spacing: 1.4px; font-size: 0.8rem; }
   .rc-new {
-    font-size: 0.62rem; letter-spacing: .12em; text-transform: uppercase;
-    color: #8fbaff; padding: 2px 7px; border-radius: 999px;
-    background: rgba(47,107,255,.14); border: 1px solid rgba(47,107,255,.32);
+    font-size: 0.58rem; letter-spacing: .1em; text-transform: uppercase;
+    color: #1743b8; padding: 1px 5px; border-radius: 999px;
+    background: rgba(47,107,255,.1); border: 1px solid rgba(47,107,255,.28);
   }
 
   .rc-text {
-    margin: 0.85rem 0 0;
-    flex: 1; min-height: 0; overflow-y: auto;
-    font-size: 0.935rem; line-height: 1.6;
-    color: rgba(244,247,251,.72);
-    scrollbar-width: thin;
-    scrollbar-color: rgba(255,255,255,.18) transparent;
+    margin: 0.5rem 0 0;
+    flex: 1; min-height: 0; overflow: hidden;
+    font-size: 0.83rem; line-height: 1.52;
+    color: #3f4550;
   }
-  .rc-text::-webkit-scrollbar { width: 4px; }
-  .rc-text::-webkit-scrollbar-thumb { background: rgba(255,255,255,.18); border-radius: 4px; }
-  .rc-text-empty { font-style: italic; color: rgba(244,247,251,.42); }
+  .rc-text-empty { font-style: italic; color: #8b919c; }
 
-  .rev-nav { display: flex; align-items: center; gap: 0.75rem; margin-top: 1.6rem; }
+  /* arrows sit outside the cards, one on each flank */
   .rev-arrow {
-    width: 38px; height: 38px; flex: none;
+    position: absolute; top: 50%;
+    width: 34px; height: 34px; margin-top: -17px;
     display: grid; place-items: center;
-    border-radius: 50%; cursor: pointer; padding: 0;
+    border-radius: 50%; cursor: pointer; padding: 0; z-index: 5;
     color: #f4f7fb;
-    background: rgba(255,255,255,.045);
-    border: 1px solid rgba(255,255,255,.16);
+    background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.18);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     transition: background .2s ease, border-color .2s ease, transform .2s ease;
   }
-  .rev-arrow:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.38); }
-  .rev-arrow:active { transform: scale(.94); }
-  .rev-count { font-family: Georgia, serif; font-size: 0.85rem; color: rgba(244,247,251,.5); letter-spacing: .06em; }
+  .rev-arrow-l { left: 0; }
+  .rev-arrow-r { right: 0; }
+  .rev-arrow:hover { background: rgba(255,255,255,.13); border-color: rgba(255,255,255,.42); }
+  .rev-arrow:active { transform: scale(.92); }
 
-  /* ---------- shared panel look (map + before/after) ---------- */
+  .rev-count {
+    margin: 0.85rem 0 0; text-align: center;
+    font-family: Georgia, serif; font-size: 0.78rem;
+    color: rgba(244,247,251,.42); letter-spacing: .07em;
+  }
+
+  /* ---------- service area map ---------- */
   .panel {
     position: relative;
     overflow: hidden;
@@ -137,26 +155,27 @@
     background: #0b0f16;
     box-shadow: inset 0 1px 0 rgba(255,255,255,.05), 0 18px 40px rgba(0,0,0,.45);
   }
-  .map-card { margin: 0; }
+  /* scaled to sit level with the review block rather than tower over it */
+  .map-card { margin: 0; max-width: 430px; }
   .map-card img { width: 100%; height: auto; display: block; }
   .panel-tag {
-    position: absolute; left: 12px; bottom: 12px;
-    font-size: 0.68rem; letter-spacing: .14em; text-transform: uppercase;
+    position: absolute; left: 11px; bottom: 11px;
+    font-size: 0.63rem; letter-spacing: .13em; text-transform: uppercase;
     color: rgba(244,247,251,.82);
-    padding: 6px 12px; border-radius: 999px;
+    padding: 5px 11px; border-radius: 999px;
     background: rgba(10,13,19,.62);
     border: 1px solid rgba(255,255,255,.16);
     backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   }
 
-  /* ---------- long, low-profile buttons ---------- */
+  /* ---------- long, low-profile button ---------- */
   .wide-btn {
     position: relative; overflow: hidden;
     display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    width: 100%; margin-top: 0.7rem;
+    width: 100%; max-width: 430px; margin-top: 0.7rem;
     min-height: 46px; padding: 0 1.15rem 0 1.25rem;
     border-radius: 4px; cursor: pointer;
-    font-family: Georgia, serif; font-size: 0.92rem; letter-spacing: .012em;
+    font-family: Georgia, serif; font-size: 0.9rem; letter-spacing: .012em;
     text-decoration: none; color: #f4f7fb;
     background: rgba(255,255,255,.022);
     border: 1px solid rgba(255,255,255,.14);
@@ -166,63 +185,12 @@
   .wide-btn svg { flex: none; opacity: .5; transition: transform .3s cubic-bezier(.2,.7,.3,1), opacity .3s ease; }
   .wide-btn:hover { border-color: rgba(255,255,255,.3); background: rgba(255,255,255,.045); }
   .wide-btn:hover svg { transform: translateX(4px); opacity: 1; }
-  /* the location check gets the accent wipe; the gallery link stays quiet */
   .wide-btn-lead::before {
     content: ""; position: absolute; inset: 0 auto 0 0; z-index: 1;
     width: 2px; background: var(--accent);
     transition: width .34s cubic-bezier(.2,.7,.3,1);
   }
   .wide-btn-lead:hover::before { width: 100%; opacity: .16; }
-  .wide-btn-quiet { color: rgba(244,247,251,.72); border-color: rgba(255,255,255,.1); }
-  .wide-btn-quiet:hover { color: #f4f7fb; }
-
-  /* ---------- before / after ---------- */
-  .ba {
-    margin-top: 1.5rem;
-    aspect-ratio: 3 / 2;
-    cursor: ew-resize;
-    touch-action: pan-y;
-    user-select: none; -webkit-user-select: none;
-    background: #000;
-  }
-  .ba-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .ba-after {
-    position: absolute; inset: 0 auto 0 0;
-    width: 50%; overflow: hidden;
-    will-change: width;
-  }
-  .ba-after .ba-img { width: auto; height: 100%; max-width: none; }
-  .ba-divider {
-    position: absolute; top: 0; bottom: 0; left: 50%;
-    width: 2px; margin-left: -1px;
-    background: rgba(255,255,255,.9);
-    box-shadow: 0 0 12px rgba(0,0,0,.65);
-    will-change: left;
-  }
-  .ba-handle {
-    position: absolute; top: 50%; left: 50%;
-    width: 46px; height: 46px; margin: -23px 0 0 -23px;
-    display: grid; place-items: center;
-    border-radius: 50%; cursor: ew-resize;
-    color: #fff;
-    background: linear-gradient(180deg, #3d78ff 0%, #1743b8 100%);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 6px 20px rgba(0,0,0,.5);
-    transition: transform .2s cubic-bezier(.2,.7,.3,1);
-  }
-  .ba:hover .ba-handle { transform: scale(1.08); }
-  .ba-handle:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
-  .ba-tag {
-    position: absolute; top: 12px; z-index: 2;
-    font-size: 0.64rem; letter-spacing: .16em; text-transform: uppercase;
-    padding: 5px 11px; border-radius: 999px;
-    background: rgba(10,13,19,.6);
-    border: 1px solid rgba(255,255,255,.16);
-    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-    color: rgba(244,247,251,.88);
-    pointer-events: none;
-  }
-  .ba-tag-l { left: 12px; }
-  .ba-tag-r { right: 12px; }
 
   /* ---------- service-area modal ---------- */
   .modal[hidden] { display: none; }
@@ -300,14 +268,17 @@
 
   /* ---------- responsive ---------- */
   @media (max-width: 960px) {
-    .reassure-grid { grid-template-columns: 1fr; gap: 2.75rem; }
+    .reassure-grid { grid-template-columns: 1fr; gap: 2.25rem; }
+    .map-card, .wide-btn { max-width: none; }
   }
   @media (max-width: 520px) {
-    .rev-stack { height: 358px; }
+    .rev-carousel { padding: 0 30px; }
+    .rev-card { width: 220px; margin-left: -110px; }
+    .rev-stage { height: 214px; }
     .modal-field { flex-direction: column; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .rev-card, .wide-btn, .wide-btn svg, .ba-handle, .modal-x { transition: none !important; }
+    .rev-card, .wide-btn, .wide-btn svg, .modal-x { transition: none !important; }
     .spin { animation-duration: 2s; }
   }
 
@@ -724,177 +695,148 @@
           <span class="rb-count">10 reviews</span>
         </div>
 
-        <div class="rev-stack" id="revStack">
-        <article class="rev-card" data-pos="0">
-          <div class="rc-top">
-            <span class="rc-avatar" aria-hidden="true">C</span>
-            <span class="rc-who">
-              <span class="rc-name">Carla Quintana</span>
-              <span class="rc-meta">Local Guide · 16 reviews</span>
-            </span>
-            <span class="g-logo rc-g" aria-label="Review from Google"></span>
-          </div>
-          <div class="rc-rating">
+        <div class="rev-carousel">
+          <button type="button" class="rev-arrow rev-arrow-l" id="revPrev" aria-label="Previous review">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M13 8H4M7.5 3.5 4 8l3.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <div class="rev-stage" id="revStack">
+          <article class="rev-card" data-pos="0">
+            <div class="rc-top">
+              <span class="rc-avatar" aria-hidden="true">C</span>
+              <span class="rc-who">
+                <span class="rc-name">Carla Quintana</span>
+                <span class="rc-meta">Local Guide · 16 reviews &middot; 2 weeks ago <span class="rc-new">New</span></span>
+              </span>
+              <span class="g-logo rc-g" aria-label="Review from Google"></span>
+            </div>
             <span class="rc-stars" aria-label="Rated 5 out of 5">★★★★★</span>
-            <span class="rc-when">2 weeks ago</span><span class="rc-new">New</span>
-          </div>
-          <p class="rc-text">Eric was great, I was doubtfull at first given he is in high school but the results spoke for themselves this young man is great at what he does, totally recommend for anyone looking for a detailer.</p>
-        </article>
-        <article class="rev-card" data-pos="1">
-          <div class="rc-top">
-            <span class="rc-avatar" aria-hidden="true">B</span>
-            <span class="rc-who">
-              <span class="rc-name">Bruno DiDuca</span>
-              <span class="rc-meta">3 reviews</span>
-            </span>
-            <span class="g-logo rc-g" aria-label="Review from Google"></span>
-          </div>
-          <div class="rc-rating">
+            <p class="rc-text">Eric was great, I was doubtfull at first given he is in high school but the results spoke for themselves this young man is great at what he…</p>
+          </article>
+          <article class="rev-card" data-pos="0">
+            <div class="rc-top">
+              <span class="rc-avatar" aria-hidden="true">B</span>
+              <span class="rc-who">
+                <span class="rc-name">Bruno DiDuca</span>
+                <span class="rc-meta">3 reviews &middot; 2 weeks ago <span class="rc-new">New</span></span>
+              </span>
+              <span class="g-logo rc-g" aria-label="Review from Google"></span>
+            </div>
             <span class="rc-stars" aria-label="Rated 5 out of 5">★★★★★</span>
-            <span class="rc-when">2 weeks ago</span><span class="rc-new">New</span>
-          </div>
-          <p class="rc-text">Highly recommenced. He did a marvelous job with attention to every detail. I own a dog my truck was a very challenging job. Eric took the time to make sure everything was perfect when the job was complete. Definitely would use them again.</p>
-        </article>
-        <article class="rev-card" data-pos="2">
-          <div class="rc-top">
-            <span class="rc-avatar" aria-hidden="true">V</span>
-            <span class="rc-who">
-              <span class="rc-name">Victor Ay</span>
-              <span class="rc-meta">1 review · 1 photo</span>
-            </span>
-            <span class="g-logo rc-g" aria-label="Review from Google"></span>
-          </div>
-          <div class="rc-rating">
+            <p class="rc-text">Highly recommenced. He did a marvelous job with attention to every detail. I own a dog my truck was a very challenging job. Eric took the…</p>
+          </article>
+          <article class="rev-card" data-pos="0">
+            <div class="rc-top">
+              <span class="rc-avatar" aria-hidden="true">V</span>
+              <span class="rc-who">
+                <span class="rc-name">Victor Ay</span>
+                <span class="rc-meta">1 review · 1 photo &middot; 2 weeks ago <span class="rc-new">New</span></span>
+              </span>
+              <span class="g-logo rc-g" aria-label="Review from Google"></span>
+            </div>
             <span class="rc-stars" aria-label="Rated 5 out of 5">★★★★★</span>
-            <span class="rc-when">2 weeks ago</span><span class="rc-new">New</span>
-          </div>
-          <p class="rc-text">Excellent service, I will definitely hire them again</p>
-        </article>
-        <article class="rev-card" data-pos="3">
-          <div class="rc-top">
-            <span class="rc-avatar" aria-hidden="true">C</span>
-            <span class="rc-who">
-              <span class="rc-name">Chris Fremont</span>
-              <span class="rc-meta">2 reviews · 1 photo</span>
-            </span>
-            <span class="g-logo rc-g" aria-label="Review from Google"></span>
-          </div>
-          <div class="rc-rating">
+            <p class="rc-text">Excellent service, I will definitely hire them again</p>
+          </article>
+          <article class="rev-card" data-pos="0">
+            <div class="rc-top">
+              <span class="rc-avatar" aria-hidden="true">C</span>
+              <span class="rc-who">
+                <span class="rc-name">Chris Fremont</span>
+                <span class="rc-meta">2 reviews · 1 photo &middot; 2 months ago</span>
+              </span>
+              <span class="g-logo rc-g" aria-label="Review from Google"></span>
+            </div>
             <span class="rc-stars" aria-label="Rated 5 out of 5">★★★★★</span>
-            <span class="rc-when">2 months ago</span>
-          </div>
-          <p class="rc-text">Got the full interior and exterior package done by Eric and team, and im impressed, the car looks better than the day I got it. The mats came out incredible. I thought they were beyond saving, and Eric proved me wrong. Carpet, seats, dash, everything got real attention. The exterior is smooth and glossy. Eric also walked me through the maintenance plan, honestly a no-brainer if you want to keep the car looking like this. Thanks, Eric and team 10/10 already booked my next appointment.</p>
-        </article>
-        <article class="rev-card" data-pos="4">
-          <div class="rc-top">
-            <span class="rc-avatar" aria-hidden="true">L</span>
-            <span class="rc-who">
-              <span class="rc-name">Li Anguo</span>
-              <span class="rc-meta">8 reviews · 2 photos</span>
-            </span>
-            <span class="g-logo rc-g" aria-label="Review from Google"></span>
-          </div>
-          <div class="rc-rating">
+            <p class="rc-text">Got the full interior and exterior package done by Eric and team, and im impressed, the car looks better than the day I got it. The mats came…</p>
+          </article>
+          <article class="rev-card" data-pos="0">
+            <div class="rc-top">
+              <span class="rc-avatar" aria-hidden="true">L</span>
+              <span class="rc-who">
+                <span class="rc-name">Li Anguo</span>
+                <span class="rc-meta">8 reviews · 2 photos &middot; 2 months ago</span>
+              </span>
+              <span class="g-logo rc-g" aria-label="Review from Google"></span>
+            </div>
             <span class="rc-stars" aria-label="Rated 5 out of 5">★★★★★</span>
-            <span class="rc-when">2 months ago</span>
-          </div>
-          <p class="rc-text">Eric is such a nice guy! Absolutely amazing service. The car looked brand new after the detail — super clean interior, spotless exterior, and great attention to detail. Very professional, friendly, and easy to work with. You can tell they really care about the quality of their work. Highly recommend Eurodetailing if you want your car looking perfect again!</p>
-        </article>
-        <article class="rev-card" data-pos="5">
-          <div class="rc-top">
-            <span class="rc-avatar" aria-hidden="true">D</span>
-            <span class="rc-who">
-              <span class="rc-name">David Atsiliem</span>
-              <span class="rc-meta">1 review · 2 photos</span>
-            </span>
-            <span class="g-logo rc-g" aria-label="Review from Google"></span>
-          </div>
-          <div class="rc-rating">
+            <p class="rc-text">Eric is such a nice guy! Absolutely amazing service. The car looked brand new after the detail — super clean interior, spotless exterior, and…</p>
+          </article>
+          <article class="rev-card" data-pos="0">
+            <div class="rc-top">
+              <span class="rc-avatar" aria-hidden="true">D</span>
+              <span class="rc-who">
+                <span class="rc-name">David Atsiliem</span>
+                <span class="rc-meta">1 review · 2 photos &middot; 2 months ago</span>
+              </span>
+              <span class="g-logo rc-g" aria-label="Review from Google"></span>
+            </div>
             <span class="rc-stars" aria-label="Rated 5 out of 5">★★★★★</span>
-            <span class="rc-when">2 months ago</span>
-          </div>
-          <p class="rc-text">Eric did an excellent job detailing my car. He came fully prepared with all equipment and clearly takes pride in his work. The results were impressive, my car looked showroom inside and out. He also set me up with a maintenance plan, so now it&#x27;s getting detailed regularly each month, which has been a huge help. Highly recommend his services.</p>
-        </article>
-        <article class="rev-card" data-pos="6">
-          <div class="rc-top">
-            <span class="rc-avatar" aria-hidden="true">E</span>
-            <span class="rc-who">
-              <span class="rc-name">E. Fernando</span>
-              <span class="rc-meta">4 reviews · 2 photos</span>
-            </span>
-            <span class="g-logo rc-g" aria-label="Review from Google"></span>
-          </div>
-          <div class="rc-rating">
+            <p class="rc-text">Eric did an excellent job detailing my car. He came fully prepared with all equipment and clearly takes pride in his work. The results were…</p>
+          </article>
+          <article class="rev-card" data-pos="0">
+            <div class="rc-top">
+              <span class="rc-avatar" aria-hidden="true">E</span>
+              <span class="rc-who">
+                <span class="rc-name">E. Fernando</span>
+                <span class="rc-meta">4 reviews · 2 photos &middot; a month ago</span>
+              </span>
+              <span class="g-logo rc-g" aria-label="Review from Google"></span>
+            </div>
             <span class="rc-stars" aria-label="Rated 5 out of 5">★★★★★</span>
-            <span class="rc-when">a month ago</span>
-          </div>
-          <p class="rc-text rc-text-empty">Left a 5-star rating on Google.</p>
-        </article>
-        <article class="rev-card" data-pos="7">
-          <div class="rc-top">
-            <span class="rc-avatar" aria-hidden="true">M</span>
-            <span class="rc-who">
-              <span class="rc-name">Ma Lu</span>
-              <span class="rc-meta">3 reviews · 3 photos</span>
-            </span>
-            <span class="g-logo rc-g" aria-label="Review from Google"></span>
-          </div>
-          <div class="rc-rating">
+            <p class="rc-text rc-text-empty">Left a 5-star rating on Google.</p>
+          </article>
+          <article class="rev-card" data-pos="0">
+            <div class="rc-top">
+              <span class="rc-avatar" aria-hidden="true">M</span>
+              <span class="rc-who">
+                <span class="rc-name">Ma Lu</span>
+                <span class="rc-meta">3 reviews · 3 photos &middot; 10 months ago</span>
+              </span>
+              <span class="g-logo rc-g" aria-label="Review from Google"></span>
+            </div>
             <span class="rc-stars" aria-label="Rated 5 out of 5">★★★★★</span>
-            <span class="rc-when">10 months ago</span>
-          </div>
-          <p class="rc-text">Thank you Eurodetailing/Eric and team for your hard work! My car feels like new again! Getting the carpet, mats, and all the interior clean is so important given the amount of time you spend breathing in your car. Thank you so much for your meticulous work. I 100% recommend their services!</p>
-        </article>
-        <article class="rev-card" data-pos="8">
-          <div class="rc-top">
-            <span class="rc-avatar" aria-hidden="true">J</span>
-            <span class="rc-who">
-              <span class="rc-name">Jean DeBenedictis</span>
-              <span class="rc-meta">1 review</span>
-            </span>
-            <span class="g-logo rc-g" aria-label="Review from Google"></span>
-          </div>
-          <div class="rc-rating">
+            <p class="rc-text">Thank you Eurodetailing/Eric and team for your hard work! My car feels like new again! Getting the carpet, mats, and all the interior clean…</p>
+          </article>
+          <article class="rev-card" data-pos="0">
+            <div class="rc-top">
+              <span class="rc-avatar" aria-hidden="true">J</span>
+              <span class="rc-who">
+                <span class="rc-name">Jean DeBenedictis</span>
+                <span class="rc-meta">1 review &middot; a year ago</span>
+              </span>
+              <span class="g-logo rc-g" aria-label="Review from Google"></span>
+            </div>
             <span class="rc-stars" aria-label="Rated 5 out of 5">★★★★★</span>
-            <span class="rc-when">a year ago</span>
-          </div>
-          <p class="rc-text">Eric and team did a fantastic job on my car. It truly never looked so good. Every detail, inside and out, shines to perfection. They were a pleasure to work with. Highly recommend!</p>
-        </article>
-        <article class="rev-card" data-pos="9">
-          <div class="rc-top">
-            <span class="rc-avatar" aria-hidden="true">V</span>
-            <span class="rc-who">
-              <span class="rc-name">Vincent Forsythe</span>
-              <span class="rc-meta">8 reviews · 3 photos</span>
-            </span>
-            <span class="g-logo rc-g" aria-label="Review from Google"></span>
-          </div>
-          <div class="rc-rating">
+            <p class="rc-text">Eric and team did a fantastic job on my car. It truly never looked so good. Every detail, inside and out, shines to perfection. They were a…</p>
+          </article>
+          <article class="rev-card" data-pos="0">
+            <div class="rc-top">
+              <span class="rc-avatar" aria-hidden="true">V</span>
+              <span class="rc-who">
+                <span class="rc-name">Vincent Forsythe</span>
+                <span class="rc-meta">8 reviews · 3 photos &middot; a year ago</span>
+              </span>
+              <span class="g-logo rc-g" aria-label="Review from Google"></span>
+            </div>
             <span class="rc-stars" aria-label="Rated 5 out of 5">★★★★★</span>
-            <span class="rc-when">a year ago</span>
+            <p class="rc-text">Eric and his team did a full reset of my MDX and I could not believe the results. They carefully detailed every nook, revived all of my black…</p>
+          </article>
           </div>
-          <p class="rc-text">Eric and his team did a full reset of my MDX and I could not believe the results. They carefully detailed every nook, revived all of my black interior plastics and mats. They were perfectionists. Highly recommend!</p>
-        </article>
+
+          <button type="button" class="rev-arrow rev-arrow-r" id="revNext" aria-label="Next review">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h9M8.5 3.5 12 8l-3.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
         </div>
 
-        <div class="rev-nav">
-          <button type="button" class="rev-arrow" id="revPrev" aria-label="Previous review">
-            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M13 8H4M7.5 3.5 4 8l3.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <span class="rev-count" id="revCount" aria-live="polite">1 / 10</span>
-          <button type="button" class="rev-arrow" id="revNext" aria-label="Next review">
-            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-              <path d="M3 8h9M8.5 3.5 12 8l-3.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
+        <p class="rev-count" id="revCount" aria-live="polite">1 / 10</p>
       </div>
 
-      <!-- ============ right: map + before/after ============ -->
+      <!-- ============ right: service area ============ -->
       <div class="map-side">
-
         <figure class="panel map-card">
           <img src="../images/location-map.webp" alt="Map of the Euro Detailing service area around Newton, Massachusetts"
                width="1600" height="1104" loading="lazy" decoding="async">
@@ -907,33 +849,6 @@
             <path d="M0 7h19M14.5 1.5 20.5 7l-6 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-
-        <div class="panel ba" id="ba">
-          <img class="ba-img" src="../images/before.webp" alt="Car interior before detailing"
-               width="1200" height="800" loading="lazy" decoding="async">
-          <div class="ba-after" id="baAfter">
-            <img class="ba-img" src="../images/after.webp" alt="The same interior after detailing"
-                 width="1200" height="800" loading="lazy" decoding="async">
-          </div>
-          <span class="ba-tag ba-tag-l">Before</span>
-          <span class="ba-tag ba-tag-r">After</span>
-          <div class="ba-divider" id="baDivider">
-            <span class="ba-handle" id="baHandle" role="slider" tabindex="0"
-                  aria-label="Reveal the after photo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
-              <svg width="20" height="12" viewBox="0 0 22 12" fill="none" aria-hidden="true">
-                <path d="M8 1.5 3.5 6 8 10.5M14 1.5 18.5 6 14 10.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-          </div>
-        </div>
-
-        <a href="#" class="wide-btn wide-btn-quiet" id="galleryBtn">
-          <span>View gallery</span>
-          <svg width="19" height="13" viewBox="0 0 22 14" fill="none" aria-hidden="true">
-            <path d="M0 7h19M14.5 1.5 20.5 7l-6 5.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-
       </div>
     </div>
   </section>
@@ -1063,20 +978,24 @@
   sync();
 })();
 
-/* ---------- review card stack ---------- */
+/* ---------- review carousel ---------- */
 (function () {
-  var stack = document.getElementById("revStack");
-  if (!stack) return;
-  var cards = [].slice.call(stack.querySelectorAll(".rev-card"));
+  var stage = document.getElementById("revStack");
+  if (!stage) return;
+  var cards = [].slice.call(stage.querySelectorAll(".rev-card"));
   var countEl = document.getElementById("revCount");
   var n = cards.length, cur = 0;
 
   function paint() {
     cards.forEach(function (card, i) {
-      // how far ahead of the front card this one is, wrapping round
-      var offset = (i - cur + n) % n;
-      card.setAttribute("data-pos", offset > 3 ? 3 : offset);
-      card.setAttribute("aria-hidden", offset === 0 ? "false" : "true");
+      // signed distance from the centre card, wrapped to the shorter way round
+      var d = i - cur;
+      if (d >  n / 2) d -= n;
+      if (d < -n / 2) d += n;
+      if (d >  2) d =  2;
+      if (d < -2) d = -2;
+      card.setAttribute("data-pos", d);
+      card.setAttribute("aria-hidden", d === 0 ? "false" : "true");
     });
     if (countEl) countEl.textContent = (cur + 1) + " / " + n;
   }
@@ -1087,15 +1006,14 @@
   if (prev) prev.addEventListener("click", function () { go(-1); });
   if (next) next.addEventListener("click", function () { go(1); });
 
-  stack.addEventListener("keydown", function (e) {
+  stage.addEventListener("keydown", function (e) {
     if (e.key === "ArrowLeft")  { e.preventDefault(); go(-1); }
     if (e.key === "ArrowRight") { e.preventDefault(); go(1); }
   });
 
-  // swipe on touch
   var x0 = null;
-  stack.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
-  stack.addEventListener("touchend", function (e) {
+  stage.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  stage.addEventListener("touchend", function (e) {
     if (x0 === null) return;
     var dx = e.changedTouches[0].clientX - x0;
     if (Math.abs(dx) > 45) go(dx < 0 ? 1 : -1);
@@ -1103,52 +1021,6 @@
   }, { passive: true });
 
   paint();
-})();
-
-/* ---------- before / after ---------- */
-(function () {
-  var box = document.getElementById("ba");
-  if (!box) return;
-  var after = document.getElementById("baAfter");
-  var divider = document.getElementById("baDivider");
-  var handle = document.getElementById("baHandle");
-  var pct = 50, dragging = false;
-
-  function set(v) {
-    pct = Math.max(0, Math.min(100, v));
-    after.style.width = pct + "%";
-    divider.style.left = pct + "%";
-    handle.style.left = pct + "%";
-    handle.setAttribute("aria-valuenow", Math.round(pct));
-  }
-  function fromEvent(e) {
-    var r = box.getBoundingClientRect();
-    return ((e.clientX - r.left) / r.width) * 100;
-  }
-
-  // pointer events cover mouse, touch and pen in one path
-  box.addEventListener("pointerdown", function (e) {
-    dragging = true;
-    box.setPointerCapture(e.pointerId);
-    set(fromEvent(e));
-    e.preventDefault();
-  });
-  box.addEventListener("pointermove", function (e) { if (dragging) set(fromEvent(e)); });
-  box.addEventListener("pointerup",     function () { dragging = false; });
-  box.addEventListener("pointercancel", function () { dragging = false; });
-
-  // keyboard: arrows nudge, Home/End jump the ends
-  handle.addEventListener("keydown", function (e) {
-    var step = e.shiftKey ? 10 : 2, hit = true;
-    if      (e.key === "ArrowLeft"  || e.key === "ArrowDown") set(pct - step);
-    else if (e.key === "ArrowRight" || e.key === "ArrowUp")   set(pct + step);
-    else if (e.key === "Home") set(0);
-    else if (e.key === "End")  set(100);
-    else hit = false;
-    if (hit) { e.preventDefault(); e.stopPropagation(); }
-  });
-
-  set(50);
 })();
 
 /* ---------- service-area check ---------- */
@@ -1282,11 +1154,7 @@
   });
 })();
 
-/* ---------- gallery button: intentionally inert for now ---------- */
-(function () {
-  var g = document.getElementById("galleryBtn");
-  if (g) g.addEventListener("click", function (e) { e.preventDefault(); });
-})();
+
 </script>
 </body>
 </html>
