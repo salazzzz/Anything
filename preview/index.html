@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="../styles.css">
 
 <style>
-  /* canvas overrides — the grainy black, everywhere, not just the header */
+  /* ---------- canvas ---------- */
   html, body { min-height: 100%; }
 
   body {
@@ -20,8 +20,142 @@
     background-repeat: repeat;
   }
 
-  /* empty space under the header so the canvas is visible */
-  .canvas { min-height: 78vh; }
+  /* ---------- Book Now button: shared skeleton ---------- */
+  .cta {
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 46px;
+    padding: 0 1.45rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.015em;
+    white-space: nowrap;
+    text-decoration: none;
+    isolation: isolate;
+    transition: transform .22s cubic-bezier(.2,.7,.3,1),
+                box-shadow .22s ease,
+                background-color .22s ease,
+                border-color .22s ease;
+  }
+  .cta > * { position: relative; z-index: 2; }
+  .cta:hover  { transform: translateY(-2px); }
+  .cta:active { transform: translateY(0) scale(.985); }
+
+  .cta .arw { transition: transform .22s cubic-bezier(.2,.7,.3,1); flex: none; }
+  .cta:hover .arw { transform: translateX(3px); }
+
+  /* the wet-look highlight that sweeps across on hover */
+  .cta--sweep::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    z-index: 1;
+    background: linear-gradient(105deg, transparent 32%, rgba(255,255,255,.5) 48%, transparent 64%);
+    transform: translateX(-130%);
+    transition: transform .75s cubic-bezier(.2,.7,.3,1);
+  }
+  .cta--sweep:hover::after { transform: translateX(130%); }
+
+  /* ---------- A · Polished ---------- */
+  .cta-a {
+    background: linear-gradient(180deg, #ffffff 0%, #e6ebf3 100%);
+    color: #0b0f16;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.95),
+                inset 0 -1px 0 rgba(0,0,0,.06),
+                0 8px 22px rgba(0,0,0,.45);
+  }
+  .cta-a:hover {
+    background: linear-gradient(180deg, #ffffff 0%, #f2f5fa 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.95),
+                0 14px 32px rgba(0,0,0,.55);
+  }
+  .cta-a::after { background: linear-gradient(105deg, transparent 34%, rgba(255,255,255,.85) 48%, transparent 62%); }
+
+  /* ---------- B · Wet Gloss ---------- */
+  .cta-b {
+    background: linear-gradient(180deg, #3d78ff 0%, #1743b8 100%);
+    color: #ffffff;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.32),
+                inset 0 -1px 0 rgba(0,0,0,.25),
+                0 8px 26px rgba(24,75,194,.5);
+  }
+  .cta-b:hover {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.4),
+                0 14px 36px rgba(47,107,255,.62);
+  }
+
+  /* ---------- C · Glass ---------- */
+  .cta-c {
+    background: rgba(255,255,255,.05);
+    color: #ffffff;
+    border-color: rgba(255,255,255,.24);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.14);
+  }
+  .cta-c:hover {
+    background: rgba(255,255,255,.11);
+    border-color: rgba(255,255,255,.45);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 10px 28px rgba(0,0,0,.4);
+  }
+
+  /* ---------- D · Chrome ---------- */
+  .cta-d {
+    background: linear-gradient(180deg,
+      #fdfefe 0%, #dfe6ef 38%, #93a0b3 50%, #ccd5e1 58%, #f7f9fc 100%);
+    color: #0b0f16;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,1),
+                inset 0 -1px 0 rgba(0,0,0,.18),
+                0 8px 24px rgba(0,0,0,.5);
+  }
+  .cta-d:hover {
+    box-shadow: inset 0 1px 0 rgba(255,255,255,1),
+                0 14px 34px rgba(0,0,0,.6);
+  }
+
+  /* ---------- variant board (temporary — goes away once you pick) ---------- */
+  .board { padding: 4.5rem 0 7rem; }
+  .board-note {
+    font-family: Georgia, serif;
+    color: rgba(244,247,251,.58);
+    font-size: .82rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    margin: 0 0 2.25rem;
+  }
+  .board-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1rem;
+  }
+  .swatch {
+    background: rgba(255,255,255,.022);
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 18px;
+    padding: 2.25rem 1.25rem 1.5rem;
+    text-align: center;
+  }
+  .swatch-label {
+    display: block;
+    margin-top: 1.5rem;
+    font-family: Georgia, serif;
+    font-size: .8rem;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: rgba(244,247,251,.5);
+  }
+  .swatch-label b { display: block; color: rgba(244,247,251,.9); font-weight: 400; letter-spacing: .06em; font-size: .95rem; margin-bottom: .3rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cta, .cta .arw, .cta::after { transition: none !important; }
+  }
 </style>
 </head>
 <body>
@@ -59,13 +193,57 @@
       <a href="https://www.tiktok.com/@eurodetailing" target="_blank" rel="noopener noreferrer" class="social-link1" aria-label="Euro Detailing on TikTok">
         <img src="../images/tiktok.webp" alt="Euro Detailing on TikTok" width="87" height="74" decoding="async">
       </a>
-      <a href="#services" class="button button-primary">Book Now</a>
+
+      <!-- currently: variant A -->
+      <a href="#services" class="cta cta-a cta--sweep">
+        <span>Book Now</span>
+        <svg class="arw" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
   </div>
 </header>
 
-<main id="main-content" class="canvas">
-  <!-- blank canvas -->
+<main id="main-content">
+  <div class="container board">
+    <p class="board-note">Hover each one — pick a letter and I'll set it everywhere</p>
+    <div class="board-grid">
+
+      <div class="swatch">
+        <a href="#" class="cta cta-a cta--sweep">
+          <span>Book Now</span>
+          <svg class="arw" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <span class="swatch-label"><b>A · Polished</b>In the header now</span>
+      </div>
+
+      <div class="swatch">
+        <a href="#" class="cta cta-b cta--sweep">
+          <span>Book Now</span>
+          <svg class="arw" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <span class="swatch-label"><b>B · Wet Gloss</b>Your brand blue</span>
+      </div>
+
+      <div class="swatch">
+        <a href="#" class="cta cta-c">
+          <span>Book Now</span>
+          <svg class="arw" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <span class="swatch-label"><b>C · Glass</b>Quietest</span>
+      </div>
+
+      <div class="swatch">
+        <a href="#" class="cta cta-d cta--sweep">
+          <span>Book Now</span>
+          <svg class="arw" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <span class="swatch-label"><b>D · Chrome</b>Polished trim</span>
+      </div>
+
+    </div>
+  </div>
 </main>
 
 <!-- real site script: powers the mobile "More" dropdown -->
