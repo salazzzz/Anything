@@ -388,10 +388,11 @@
   }
   .faq-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.86fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
     gap: clamp(2rem, 4vw, 3.5rem);
-    align-items: start;
+    align-items: stretch;
   }
+  .faq-side { display: flex; flex-direction: column; }
 
   /* ---------- FAQ pills ---------- */
   .faq-title {
@@ -402,10 +403,20 @@
   }
   .faq-lede { margin: 0.55rem 0 0; font-size: 0.86rem; color: rgba(244,247,251,.45); }
 
-  .faq-pills { display: flex; flex-wrap: wrap; gap: 0.55rem; margin-top: 1.35rem; }
+  .faq-pills {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+    align-content: start;
+    margin-top: 1.35rem;
+  }
+  /* odd one out runs the full width rather than leaving a hole */
+  .faq-pill:last-child { grid-column: 1 / -1; }
   .faq-pill {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    padding: 0.7rem 0.95rem 0.7rem 1.1rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 0.6rem;
+    min-height: 56px; text-align: left;
+    padding: 0.7rem 1.05rem 0.7rem 1.25rem;
     border-radius: 999px; cursor: pointer;
     font-family: Georgia, serif; font-size: 0.9rem; letter-spacing: .01em;
     color: rgba(244,247,251,.82);
@@ -432,6 +443,22 @@
   .faq-pill i::before { top: 6px; left: 0; width: 13px; height: 1.4px; }
   .faq-pill i::after  { left: 6px; top: 0; height: 13px; width: 1.4px; }
   .faq-pill:hover i { transform: rotate(90deg); }
+
+  .faq-more {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 0.5rem 1rem;
+    margin-top: auto;                 /* pins it to the foot of the column */
+    padding: 1rem 0 0;
+    border-top: 1px solid rgba(255,255,255,.09);
+    text-decoration: none;
+    font-size: 0.86rem; color: rgba(244,247,251,.5);
+    transition: color .22s ease;
+  }
+  .faq-more:hover { color: rgba(244,247,251,.85); }
+  .faq-more-num {
+    font-family: Georgia, serif; font-size: 0.95rem; color: #8fbaff;
+  }
+  .faq-more:hover .faq-more-num { color: #b9d2ff; }
 
   /* ---------- contact ---------- */
   .contact-title {
@@ -501,6 +528,10 @@
 
   @media (max-width: 900px) {
     .faq-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .faq-pills { gap: 0.55rem; }
+  }
+  @media (max-width: 560px) {
+    .faq-pills { grid-template-columns: 1fr; }
   }
   @media (prefers-reduced-motion: reduce) {
     .faq-pill, .faq-pill i, .contact-row, .contact-social { transition: none !important; }
@@ -1294,6 +1325,11 @@
           <button type="button" class="faq-pill" data-q="Which detailing package should I choose?" data-a="If your car is already maintained regularly, a Basic tier is plenty. If it has been a while or you feel your car is dirty, a Professional is recommended."><span>Which package should I pick?</span><i aria-hidden="true"></i></button>
           <button type="button" class="faq-pill" data-q="Do you serve only Newton, MA?" data-a="Newton is the primary area, but we also serve nearby communities including Brookline, Watertown, Wellesley, Needham, Belmont, Brighton, and Allston when the location and job are a good fit. Reach out if you are unsure whether you are inside the service range."><span>Where do you go?</span><i aria-hidden="true"></i></button>
         </div>
+
+        <a class="faq-more" href="tel:+17812903040">
+          <span>Not on the list? Call Eric and just ask.</span>
+          <span class="faq-more-num">(781) 290-3040</span>
+        </a>
       </div>
 
       <!-- ---------- right: contact ---------- -->
