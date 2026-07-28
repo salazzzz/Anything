@@ -542,6 +542,84 @@
     .faq-pill, .faq-pill i, .contact-row, .contact-social { transition: none !important; }
   }
 
+
+  /* ================= footer ================= */
+  /* NB: not .site-footer — styles.css already owns that name */
+  .ft { padding: clamp(2.25rem, 4vw, 3.25rem) 0 0; }
+  .ft-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.75fr) minmax(0, 0.95fr);
+    gap: clamp(1.75rem, 3.5vw, 3.25rem);
+    align-items: start;
+  }
+
+  .ft-mark { display: inline-flex; align-items: center; gap: 0.6rem; text-decoration: none; }
+  .ft-mark img { width: 40px; height: 40px; border-radius: 9px; }
+  .ft-mark span {
+    font-family: Georgia, serif; font-size: 1.08rem; color: #f4f7fb; letter-spacing: .01em;
+  }
+  .ft-note {
+    margin: 0.9rem 0 0; max-width: 42ch;
+    font-size: 0.875rem; line-height: 1.6; color: rgba(244,247,251,.6);
+  }
+  .ft-area {
+    margin: 0.5rem 0 0; max-width: 46ch;
+    font-size: 0.8rem; line-height: 1.6; color: rgba(244,247,251,.38);
+  }
+
+  .ft-col { display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+  .ft-head {
+    margin-bottom: 0.2rem;
+    font-family: Georgia, serif; font-size: 0.68rem;
+    letter-spacing: .22em; text-transform: uppercase;
+    color: rgba(244,247,251,.38);
+  }
+  .ft-col a {
+    position: relative;
+    font-size: 0.9rem; color: rgba(244,247,251,.66);
+    text-decoration: none;
+    transition: color .22s ease;
+  }
+  .ft-col a:hover { color: #f4f7fb; }
+  /* a hairline that grows under the link rather than a switched-on underline */
+  .ft-col a::after {
+    content: ""; position: absolute; left: 0; bottom: -3px;
+    width: 0; height: 1px; background: var(--accent);
+    transition: width .28s cubic-bezier(.2,.7,.3,1);
+  }
+  .ft-col a:hover::after { width: 100%; }
+  .ft-hours { font-size: 0.8rem; color: rgba(244,247,251,.38); }
+
+  .ft-social { display: flex; gap: 0.5rem; margin-top: 0.35rem; }
+  .ft-social a {
+    width: 38px; height: 38px;
+    display: grid; place-items: center; border-radius: 50%;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.12);
+    transition: background-color .22s ease, border-color .22s ease, transform .22s cubic-bezier(.2,.7,.3,1);
+  }
+  .ft-social a::after { display: none; }
+  .ft-social a:hover { background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.32); transform: translateY(-2px); }
+  .ft-social img { width: 22px; height: 22px; object-fit: contain; }
+
+  .ft-bottom {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 0.6rem 1.5rem;
+    margin-top: clamp(1.75rem, 3vw, 2.5rem);
+    padding: 1.15rem 0 clamp(1.75rem, 3vw, 2.25rem);
+    border-top: 1px solid rgba(255,255,255,.09);
+  }
+  .ft-bottom p { margin: 0; font-size: 0.78rem; color: rgba(244,247,251,.35); }
+  .ft-by { font-family: Georgia, serif; font-style: italic; }
+
+  @media (max-width: 780px) {
+    .ft-inner { grid-template-columns: 1fr 1fr; }
+    .ft-brand { grid-column: 1 / -1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ft-col a, .ft-col a::after, .ft-social a { transition: none !important; }
+  }
+
   /* ---------- service-area modal ---------- */
   .modal[hidden] { display: none; }
   .modal {
@@ -632,7 +710,6 @@
     .spin { animation-duration: 2s; }
   }
 
-  .canvas { min-height: 45vh; }
 
   /* ================= hero ================= */
   .hero-shell {
@@ -1422,12 +1499,52 @@
     </div>
   </section>
 
-  <div class="canvas">
-    <!-- blank canvas -->
-  </div>
-
-
 </main>
+
+  <footer class="ft">
+    <div class="container ft-inner" data-reveal-group>
+
+      <div class="ft-brand">
+        <a class="ft-mark" href="#top">
+          <img src="../images/logo.webp" alt="" width="40" height="40" loading="lazy" decoding="async">
+          <span>Euro Detailing</span>
+        </a>
+        <p class="ft-note">Mobile car detailing in Newton, MA 02465 and surrounding areas.</p>
+        <p class="ft-area">Serving Newton, Brookline, Watertown, Wellesley, Needham, Belmont, Brighton and Allston.</p>
+      </div>
+
+      <nav class="ft-col" aria-label="Footer">
+        <span class="ft-head">Explore</span>
+        <a href="#services">Services</a>
+        <a href="../gallery.html">Gallery</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <div class="ft-col">
+        <span class="ft-head">Get in touch</span>
+        <a href="tel:+17812903040">+1 781-290-3040</a>
+        <a href="#" class="js-email" data-e="eurodetailinginfo" data-d="gmail.com">Email Us</a>
+        <span class="ft-hours">Mon&ndash;Sun, 8am&ndash;8pm</span>
+        <div class="ft-social">
+          <a href="https://www.instagram.com/euro_detailingg" target="_blank" rel="noopener noreferrer" aria-label="Euro Detailing on Instagram">
+            <img src="../images/instagram.webp" alt="" width="22" height="22" loading="lazy" decoding="async">
+          </a>
+          <a href="https://www.tiktok.com/@eurodetailing" target="_blank" rel="noopener noreferrer" aria-label="Euro Detailing on TikTok">
+            <img src="../images/tiktok.webp" alt="" width="22" height="22" loading="lazy" decoding="async">
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container ft-bottom">
+      <p>&copy; <span id="footer-year">2026</span> Euro Detailing. All rights reserved.</p>
+      <p class="ft-by">Owner-operated by Eric Salas</p>
+    </div>
+  </footer>
+
 
 
 
