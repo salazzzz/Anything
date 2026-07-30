@@ -1,26 +1,32 @@
 /* ================= reviews ================= */
 .rv-head { padding: clamp(1.75rem, 3.5vw, 2.75rem) 0 0; }
 .rv-head-in {
-  display: grid; grid-template-columns: minmax(0,1fr) 300px;
+  display: grid; grid-template-columns: minmax(0,1fr) minmax(0, 500px);
   gap: clamp(1.75rem, 4vw, 3.5rem); align-items: start;
 }
 .rv-head h1 { max-width: 14ch; }
 
 /* ---------- score panel ---------- */
 .score {
-  padding: 1.4rem 1.35rem;
+  /* laid out across rather than down, so its foot lines up with the lede */
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: .45rem 1.4rem;
+  padding: 1rem 1.2rem;
   border-radius: 14px;
   background: linear-gradient(178deg, #141b28, #0b1017);
   border: 1px solid rgba(255,255,255,.12);
   box-shadow: 0 20px 46px rgba(0,0,0,.5);
 }
-.score-top { display: flex; align-items: center; gap: .5rem; }
+.score-top { grid-column: 1 / -1; display: flex; align-items: center; gap: .5rem; }
 .score-src { font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(244,247,251,.42); }
-.score-n { margin: .8rem 0 0; font-family: Georgia, serif; font-size: 3.2rem; line-height: 1; color: #fff; }
-.score-stars { margin: .35rem 0 0; color: #fbbf24; letter-spacing: 3px; font-size: 1rem; }
-.score-count { margin: .45rem 0 0; font-size: .8rem; color: rgba(244,247,251,.45); }
+.score-side { display: flex; flex-direction: column; }
+.score-n { margin: 0; font-family: Georgia, serif; font-size: 2.4rem; line-height: 1; color: #fff; }
+.score-stars { margin: .3rem 0 0; color: #fbbf24; letter-spacing: 2.5px; font-size: .92rem; }
+.score-count { margin: .35rem 0 0; font-size: .76rem; color: rgba(244,247,251,.45); white-space: nowrap; }
 
-.bars { margin: 1.25rem 0 0; display: grid; gap: .3rem; }
+.bars { margin: 0; display: grid; gap: .22rem; align-content: center; }
 .bars > div { display: grid; grid-template-columns: 30px 1fr; align-items: center; gap: .55rem; }
 .bars dt { font-size: .72rem; color: rgba(244,247,251,.45); white-space: nowrap; }
 .bars dt span { color: #fbbf24; margin-left: 1px; }
@@ -29,16 +35,15 @@
 .bar i { display: block; height: 100%; border-radius: 3px; background: linear-gradient(90deg, #fbbf24, #f0a500); }
 .bars b { font-size: .72rem; font-weight: 400; color: rgba(244,247,251,.4); text-align: right; }
 
-.score-link { width: 100%; margin-top: 1.25rem; min-height: 44px; font-size: .86rem; }
+.score-link { width: auto; margin: 0; min-height: 40px; white-space: nowrap; padding: 0 1rem; font-size: .84rem; }
 
 /* ---------- the reviews ---------- */
 .rv-body { padding: clamp(1.75rem, 3.5vw, 2.75rem) 0 clamp(2rem, 4vw, 3rem); }
-.rv-grid { columns: 2; column-gap: 1rem; }
-@media (min-width: 1180px) { .rv-grid { columns: 3; } }
+.rv-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; align-items: start; }
+.rv-col { display: flex; flex-direction: column; gap: 1rem; }
 
 .rv {
-  break-inside: avoid;
-  margin: 0 0 1rem;
+  margin: 0;
   padding: 1.25rem 1.3rem;
   border-radius: 14px;
   background: #ffffff;
@@ -84,5 +89,27 @@
 @media (max-width: 900px) {
   .rv-head-in { grid-template-columns: 1fr; }
   .score { max-width: 340px; }
-  .rv-grid { columns: 1; }
+  .rv-grid { grid-template-columns: 1fr; }
 }
+
+/* ---------- the CTA, sitting inside the middle column ---------- */
+.rv-cta {
+  padding: 1.6rem 1.35rem;
+  border-radius: 14px;
+  text-align: center;
+  background: linear-gradient(178deg, rgba(47,107,255,.14), #0b1017);
+  border: 1px solid rgba(47,107,255,.42);
+  box-shadow: 0 20px 46px rgba(0,0,0,.5);
+}
+.rv-cta .sec-rule { margin: 0 auto 1rem; }
+.rv-cta h2 {
+  margin: 0;
+  font-family: Georgia, serif; font-weight: 400;
+  font-size: 1.32rem; line-height: 1.2; letter-spacing: -.02em; color: #f7f9fc;
+}
+.rv-cta p { margin: .65rem 0 1.2rem; font-size: .86rem; line-height: 1.55; color: rgba(244,247,251,.6); }
+.rv-cta .cta, .rv-cta .cta-ghost { width: 100%; }
+.rv-cta .cta { margin-bottom: .5rem; }
+
+@media (max-width: 1100px) { .rv-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 720px)  { .rv-grid { grid-template-columns: 1fr; } }
