@@ -1,0 +1,40 @@
+SERVICE = {
+ "name": "Interior Detailing",
+ "slug": "interior",
+ "lede": "Seats, carpets, mats and every surface brought back — in your driveway, while you get on with your day.",
+ "shot": "interior-service.webp",
+ "tiers": {
+   "basic": {
+     "label": "Basic",
+     "blurb": "Kept up regularly? This is plenty.",
+     "sizes": {"sedan": (105, "~1.5–2 hrs", "basic-interior-detail"),
+               "suv":   (125, "~2–2.5 hrs", "basic-interior-detail-suv"),
+               "xl":    (145, "~2.5–3 hrs", "basic-interior-detail-xl")},
+     "includes": ["Full interior vacuum — seats, floors, trunk",
+                  "Dashboard, console and vents wiped down",
+                  "Door panels cleaned",
+                  "Interior windows cleaned",
+                  "Floor mats cleaned",
+                  "Door jambs washed",
+                  "Matte satin finish",
+                  "Light fragrance finish"]},
+   "premium": {
+     "label": "Deep Clean",
+     "blurb": "Been a while, or you want it perfect.",
+     "sizes": {"sedan": (165, "~2.5–3 hrs", "premium-interior-detail"),
+               "suv":   (190, "~3–3.5 hrs", "premium-interior-detail-suv"),
+               "xl":    (215, "~3.5–4 hrs", "premium-interior-detail-xl")},
+     "includes": ["Everything in Basic",
+                  "Spot and stain removal, cloth seats and carpets",
+                  "Full steam clean",
+                  "Leather cleaned and conditioned (if applicable)",
+                  "Light pet hair removal",
+                  "Plastic floor mat restoration included",
+                  "Deeper odour treatment and fragrance finish"]},
+ },
+}
+SIZES = [("sedan", "Sedan", "Coupe, small car"),
+         ("suv",   "SUV",   "Crossover, wagon"),
+         ("xl",    "Truck / XL", "3-row, van")]
+ADDONS = [("Pet hair removal","$35+"), ("Engine bay","$49.99"), ("Seat extraction","$49.99+"),
+          ("Mat restoration","$25+"), ("Mould removal","$49.99"), ("Clay bar","$49.99"), ("Wax","$34.99")]
