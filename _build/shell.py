@@ -28,6 +28,8 @@ def header(home=False):
     </a>
     <nav class="site-nav" aria-label="Primary">
       <a href="%(p)s#services">Services</a>
+      <a href="/membership">Membership</a>
+      <a href="/addons">Add-ons</a>
       <a href="%(p)s#faq">FAQ</a>
       <a href="%(p)s#contact">Contact</a>
     </nav>

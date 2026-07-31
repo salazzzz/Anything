@@ -457,3 +457,18 @@ a.ao:hover { border-color: rgba(255,255,255,.34); background: rgba(255,255,255,.
 .pl-blurb { margin: .85rem 0 .3rem; font-size: .875rem; line-height: 1.55; color: rgba(244,247,251,.6); }
 .pl .ticks { flex: 1; margin-top: .5rem; }
 .pl-cta { margin-top: 1.2rem; width: 100%; }
+
+/* ---------- header nav fits at narrower desktop widths ----------
+   .site-nav is absolutely positioned and centred, so it reserves no layout
+   space and simply runs under the brand or the buttons once it grows. Adding
+   Membership and Add-ons pushed it into the buttons at around 1100px. Tighten
+   the gap first, then drop the header social icons — they are still in the
+   footer, and Book Now is the button that matters. */
+@media (max-width: 1200px) {
+  .site-nav { gap: 1rem; }
+}
+@media (max-width: 1120px) {
+  .site-nav { gap: 0.75rem; font-size: 0.94rem; }
+  .header-actions .social-link,
+  .header-actions .social-link1 { display: none; }
+}

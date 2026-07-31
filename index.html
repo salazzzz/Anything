@@ -1040,6 +1040,21 @@
       transition: none !important;
     }
   }
+
+/* ---------- header nav fits at narrower desktop widths ----------
+   .site-nav is absolutely positioned and centred, so it reserves no layout
+   space and simply runs under the brand or the buttons once it grows. Adding
+   Membership and Add-ons pushed it into the buttons at around 1100px. Tighten
+   the gap first, then drop the header social icons — they are still in the
+   footer, and Book Now is the button that matters. */
+@media (max-width: 1200px) {
+  .site-nav { gap: 1rem; }
+}
+@media (max-width: 1120px) {
+  .site-nav { gap: 0.75rem; font-size: 0.94rem; }
+  .header-actions .social-link,
+  .header-actions .social-link1 { display: none; }
+}
 </style>
 </head>
 <body>
@@ -1058,6 +1073,8 @@
 
     <nav class="site-nav" aria-label="Primary">
       <a href="#services">Services</a>
+      <a href="/membership">Membership</a>
+      <a href="/addons">Add-ons</a>
       <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
     </nav>
