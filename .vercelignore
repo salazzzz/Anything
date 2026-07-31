@@ -1,0 +1,19 @@
+# Files that exist for building and handoff, never for serving.
+#
+# Everything in the repo root is deployed and publicly readable by default.
+# Before this file, https://www.eurodetailing.com/_build/gen_membership.py,
+# /HANDOFF.md and /chats/chat1.md all returned 200 — which meant the pricing
+# rationale, the internal design transcripts, and a handoff note saying the
+# membership prices were unconfirmed proposals were all readable by anyone.
+#
+# Nothing on the live pages references any of these; the gallery data is read
+# at build time and baked into gallery.html, not fetched at runtime.
+
+_build/
+chats/
+HANDOFF.md
+PRODUCT.md
+
+# The retired 2026-05 Claude Design prototype. /project and /project/* already
+# 301 to the homepage; this stops the files being uploaded at all.
+project/
