@@ -1,7 +1,40 @@
-import json, html as H, re
+import json, html as H, re, os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import seo, shell
+
+PATH = "/gallery"
+TITLE = "Before &amp; After Detailing Gallery | Euro Detailing, Newton MA"
+DESC = ("Real before and after photos and video from mobile detailing jobs around "
+        "Newton, MA — interiors, paint correction and wheels, all by Eric Salas.")
 
 d = json.load(open("data/gallery.json"))
 items = [i for i in d["items"] if i.get("src")]
+
+
+def schema():
+    """ImageGallery with every tile, plus VideoObject for the clips."""
+    imgs, vids = [], []
+    for i in items:
+        node = {"@type": "ImageObject", "contentUrl": seo.ORIGIN + "/" + i["src"],
+                "url": seo.ORIGIN + "/" + i["src"], "caption": i["alt"],
+                "width": i.get("w"), "height": i.get("h")}
+        imgs.append(node)
+        if i.get("video"):
+            vids.append({"@type": "VideoObject", "name": i["alt"],
+                         "description": i["alt"],
+                         "thumbnailUrl": seo.ORIGIN + "/" + i["src"],
+                         "contentUrl": seo.ORIGIN + "/" + i["video"],
+                         "uploadDate": d.get("uploadDate", "2026-01-01"),
+                         "duration": i.get("duration"),
+                         "publisher": {"@id": seo.ID_BIZ}})
+    gallery = {"@type": "ImageGallery", "@id": seo.url(PATH) + "#gallery",
+               "name": "Euro Detailing before and after gallery",
+               "description": DESC, "url": seo.url(PATH),
+               "associatedMedia": imgs}
+    return seo.ld(seo.business(), seo.website(),
+                  seo.webpage(PATH, TITLE.replace("&amp;", "&"), DESC),
+                  seo.breadcrumb([("Home", "/"), ("Gallery", PATH)]),
+                  gallery, *vids)
 
 def iso_to_secs(s):
     m = re.match(r"PT(?:(\d+)M)?(?:(\d+)S)?", s or "")
@@ -25,49 +58,26 @@ for n, it in enumerate(items):
              '%s</span>') % ("0:%02d" % secs if secs is not None else "Video") if vid else ""
     tiles.append(
       '<button type="button" class="tile" data-i="%d" data-cat="%s"%s aria-label="%s">'
-      '<img src="../%s" alt="%s" width="%d" height="%d" loading="lazy" decoding="async">%s</button>'
-      % (n, it.get("category", ""), ' data-video="../%s"' % vid if vid else "",
+      '<img src="/%s" alt="%s" width="%d" height="%d" loading="lazy" decoding="async">%s</button>'
+      % (n, it.get("category", ""), ' data-video="/%s"' % vid if vid else "",
          H.escape(it["alt"], True), it["src"], H.escape(it["alt"], True), it["w"], it["h"], badge))
 
-DATA = json.dumps([{"src": "../" + i["src"], "alt": i["alt"],
-                    "video": ("../" + i["video"]) if i.get("video") else None,
+DATA = json.dumps([{"src": "/" + i["src"], "alt": i["alt"],
+                    "video": ("/" + i["video"]) if i.get("video") else None,
                     "cat": i.get("category", "")} for i in items], separators=(",", ":"))
 
 html = """<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script>if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("js-anim")}</script>
-<title>Gallery — Euro Detailing</title>
-<meta name="robots" content="noindex, nofollow">
-<link rel="stylesheet" href="../styles.css">
-<link rel="stylesheet" href="tpl.css">
-<link rel="stylesheet" href="gallery.css">
+%(head)s
+%(schema)s
 </head>
 <body>
 
-<header class="site-header" id="top">
-  <div class="container header-inner">
-    <a href="/preview" class="brand">
-      <img src="../images/logo.webp" alt="Euro Detailing logo" class="logo-image" width="72" height="72" decoding="async">
-      <span class="brand-text">
-        <span class="brand-name">Euro Detailing</span>
-        <span class="brand-subtitle">Mobile car detailing in Newton, MA</span>
-      </span>
-    </a>
-    <nav class="site-nav" aria-label="Primary">
-      <a href="/preview#services">Services</a>
-      <a href="/preview#faq">FAQ</a>
-      <a href="/preview#contact">Contact</a>
-    </nav>
-    <div class="header-actions">
-      <a href="tel:+17812903040" class="cta"><span>Call Eric</span></a>
-    </div>
-  </div>
-</header>
+%(skip)s
+%(header)s
 
-<main>
+<main id="main-content">
 <section class="gal-head">
   <div class="container">
     <span class="sec-rule" aria-hidden="true"></span>
@@ -92,7 +102,7 @@ html = """<!DOCTYPE html>
       <p class="lede">Pick a package and we'll come to you.</p>
     </div>
     <div class="gal-cta-btns">
-      <a href="/preview#services" class="cta"><span>View services</span>
+      <a href="/#services" class="cta"><span>View services</span>
         <svg class="arw" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
@@ -117,14 +127,9 @@ html = """<!DOCTYPE html>
   <figcaption class="lb-cap"><span id="lbAlt"></span><span class="lb-count" id="lbCount"></span></figcaption>
 </div>
 
-<footer class="ft">
-  <div class="container ft-bottom">
-    <p>&copy; <span id="footer-year">2026</span> Euro Detailing. All rights reserved.</p>
-    <p class="ft-by">Owner-operated by Eric Salas</p>
-  </div>
-</footer>
+%(footer)s
 
-<script src="../script.js" defer></script>
+<script src="/script.js" defer></script>
 <script>
 var ITEMS = %(data)s;
 
@@ -205,8 +210,11 @@ var ITEMS = %(data)s;
 </script>
 </body>
 </html>
-""" % dict(chips=chips, tiles="".join(tiles), data=DATA)
+""" % dict(chips=chips, tiles="".join(tiles), data=DATA,
+           head=seo.head(TITLE, DESC, PATH, css=("/styles.css", "/tpl.css", "/gallery.css")),
+           schema=schema(), skip=shell.SKIP, header=shell.header(), footer=shell.footer())
 
-open("preview/gallery.html", "w", encoding="utf-8").write(html)
-print("wrote preview/gallery.html — %d tiles (%d video), filters: %s" % (
+open("gallery.html", "w", encoding="utf-8").write(html)
+print("wrote gallery.html")
+print("wrote gallery.html — %d tiles (%d video), filters: %s" % (
     len(items), sum(1 for i in items if i.get("video")), counts))

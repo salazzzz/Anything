@@ -1,14 +1,18 @@
-import json, os, html as H
+import json, os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import seo, shell
+from addondata import ADDONS, strip_html
 
 SIZES = [("sedan","Sedan","Coupe, small car"),("suv","SUV","Crossover, wagon"),("xl","Truck / XL","3-row, van")]
-ADDONS = [("Pet hair removal","$35+"),("Engine bay","$49.99"),("Seat extraction","$49.99+"),
-          ("Mat restoration","$25+"),("Mould removal","$49.99"),("Clay bar","$49.99"),("Wax","$34.99")]
 
 SERVICES = {
 "interior": dict(
-  name="Interior Detailing", file="service-interior.html",
-  visual=("beforeafter", (("../images/after.webp", "Car interior after detailing"),
-                          ("../images/before.webp", "The same interior before detailing"))),
+  name="Interior Detailing", file="services/interior.html", path="/services/interior",
+  title="Interior Car Detailing in Newton, MA | Euro Detailing",
+  desc="Mobile interior car detailing in Newton, MA. Steam clean, stain removal, "
+       "leather conditioning and odor treatment — done in your driveway. From $105.",
+  visual=("beforeafter", (("/images/after.webp", "Car interior after detailing"),
+                          ("/images/before.webp", "The same interior before detailing"))),
   pitch=["A vacuum and a wipe-down moves dirt around. It doesn't take it out.",
          "The inside of a car is one of the dirtiest surfaces you touch all day &mdash; right behind the toilet seat. Bacteria sitting in the vents, dirt worked deep into the carpet, and smells that come straight back because nothing was ever actually pulled out.",
          "<strong>Basic</strong> is for a car that's already kept up. If it's been more than three months since the last detail, take the <strong>Deep Clean</strong>."],
@@ -24,12 +28,15 @@ SERVICES = {
                       "xl":(215,"~3.5–4 hrs","premium-interior-detail-xl")},
              inc=["Spot and stain removal, cloth seats and carpets","Full steam clean",
                   "Leather cleaned and conditioned (if applicable)","Light pet hair removal",
-                  "Plastic floor mat restoration included","Deeper odour treatment and fragrance finish"])),
+                  "Plastic floor mat restoration","Deeper odor treatment and fragrance finish"])),
 
 "exterior": dict(
-  name="Exterior Detailing", file="service-exterior.html",
-  visual=("beforeafter", (("../images/gallery/bmw-x5m-matte-after.webp", "Matte black BMW X5 M after a full exterior detail"),
-                          ("../images/gallery/bmw-x5m-matte-before.webp", "The same BMW X5 M before the detail, covered in road dust"))),
+  name="Exterior Detailing", file="services/exterior.html", path="/services/exterior",
+  title="Exterior Car Detailing &amp; Hand Wash in Newton, MA | Euro Detailing",
+  desc="Mobile exterior detailing in Newton, MA. Foam bath hand wash, clay bar "
+       "decontamination and up to six months of paint sealant. From $70.",
+  visual=("beforeafter", (("/images/gallery/bmw-x5m-matte-after.webp", "Matte black BMW X5 M after a full exterior detail"),
+                          ("/images/gallery/bmw-x5m-matte-before.webp", "The same BMW X5 M before the detail, covered in road dust"))),
   pitch=["A wash gets the dirt off. It doesn't get the paint clean.",
          "Road film, brake dust and tree sap bond to the clear coat and stay there &mdash; you can feel it as roughness under your fingertips. Washing over it seals it in, and the shine you were after never quite arrives.",
          "<strong>Basic</strong> is a proper hand wash with four weeks of protection. If the paint feels rough, or it has been a season, take the <strong>Deep Clean</strong> &mdash; clay bar, decontamination and six months of sealant."],
@@ -37,8 +44,8 @@ SERVICES = {
   basic=dict(sizes={"sedan":(70,"~45 min – 1 hr","basic-exterior-detail-sedan"),
                     "suv":(85,"~1 hr","basic-exterior-detail-suv"),
                     "xl":(100,"~1 hr","basic-exterior-detail-xl")},
-             inc=["Foam bath and hand wash","Wheels, tyres and wheel wells cleaned","4 week protective sealant",
-                  "Exterior windows cleaned","Tyre shine dressing","Hand dried with soft microfibre"]),
+             inc=["Foam bath and hand wash","Wheels, tires and wheel wells cleaned","4 week protective sealant",
+                  "Exterior windows cleaned","Tire shine dressing","Hand dried with soft microfiber"]),
   premium=dict(sizes={"sedan":(105,"~1 hr","permium-exterior-detail-sedan"),
                       "suv":(120,"~1.5 hrs","premium-exterior-detail-suv"),
                       "xl":(135,"~1–2 hrs","premium-exterior-detail-xl")},
@@ -46,7 +53,10 @@ SERVICES = {
                   "6 month protective sealant","Basic tree sap removal","Trim restoration"])),
 
 "bundle": dict(
-  name="Interior + Exterior", file="service-bundle.html",
+  name="Interior + Exterior", file="services/bundle.html", path="/services/bundle",
+  title="Full Car Detailing, Inside and Out, in Newton, MA | Euro Detailing",
+  desc="Interior and exterior detailing in one mobile visit in Newton, MA. "
+       "Cheaper than booking both separately, and it takes one afternoon. From $150.",
   visual=("duo", None),
   pitch=["Inside and out, in a single visit.",
          "Most people book one and then wish they had booked both. A spotless interior makes tired paint obvious, and fresh paint makes a dusty dash impossible to ignore. Together it costs less than two separate appointments and takes one afternoon instead of two.",
@@ -57,7 +67,7 @@ SERVICES = {
                     "xl":(210,"~3.5 hrs","basic-bundle-detail-xl")},
              inc=["Full interior vacuum and wipe down","Interior windows and door panels",
                   "Floor mats cleaned and dressed","Foam bath and exterior hand wash",
-                  "Wheels, tyres and wheel wells","Tyre shine and hand dried finish"]),
+                  "Wheels, tires and wheel wells","Tire shine and hand dried finish"]),
   premium=dict(sizes={"sedan":(230,"~3.5–4 hrs","premium-bundle-detail-sedan"),
                       "suv":(265,"~4–4.5 hrs","premium-bundle-detail-suv"),
                       "xl":(300,"~5 hrs","premium-bundle-detail-xl")},
@@ -66,7 +76,10 @@ SERVICES = {
                   "Trim restoration and dressing","Professional finish and fragrance"])),
 }
 
+SIZE_LABEL = {"sedan": "Sedan", "suv": "SUV", "xl": "Truck / XL"}
+
 ARROW = '<svg class="arw" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+
 
 def slider(base, over, base_lbl, over_lbl, base_alt, over_alt, aria):
     """The overlay sits on the LEFT, so whatever belongs on the left goes in `over`."""
@@ -89,6 +102,25 @@ def slider(base, over, base_lbl, over_lbl, base_alt, over_alt, aria):
     </div>""" % (base, base_alt, over, over_alt, over_lbl, base_lbl, aria)
 
 
+def schema_for(S):
+    """Service + OfferCatalog carrying all six real prices, plus breadcrumb."""
+    offers = []
+    for tier, label in (("basic", "Basic"), ("premium", "Deep Clean")):
+        for key in ("sedan", "suv", "xl"):
+            price, _time, _slug = S[tier]["sizes"][key]
+            offers.append(seo.offer(
+                "%s — %s, %s" % (S["name"], label, SIZE_LABEL[key]),
+                price, S["path"],
+                desc="; ".join(S[tier]["inc"][:4])))
+    return seo.ld(
+        seo.business(),
+        seo.website(),
+        seo.webpage(S["path"], S["title"].replace("&amp;", "&"), S["desc"]),
+        seo.breadcrumb([("Home", "/"), ("Services", "/#services"),
+                        (S["name"], S["path"])]),
+        seo.service(S["name"], S["desc"], S["path"], offers))
+
+
 def build(key, S):
     other = [(k, v) for k, v in SERVICES.items() if k != key]
     sizes = "".join('<button type="button" class="sz" role="radio" aria-checked="%s" data-size="%s"><strong>%s</strong><em>%s</em></button>'
@@ -99,14 +131,14 @@ def build(key, S):
         visual = slider(a[0], bfr[0], "After", "Before", a[1], bfr[1],
                         "Drag to compare before and after")
     elif v == "duo":
-        visual = slider("../images/gallery/bmw-x5m-matte-after.webp",
-                        "../images/gallery/mercedes-beige-interior-cleaned.webp",
+        visual = slider("/images/gallery/bmw-x5m-matte-after.webp",
+                        "/images/gallery/mercedes-beige-interior-cleaned.webp",
                         "Exterior", "Interior",
                         "Matte black BMW X5 M after a full exterior detail",
                         "Cleaned Mercedes-Benz beige leather interior",
                         "Drag to see the interior and the exterior")
     else:
-        visual = ('<img class="hero-a-shot" src="../images/%s" alt="%s by Euro Detailing" width="800" height="500" decoding="async">'
+        visual = ('<img class="hero-a-shot" src="/images/%s" alt="%s by Euro Detailing" width="800" height="500" decoding="async">'
                   % (S["visual"][1], S["name"]))
 
     data = {t: {s: list(v) for s, v in S[t]["sizes"].items()} for t in ("basic", "premium")}
@@ -114,37 +146,15 @@ def build(key, S):
     return """<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script>if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("js-anim")}</script>
-<title>%(name)s — Euro Detailing</title>
-<meta name="robots" content="noindex, nofollow">
-<link rel="stylesheet" href="../styles.css">
-<link rel="stylesheet" href="tpl.css">
+%(head)s
+%(schema)s
 </head>
 <body>
 
-<header class="site-header" id="top">
-  <div class="container header-inner">
-    <a href="/preview" class="brand">
-      <img src="../images/logo.webp" alt="Euro Detailing logo" class="logo-image" width="72" height="72" decoding="async">
-      <span class="brand-text">
-        <span class="brand-name">Euro Detailing</span>
-        <span class="brand-subtitle">Mobile car detailing in Newton, MA</span>
-      </span>
-    </a>
-    <nav class="site-nav" aria-label="Primary">
-      <a href="/preview#services">Services</a>
-      <a href="/preview#faq">FAQ</a>
-      <a href="/preview#contact">Contact</a>
-    </nav>
-    <div class="header-actions">
-      <a href="tel:+17812903040" class="cta"><span>Call Eric</span></a>
-    </div>
-  </div>
-</header>
+%(skip)s
+%(header)s
 
-<main>
+<main id="main-content">
 <section class="hero-a">
   <div class="container hero-a-in">
     <div>
@@ -164,15 +174,7 @@ def build(key, S):
   </a>
 </section>
 
-<div class="trust-strip">
-  <div class="container">
-    <span class="g-logo" aria-hidden="true"></span>
-    <b>5.0</b><span class="stars">★★★★★</span>
-    <span>10 Google reviews</span><span class="dot"></span>
-    <span>We come to you</span><span class="dot"></span>
-    <span>Pay after the job</span>
-  </div>
-</div>
+%(trust)s
 
 <section class="sec" id="pick">
   <div class="container">
@@ -226,7 +228,16 @@ def build(key, S):
   <div class="container">
     <span class="sec-rule" aria-hidden="true"></span>
     <h2 class="sec-h">Add anything on.</h2>
-    <div class="chips">%(addons)s</div>
+    %(addons)s
+  </div>
+</section>
+
+<section class="sec">
+  <div class="container">
+    <span class="sec-rule" aria-hidden="true"></span>
+    <h2 class="sec-h">Booking more than once?</h2>
+    <p class="lede">A membership keeps the car in this condition year-round and works out cheaper than booking each detail one at a time.</p>
+    <p class="foot-note"><a href="/membership">See membership plans &rarr;</a></p>
   </div>
 </section>
 
@@ -239,14 +250,9 @@ def build(key, S):
 </section>
 </main>
 
-<footer class="ft">
-  <div class="container ft-bottom">
-    <p>&copy; <span id="footer-year">2026</span> Euro Detailing. All rights reserved.</p>
-    <p class="ft-by">Owner-operated by Eric Salas</p>
-  </div>
-</footer>
+%(footer)s
 
-<script src="../script.js" defer></script>
+<script src="/script.js" defer></script>
 <script>
 var CAL = "https://cal.com/eric-salas/";
 var DATA = %(data)s;
@@ -314,6 +320,9 @@ var DATA = %(data)s;
 </body>
 </html>
 """ % dict(
+    head=seo.head(S["title"], S["desc"], S["path"], css=("/styles.css", "/tpl.css")),
+    schema=schema_for(S),
+    skip=shell.SKIP, header=shell.header(), footer=shell.footer(), trust=shell.TRUST,
     name=S["name"],
     pitch="\n        ".join("<p>%s</p>" % p for p in S["pitch"]),
     kicker=S["kicker"], visual=visual, sizes=sizes, arrow=ARROW,
@@ -322,13 +331,15 @@ var DATA = %(data)s;
     binc="".join("<li>%s</li>" % b for b in S["basic"]["inc"]),
     bexc="".join('<li class="no">%s</li>' % b for b in S["premium"]["inc"]),
     pinc="".join("<li>%s</li>" % b for b in S["premium"]["inc"]),
-    addons="".join('<span class="chip">%s <b>%s</b></span>' % (n, p) for n, p in ADDONS),
-    xsell="".join('<a class="xs" href="/preview/%s"><span class="xs-name">%s</span><span class="xs-price">from $%d</span></a>'
-                  % (v["file"].replace(".html",""), v["name"], v["basic"]["sizes"]["sedan"][0]) for k, v in other),
+    addons=strip_html(),
+    xsell="".join('<a class="xs" href="%s"><span class="xs-name">%s</span><span class="xs-price">from $%d</span></a>'
+                  % (v["path"], v["name"], v["basic"]["sizes"]["sedan"][0]) for k, v in other),
     data=json.dumps(data).replace('", "', '","'))
 
-for k, S in SERVICES.items():
-    out = "preview/" + S["file"]
-    open(out, "w", encoding="utf-8").write(build(k, S))
-    print("wrote %-32s  basic $%d  deep $%d  visual=%s" % (
-        out, S["basic"]["sizes"]["sedan"][0], S["premium"]["sizes"]["sedan"][0], S["visual"][0]))
+
+if __name__ == "__main__":
+    os.makedirs("services", exist_ok=True)
+    for k, S in SERVICES.items():
+        open(S["file"], "w", encoding="utf-8").write(build(k, S))
+        print("wrote %-26s  basic $%d  deep $%d  visual=%s" % (
+            S["file"], S["basic"]["sizes"]["sedan"][0], S["premium"]["sizes"]["sedan"][0], S["visual"][0]))

@@ -11,6 +11,31 @@
       "source": "/InteriorPremium",
       "destination": "/services/interior",
       "permanent": true
+    },
+    {
+      "source": "/testimonials",
+      "destination": "/reviews",
+      "permanent": true
+    },
+    {
+      "source": "/project",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/project/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/preview",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/preview/:path*",
+      "destination": "/",
+      "permanent": true
     }
   ],
   "headers": [
@@ -33,7 +58,7 @@
       ]
     },
     {
-      "source": "/styles.css",
+      "source": "/(styles|tpl|gallery|reviews).css",
       "headers": [
         {
           "key": "Cache-Control",

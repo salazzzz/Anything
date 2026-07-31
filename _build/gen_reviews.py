@@ -1,4 +1,21 @@
-import html as H
+import html as H, os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import seo, shell
+
+PATH = "/reviews"
+TITLE = "Reviews — 5.0 Stars from 10 Google Reviews | Euro Detailing"
+DESC = ("Every Google review for Euro Detailing, mobile car detailing in Newton, MA. "
+        "5.0 stars across 10 reviews, with Eric's replies.")
+
+
+def schema():
+    """Real Review nodes — the reason this page can win a rich result."""
+    revs = seo.reviews([(r[0], r[4]) for r in R if r[4]])
+    return seo.ld(seo.business(), seo.website(),
+                  seo.webpage(PATH, TITLE, DESC),
+                  seo.breadcrumb([("Home", "/"), ("Reviews", PATH)]),
+                  *revs)
+
 
 G_PROFILE = "https://g.page/r/CQPibJ1CNvd7EAE"
 G_WRITE   = "https://g.page/r/CQPibJ1CNvd7EAE/review"
@@ -77,7 +94,7 @@ CTA = """      <div class="rv-cta">
             <path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-        <a href="/preview#services" class="cta-ghost"><span>Book a detail</span></a>
+        <a href="/#services" class="cta-ghost"><span>Book a detail</span></a>
       </div>""" % G_WRITE
 
 # The middle column holds the CTA, so it gets the four shortest reviews: more
@@ -121,38 +138,15 @@ print("  CTA sits at position %d of %d in the middle column" % (at, len(mid)))
 html = """<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script>if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("js-anim")}</script>
-<title>Reviews — Euro Detailing</title>
-<meta name="robots" content="noindex, nofollow">
-<link rel="stylesheet" href="../styles.css">
-<link rel="stylesheet" href="tpl.css">
-<link rel="stylesheet" href="reviews.css">
+%(head)s
+%(schema)s
 </head>
 <body>
 
-<header class="site-header" id="top">
-  <div class="container header-inner">
-    <a href="/preview" class="brand">
-      <img src="../images/logo.webp" alt="Euro Detailing logo" class="logo-image" width="72" height="72" decoding="async">
-      <span class="brand-text">
-        <span class="brand-name">Euro Detailing</span>
-        <span class="brand-subtitle">Mobile car detailing in Newton, MA</span>
-      </span>
-    </a>
-    <nav class="site-nav" aria-label="Primary">
-      <a href="/preview#services">Services</a>
-      <a href="/preview#faq">FAQ</a>
-      <a href="/preview#contact">Contact</a>
-    </nav>
-    <div class="header-actions">
-      <a href="tel:+17812903040" class="cta"><span>Call Eric</span></a>
-    </div>
-  </div>
-</header>
+%(skip)s
+%(header)s
 
-<main>
+<main id="main-content">
 <section class="rv-head">
   <div class="container rv-head-in">
     <div>
@@ -190,21 +184,19 @@ html = """<!DOCTYPE html>
 
 </main>
 
-<footer class="ft">
-  <div class="container ft-bottom">
-    <p>&copy; <span id="footer-year">2026</span> Euro Detailing. All rights reserved.</p>
-    <p class="ft-by">Owner-operated by Eric Salas</p>
-  </div>
-</footer>
+%(footer)s
 
-<script src="../script.js" defer></script>
+<script src="/script.js" defer></script>
 </body>
 </html>
 """ % dict(
+  head=seo.head(TITLE, DESC, PATH, css=("/styles.css", "/tpl.css", "/reviews.css")),
+  schema=schema(), skip=shell.SKIP, header=shell.header(), footer=shell.footer(),
   n=len(R), cards=COLUMNS, profile=G_PROFILE, write=G_WRITE,
   bars="".join('<div><dt>%d<span aria-hidden="true">★</span></dt><dd><span class="bar"><i style="width:%d%%"></i></span><b>%d</b></dd></div>'
                % (s, 100 if s == 5 else 0, len(R) if s == 5 else 0) for s in (5,4,3,2,1)))
 
-open("preview/reviews.html","w",encoding="utf-8").write(html)
-print("wrote preview/reviews.html — %d reviews, %d with an owner reply, %d rating-only"
+open("reviews.html","w",encoding="utf-8").write(html)
+print("wrote reviews.html")
+print("wrote reviews.html — %d reviews, %d with an owner reply, %d rating-only"
       % (len(R), sum(1 for r in R if r[5]), sum(1 for r in R if not r[4])))

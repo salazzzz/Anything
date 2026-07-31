@@ -2,13 +2,16 @@
 html, body { min-height: 100%; }
 body {
   background-color: #060606;
-  background-image: url("../images/bg-texture.webp");
+  /* root-absolute so this resolves the same wherever the stylesheet ends up */
+  background-image: url("/images/bg-texture.webp");
   background-repeat: repeat;
 }
 
 
 /* ---------- shared marks ---------- */
-.sec-rule { display: block; width: 44px; height: 1px; background: var(--accent); margin-bottom: 1rem; }
+/* 38px matches the homepage's inline value. These were 44 vs 38, so the accent
+   rule visibly changed width when you moved between pages. */
+.sec-rule { display: block; width: 38px; height: 1px; background: var(--accent); margin-bottom: 1rem; }
 .sec { padding: clamp(1.75rem, 3.5vw, 2.75rem) 0; border-bottom: 1px solid var(--accent); }
 .sec-h {
   margin: 0 0 1.25rem;
@@ -333,3 +336,124 @@ h1 {
 .xs-name { font-family: Georgia, serif; font-size: 1rem; color: #f4f7fb; }
 .xs-price { font-size: .82rem; color: rgba(244,247,251,.45); white-space: nowrap; }
 @media (max-width: 700px) { .xsell { grid-template-columns: 1fr; } }
+
+
+/* ================= full footer =================
+   Ported from the homepage's inline block so every page carries the same
+   footer. Four columns instead of three: gallery, reviews, add-ons and
+   membership had no site-wide links at all before this, which left them
+   orphaned for visitors and crawlers alike. */
+.ft { padding: clamp(2.25rem, 4vw, 3.25rem) 0 0; }
+.ft-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, .8fr) minmax(0, .7fr) minmax(0, .95fr);
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  align-items: start;
+}
+.ft-mark { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; }
+.ft-mark img { width: 40px; height: 40px; border-radius: 9px; }
+.ft-mark span { font-family: Georgia, serif; font-size: 1.08rem; color: #f4f7fb; letter-spacing: .01em; }
+.ft-note { margin: .9rem 0 0; max-width: 42ch; font-size: .875rem; line-height: 1.6; color: rgba(244,247,251,.6); }
+.ft-area { margin: .5rem 0 0; max-width: 46ch; font-size: .8rem; line-height: 1.6; color: rgba(244,247,251,.38); }
+
+.ft-col { display: flex; flex-direction: column; align-items: flex-start; gap: .6rem; }
+.ft-head {
+  margin-bottom: .2rem;
+  font-family: Georgia, serif; font-size: .68rem;
+  letter-spacing: .22em; text-transform: uppercase; color: rgba(244,247,251,.38);
+}
+.ft-col a {
+  position: relative; font-size: .9rem; color: rgba(244,247,251,.66);
+  text-decoration: none; transition: color .22s ease;
+}
+.ft-col a:hover { color: #f4f7fb; }
+.ft-col a::after {
+  content: ""; position: absolute; left: 0; bottom: -3px;
+  width: 0; height: 1px; background: var(--accent);
+  transition: width .28s cubic-bezier(.2,.7,.3,1);
+}
+.ft-col a:hover::after { width: 100%; }
+.ft-hours { font-size: .8rem; color: rgba(244,247,251,.38); }
+
+.ft-social { display: flex; gap: .5rem; margin-top: .35rem; }
+.ft-social a {
+  width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12);
+  transition: background-color .22s ease, border-color .22s ease, transform .22s cubic-bezier(.2,.7,.3,1);
+}
+.ft-social a::after { display: none; }
+.ft-social a:hover { background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.32); transform: translateY(-2px); }
+.ft-social img { width: 22px; height: 22px; object-fit: contain; }
+
+.ft-bottom { margin-top: clamp(1.75rem, 3vw, 2.5rem); border-top: 1px solid rgba(255,255,255,.09); }
+.ft-bottom p { margin: 0; font-size: .78rem; color: rgba(244,247,251,.35); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ft-col a, .ft-col a::after, .ft-social a { transition: none !important; }
+}
+
+
+/* ================= add-on cards =================
+   Add-ons used to be seven flat text chips with no page behind them. These are
+   deliberately smaller than the service tiers — the point is to scan the whole
+   menu at once, not to sell one item hard. */
+/* 260px lands four across in the container, so the seven add-ons wrap 4+3
+   rather than a lopsided 5+2. */
+.ao-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: .75rem; margin-top: .25rem;
+}
+.ao {
+  display: flex; flex-direction: column; gap: .3rem;
+  padding: .95rem 1.05rem; border-radius: 11px;
+  background: rgba(255,255,255,.028); border: 1px solid rgba(255,255,255,.12);
+  text-decoration: none; color: inherit;
+  transition: border-color .22s ease, background-color .22s ease, transform .22s cubic-bezier(.2,.7,.3,1);
+}
+a.ao:hover { border-color: rgba(255,255,255,.34); background: rgba(255,255,255,.055); transform: translateY(-2px); }
+.ao-top { display: flex; align-items: baseline; justify-content: space-between; gap: .75rem; }
+.ao-name { font-size: .95rem; font-weight: 600; color: #f4f7fb; }
+.ao-price { font-family: Georgia, serif; font-size: 1.02rem; color: #fff; white-space: nowrap; }
+.ao-note { margin: 0; font-size: .8rem; line-height: 1.5; color: rgba(244,247,251,.55); }
+
+/* the compact strip used at the foot of each service page */
+.ao-strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(178px, 1fr)); gap: .6rem; }
+.ao-strip .ao { padding: .7rem .85rem; }
+.ao-strip .ao-name { font-size: .875rem; }
+.ao-strip .ao-price { font-size: .92rem; }
+.ao-more { margin: 1.1rem 0 0; font-size: .86rem; color: rgba(244,247,251,.5); }
+.ao-more a { color: #8fbaff; }
+
+@media (prefers-reduced-motion: reduce) { .ao { transition: none !important; } }
+
+
+/* ================= membership plans ================= */
+.pl-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-top: .5rem; }
+.pl {
+  display: flex; flex-direction: column;
+  padding: 1.35rem 1.35rem 1.5rem; border-radius: 14px;
+  background: #0b1017; border: 1px solid rgba(255,255,255,.12);
+}
+.pl-best { border-color: rgba(47,107,255,.5); background: linear-gradient(178deg, rgba(47,107,255,.1), #0b1017); }
+.pl-name {
+  display: flex; align-items: center; gap: .5rem;
+  font-family: Georgia, serif; font-size: .72rem; letter-spacing: .2em;
+  text-transform: uppercase; color: rgba(244,247,251,.5);
+}
+.pl-name i {
+  font-style: normal; font-size: .6rem; letter-spacing: .12em;
+  padding: .2rem .5rem; border-radius: 999px;
+  background: rgba(47,107,255,.22); color: #cfe0ff;
+}
+.pl-price { margin: .7rem 0 0; font-family: Georgia, serif; font-size: 2.4rem; line-height: 1; color: #fff; }
+.pl-price sup { font-size: 1.1rem; top: -.6em; color: rgba(244,247,251,.55); margin-right: 2px; }
+.pl-price span.per { font-family: system-ui, sans-serif; font-size: .82rem; color: rgba(244,247,251,.45); margin-left: .35rem; }
+.pl-cadence { margin: .35rem 0 0; font-size: .8rem; color: rgba(244,247,251,.45); }
+.pl-save {
+  display: inline-block; margin: .65rem 0 0; padding: .22rem .6rem; border-radius: 999px;
+  background: rgba(52,199,123,.14); border: 1px solid rgba(52,199,123,.35);
+  font-size: .74rem; color: #7ee2ab;
+}
+.pl-blurb { margin: .85rem 0 .3rem; font-size: .875rem; line-height: 1.55; color: rgba(244,247,251,.6); }
+.pl .ticks { flex: 1; margin-top: .5rem; }
+.pl-cta { margin-top: 1.2rem; width: 100%; }

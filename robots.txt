@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
+
+# The retired design and the old preview build both 301 to the live pages.
+Disallow: /project/
+
 Sitemap: https://www.eurodetailing.com/sitemap.xml
 
 # LLM crawlers
@@ -9,7 +13,13 @@ Allow: /
 User-agent: Claude-Web
 Allow: /
 
+User-agent: ClaudeBot
+Allow: /
+
 User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 User-agent: Googlebot
