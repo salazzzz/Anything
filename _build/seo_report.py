@@ -37,7 +37,11 @@ import requests
 from google.auth.transport.requests import Request
 from google.oauth2 import service_account
 
-SITE = os.environ.get("GSC_SITE", "https://www.eurodetailing.com/")
+# eurodetailing.com is registered as a DOMAIN property, so the site key is
+# "sc-domain:eurodetailing.com" — not the "https://www.…/" URL-prefix form.
+# Using the wrong one returns 403 even when the service account has access.
+# Run `seo_report.py sites` to see the exact string Google expects.
+SITE = os.environ.get("GSC_SITE", "sc-domain:eurodetailing.com")
 SITEMAP = "https://www.eurodetailing.com/sitemap.xml"
 SCOPES = ["https://www.googleapis.com/auth/webmasters"]
 WM = "https://www.googleapis.com/webmasters/v3"

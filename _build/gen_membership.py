@@ -23,9 +23,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import seo, shell
 
 PATH = "/membership"
-TITLE = "Car Detailing Membership in Newton, MA | Euro Detailing"
-DESC = ("Recurring mobile detailing in Newton, MA — every 2 weeks, monthly, or "
-        "every 3 months. Members save up to 30% per visit. No contract, from $135.")
+TITLE = "Car Detailing Membership Newton MA — From $119/month"
+DESC = ("Recurring mobile detailing in Newton, MA — every 2 weeks, monthly, or every 3 months. Save up to 30% a visit, no contract, cancel any time. We come to you.")
 
 SIZES = [("sedan", "Sedan", "Coupe, small car"),
          ("suv", "SUV", "Crossover, wagon"),

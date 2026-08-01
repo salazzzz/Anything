@@ -12,9 +12,8 @@ import seo, shell
 from addondata import ADDONS
 
 PATH = "/addons"
-TITLE = "Car Detailing Add-ons in Newton, MA | Euro Detailing"
-DESC = ("Pet hair removal, seat extraction, engine bay, mold removal, clay bar and "
-        "waxing — add any of them to an interior, exterior or full detail. From $25.")
+TITLE = "Detailing Add-ons Newton MA — Pet Hair, Clay Bar, Wax"
+DESC = ("Pet hair removal, seat extraction, engine bay, mold removal, clay bar and waxing. Add any to an interior, exterior or full detail in Newton, MA. From $25.")
 
 ARROW = '<svg class="arw" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 

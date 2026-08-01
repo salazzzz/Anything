@@ -8,9 +8,9 @@ SIZES = [("sedan","Sedan","Coupe, small car"),("suv","SUV","Crossover, wagon"),(
 SERVICES = {
 "interior": dict(
   name="Interior Detailing", file="services/interior.html", path="/services/interior",
-  title="Interior Car Detailing in Newton, MA | Euro Detailing",
-  desc="Mobile interior car detailing in Newton, MA. Steam clean, stain removal, "
-       "leather conditioning and odor treatment — done in your driveway. From $105.",
+  title="Interior Car Detailing Newton MA — We Come to You",
+  desc="Mobile interior detailing in Newton, MA. Steam clean, stain and odor removal, "
+       "leather conditioned — in your driveway. From $105, 5.0 stars, pay after.",
   visual=("beforeafter", (("/images/after.webp", "Car interior after detailing"),
                           ("/images/before.webp", "The same interior before detailing"))),
   pitch=["A vacuum and a wipe-down moves dirt around. It doesn't take it out.",
@@ -32,9 +32,9 @@ SERVICES = {
 
 "exterior": dict(
   name="Exterior Detailing", file="services/exterior.html", path="/services/exterior",
-  title="Exterior Car Detailing &amp; Hand Wash in Newton, MA | Euro Detailing",
+  title="Exterior Car Detailing Newton MA — We Come to You",
   desc="Mobile exterior detailing in Newton, MA. Foam bath hand wash, clay bar "
-       "decontamination and up to six months of paint sealant. From $70.",
+       "decontamination, six months of sealant. From $70, 5.0 stars, pay after.",
   visual=("beforeafter", (("/images/gallery/bmw-x5m-matte-after.webp", "Matte black BMW X5 M after a full exterior detail"),
                           ("/images/gallery/bmw-x5m-matte-before.webp", "The same BMW X5 M before the detail, covered in road dust"))),
   pitch=["A wash gets the dirt off. It doesn't get the paint clean.",
@@ -54,9 +54,9 @@ SERVICES = {
 
 "bundle": dict(
   name="Interior + Exterior", file="services/bundle.html", path="/services/bundle",
-  title="Full Car Detailing, Inside and Out, in Newton, MA | Euro Detailing",
-  desc="Interior and exterior detailing in one mobile visit in Newton, MA. "
-       "Cheaper than booking both separately, and it takes one afternoon. From $150.",
+  title="Full Car Detailing Newton MA, Inside and Out — We Come to You",
+  desc="Interior and exterior detailing in one mobile visit in Newton, MA. Cheaper "
+       "than booking both separately and it takes one afternoon. From $150, 5.0 stars, pay after the job.",
   visual=("duo", None),
   pitch=["Inside and out, in a single visit.",
          "Most people book one and then wish they had booked both. A spotless interior makes tired paint obvious, and fresh paint makes a dusty dash impossible to ignore. Together it costs less than two separate appointments and takes one afternoon instead of two.",

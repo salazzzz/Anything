@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>if(window.matchMedia&&!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("js-anim")}</script>
 
-<title>Mobile Car Detailing in Newton, MA | Euro Detailing</title>
-<meta name="description" content="Owner-operated mobile car detailing in Newton, MA — we come to you. Interior, exterior and full detailing from $70, 5.0 stars across 10 Google reviews.">
+<title>Mobile Car Detailing in Newton, MA — We Come to You</title>
+<meta name="description" content="Owner-operated mobile car detailing in Newton, MA. We come to you at home or work — interior, exterior and full details from $70. 5.0 stars, 10 reviews, pay after the job.">
 <link rel="canonical" href="https://www.eurodetailing.com/">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 <meta name="author" content="Eric Salas">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Euro Detailing">
 <meta property="og:title" content="Mobile Car Detailing in Newton, MA | Euro Detailing">
-<meta property="og:description" content="Owner-operated mobile car detailing in Newton, MA — we come to you. Interior, exterior and full detailing from $70, 5.0 stars across 10 Google reviews.">
+<meta property="og:description" content="Owner-operated mobile car detailing in Newton, MA. We come to you at home or work — interior, exterior and full details from $70. 5.0 stars, 10 reviews, pay after the job.">
 <meta property="og:url" content="https://www.eurodetailing.com/">
 <meta property="og:image" content="https://www.eurodetailing.com/images/og-euro-detailing.webp">
 <meta property="og:image:alt" content="Euro Detailing — mobile car detailing in Newton, MA">
@@ -22,7 +22,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Mobile Car Detailing in Newton, MA | Euro Detailing">
-<meta name="twitter:description" content="Owner-operated mobile car detailing in Newton, MA — we come to you. Interior, exterior and full detailing from $70, 5.0 stars across 10 Google reviews.">
+<meta name="twitter:description" content="Owner-operated mobile car detailing in Newton, MA. We come to you at home or work — interior, exterior and full details from $70. 5.0 stars, 10 reviews, pay after the job.">
 <meta name="twitter:image" content="https://www.eurodetailing.com/images/og-euro-detailing.webp">
 
 <meta name="geo.region" content="US-MA">
@@ -1055,6 +1055,11 @@
   .header-actions .social-link,
   .header-actions .social-link1 { display: none; }
 }
+
+  /* Header phone — sized to sit beside Book Now without crowding it. */
+  .header-call { min-height: 44px; padding: 0 .95rem; gap: .45rem; font-size: .88rem; }
+  .header-call svg { flex: none; opacity: .8; }
+  @media (max-width: 1120px) { .header-call span { display: none; } .header-call { padding: 0 .8rem; } }
 </style>
 </head>
 <body>
@@ -1080,11 +1085,16 @@
     </nav>
 
     <div class="header-actions">
-      <a href="https://www.instagram.com/euro_detailingg" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Euro Detailing on Instagram">
-        <img src="/images/instagram.webp" alt="Euro Detailing on Instagram" width="60" height="60" decoding="async">
-      </a>
-      <a href="https://www.tiktok.com/@eurodetailing" target="_blank" rel="noopener noreferrer" class="social-link1" aria-label="Euro Detailing on TikTok">
-        <img src="/images/tiktok.webp" alt="Euro Detailing on TikTok" width="87" height="74" decoding="async">
+      <!-- The phone comes before everything else. This page takes 98% of the
+           site's search impressions, and the first tel: link used to sit at 58%
+           page depth while Instagram and TikTok held the header. Someone who
+           searched "car detailing near me" and landed here wants to call. The
+           socials are still in the footer. -->
+      <a href="tel:+17812903040" class="cta-ghost header-call">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M5.2 2.3 6.6 5 5.3 6.3a8.4 8.4 0 0 0 4.4 4.4L11 9.4l2.7 1.4v2.4c0 .5-.4.9-.9.8A11.6 11.6 0 0 1 2 3.1c0-.5.3-.9.8-.9h2.4Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        <span>(781) 290-3040</span>
       </a>
       <a href="#services" class="cta">
         <span>Book Now</span>

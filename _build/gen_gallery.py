@@ -3,7 +3,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import seo, shell
 
 PATH = "/gallery"
-TITLE = "Before &amp; After Detailing Gallery | Euro Detailing, Newton MA"
+TITLE = "Before &amp; After Detailing Photos — Newton, MA"
 DESC = ("Real before and after photos and video from mobile detailing jobs around "
         "Newton, MA — interiors, paint correction and wheels, all by Eric Salas.")
 
