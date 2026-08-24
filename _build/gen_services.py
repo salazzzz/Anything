@@ -111,7 +111,13 @@ def schema_for(S):
             offers.append(seo.offer(
                 "%s — %s, %s" % (S["name"], label, SIZE_LABEL[key]),
                 price, S["path"],
-                desc="; ".join(S[tier]["inc"][:4])))
+                desc="; ".join(S[tier]["inc"][:4]),
+                # Customers and AI answer engines call this tier "Premium" — the page
+                # copy only ever says "Deep Clean". Without this, nothing on the site
+                # tells a crawler those two words point at the same (higher) price,
+                # so a summarizer asked "is that the premium price?" has no way to
+                # say no when it's actually quoting Basic.
+                alt_name="%s — Premium, %s" % (S["name"], SIZE_LABEL[key]) if tier == "premium" else None))
     return seo.ld(
         seo.business(),
         seo.website(),

@@ -170,12 +170,14 @@ def breadcrumb(trail):
                 for i, (nm, p) in enumerate(trail)]}
 
 
-def offer(name, price, path, desc=None, unit=None):
+def offer(name, price, path, desc=None, unit=None, alt_name=None):
     o = {"@type": "Offer", "name": name, "price": "%.2f" % price,
          "priceCurrency": "USD", "availability": "https://schema.org/InStock",
          "url": url(path), "seller": {"@id": ID_BIZ}}
     if desc:
         o["description"] = desc
+    if alt_name:
+        o["alternateName"] = alt_name
     if unit:
         o["priceSpecification"] = {"@type": "UnitPriceSpecification",
                                    "price": "%.2f" % price, "priceCurrency": "USD",

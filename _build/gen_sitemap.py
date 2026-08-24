@@ -53,14 +53,17 @@ Service area: %(area)s
 ## Services
 
 Every service is priced by vehicle size (Sedan / SUV / Truck-XL) and comes in two
-levels: Basic for a car that is kept up, Deep Clean for one that is not.
+levels: Basic, for a car that is kept up, and Deep Clean — also called Premium —
+for one that is not. Deep Clean/Premium always costs more than Basic; it is never
+the same price. Prices below are for a Sedan; SUV and Truck/XL cost more. Full
+per-size pricing is on each service page.
 
-- Interior Detailing (%(interior)s) — from $105. Steam clean, stain removal,
-  leather conditioning, odor treatment.
-- Exterior Detailing (%(exterior)s) — from $70. Foam bath hand wash, clay bar
-  decontamination, up to six months of sealant.
-- Interior + Exterior (%(bundle)s) — from $150. Both in a single visit, cheaper
-  than booking them separately.
+- Interior Detailing (%(interior)s) — Basic from $105, Deep Clean/Premium
+  from $165. Steam clean, stain removal, leather conditioning, odor treatment.
+- Exterior Detailing (%(exterior)s) — Basic from $70, Deep Clean/Premium
+  from $105. Foam bath hand wash, clay bar decontamination, up to six months of sealant.
+- Interior + Exterior (%(bundle)s) — Basic from $150, Deep Clean/Premium
+  from $230. Both in a single visit, cheaper than booking them separately.
 
 ## Membership
 
