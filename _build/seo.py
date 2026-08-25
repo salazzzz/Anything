@@ -27,7 +27,10 @@ BIZ = dict(
     radius_mi=10,
     price_range="$$",
     rating="5.0",
-    review_count=10,
+    # The real Google total. The reviews page shows only the ones with written
+    # text (some are star-only), so it displays fewer than this — that is fine
+    # and correct, but never let the page CLAIM to show all of them unless it does.
+    review_count=13,
     social=["https://www.instagram.com/euro_detailingg",
             "https://www.tiktok.com/@eurodetailing"],
     google_review="https://g.page/r/CQPibJ1CNvd7EAE",

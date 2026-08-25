@@ -9,6 +9,7 @@ import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import seo
 from addondata import ADDONS
+from towndata import TOWNS
 
 LASTMOD = "2026-07-30"
 
@@ -21,6 +22,11 @@ PAGES = [
     ("/addons",             "monthly", "0.8"),
     ("/gallery",            "monthly", "0.8"),
     ("/reviews",            "monthly", "0.8"),
+] + [
+    # Service-area pages. High priority: these target the town queries we
+    # previously had no page for at all. See _build/towndata.py.
+    ("/mobile-car-detailing-%s-ma" % T["slug"], "monthly", "0.9")
+    for T in TOWNS
 ]
 
 
@@ -78,10 +84,21 @@ Any of these can be added to any package (%(addons)s):
 
 %(addon_list)s
 
+## Service areas
+
+Pages covering the towns we work in most, with the local parking and access
+details that actually matter for a mobile detailer:
+
+%(town_list)s
+
+Anywhere else within 10 miles of Newton is served too — these are just the areas
+with a page of their own.
+
 ## Other pages
 
 - Gallery (%(gallery)s) — real before/after photos and video from local jobs.
-- Reviews (%(reviews_url)s) — all %(reviews)d Google reviews in full.
+- Reviews (%(reviews_url)s) — 5.0 stars across %(reviews)d Google reviews. Every review
+  that came with a written comment is quoted there in full.
 
 Booking is through Cal.com links on each service page, or by phone/text to %(tel)s.
 """ % dict(
@@ -90,7 +107,13 @@ Booking is through Cal.com links on each service page, or by phone/text to %(tel
         interior=seo.url("/services/interior"), exterior=seo.url("/services/exterior"),
         bundle=seo.url("/services/bundle"), membership=seo.url("/membership"),
         addons=seo.url("/addons"), gallery=seo.url("/gallery"),
-        reviews_url=seo.url("/reviews"), addon_list=addons)
+        reviews_url=seo.url("/reviews"), addon_list=addons,
+        town_list="\n".join(
+            "- %s (%s) — %s" % (
+                T["town"],
+                seo.url("/mobile-car-detailing-%s-ma" % T["slug"]),
+                T["desc"].split(".")[0].strip() + ".")
+            for T in TOWNS))
 
 
 def robots():

@@ -9,6 +9,12 @@ link graph for the whole site.
 Header stays at three items by instruction. Everything else lives in the footer.
 """
 
+import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import seo
+
 TEL = "+17812903040"
 TEL_TXT = "+1 781-290-3040"
 
@@ -51,7 +57,7 @@ def footer(home=False):
         <span>Euro Detailing</span>
       </a>
       <p class="ft-note">Mobile car detailing in Newton, MA 02465 &mdash; we come to you.</p>
-      <p class="ft-area">Serving Newton, Waltham, Watertown, Brighton, Weston, Belmont, Needham, Wellesley, Allston, Brookline, Dedham and Boston.</p>
+      <p class="ft-area">Serving <a href="/mobile-car-detailing-west-newton-ma">West Newton</a>, the rest of Newton, <a href="/mobile-car-detailing-waltham-ma">Waltham</a>, <a href="/mobile-car-detailing-watertown-ma">Watertown</a>, Brighton, Weston, Belmont, Needham, Wellesley, Allston, Brookline, Dedham and Boston.</p>
     </div>
 
     <nav class="ft-col" aria-label="Services">
@@ -99,8 +105,8 @@ TRUST = """<div class="trust-strip">
   <div class="container">
     <span class="g-logo" aria-hidden="true"></span>
     <b>5.0</b><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-    <span>10 Google reviews</span><span class="dot"></span>
+    <span>%d Google reviews</span><span class="dot"></span>
     <span>We come to you</span><span class="dot"></span>
     <span>Pay after the job</span>
   </div>
-</div>"""
+</div>""" % seo.BIZ["review_count"]
