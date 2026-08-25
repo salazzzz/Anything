@@ -103,8 +103,8 @@ def schema_for(T):
 def travel_line(T):
     """One honest sentence about distance. The base town gets a different one."""
     if T.get("home"):
-        return ("<p>This is our home base, so there is no travel time, no travel "
-                "charge and no minimum job size.</p>")
+        return ("<p>This is our home base, so there is no travel time and no "
+                "travel charge.</p>")
     d = miles(BASE, T["coord"])
     return ('<p>%s is about <strong>%.1f miles</strong> from our base in West Newton '
             '&mdash; well inside the 10 mile radius we serve, so there is no travel '
