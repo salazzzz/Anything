@@ -1,11 +1,12 @@
 {
-  "_instructions": "Owner guide. To add a PHOTO: drop the image into /images/gallery/, then add an entry with type \"image\", src (path under images/gallery/), alt (short descriptive sentence), category (interior, exterior, or wheels), and w/h (pixel size). To add a VIDEO: drop the .mp4 into /videos/ and a poster image into /images/gallery/, then add an entry with type \"video\", src (poster path), video (mp4 path), duration (ISO 8601 like PT12S), alt, category, and w/h (poster size). Newest entries can go at the top.",
+  "_instructions": "Owner guide. To add a PHOTO: drop the image into /images/gallery/, then add an entry with type \"image\", src (path under images/gallery/), alt (short descriptive sentence), category (interior, exterior, or wheels), and w/h (pixel size). To add a VIDEO: drop the .mp4 into /videos/ and a poster image into /images/gallery/, then add an entry with type \"video\", src (poster path), video (mp4 path), duration (ISO 8601 like PT12S), alt, category, and w/h (poster size). OPTIONAL but worth doing: add \"town\" with the town the job was actually in (e.g. \"West Newton\", \"Waltham\", \"Watertown\"). It is used to show real local work on that town's service-area page, which is what makes those pages rank. Only put a town you genuinely did the job in — leave it out if you are not sure. Newest entries can go at the top.",
   "items": [
     {
       "type": "image",
       "src": "images/gallery/bmw-x5m-matte-after.webp",
       "alt": "Matte black BMW X5 M after a full exterior detail in Newton, MA",
       "category": "exterior",
+      "town": "",
       "w": 1200,
       "h": 900
     },
@@ -14,6 +15,7 @@
       "src": "images/gallery/bmw-x5m-matte-before.webp",
       "alt": "The same matte black BMW X5 M before the detail, covered in road dust",
       "category": "exterior",
+      "town": "",
       "w": 1200,
       "h": 900
     },
@@ -22,6 +24,7 @@
       "src": "images/gallery/audi-q8-black-exterior.webp",
       "alt": "Glossy black Audi Q8 after a full exterior detail and hand wash in Newton, MA",
       "category": "exterior",
+      "town": "",
       "w": 1536,
       "h": 1024
     },
@@ -32,6 +35,7 @@
       "duration": "PT12S",
       "alt": "Walkaround video of a freshly detailed sedan with a deep, glossy paint finish, Newton MA",
       "category": "exterior",
+      "town": "",
       "w": 464,
       "h": 832
     },
@@ -40,6 +44,7 @@
       "src": "images/gallery/mercedes-gle-front-interior.webp",
       "alt": "Detailed Mercedes-Benz GLE black leather front interior and dashboard, Newton MA mobile detailing",
       "category": "interior",
+      "town": "",
       "w": 1046,
       "h": 1014
     },
@@ -50,6 +55,7 @@
       "duration": "PT5S",
       "alt": "Video of a detailed Nissan Rogue cargo area with cleaned carpet and trim, Newton MA",
       "category": "interior",
+      "town": "",
       "w": 832,
       "h": 464
     },
@@ -58,6 +64,7 @@
       "src": "images/gallery/mercedes-gle-snow-foam-wash.webp",
       "alt": "Mercedes-Benz GLE SUV covered in snow foam during an exterior hand wash in Newton, MA",
       "category": "exterior",
+      "town": "",
       "w": 1206,
       "h": 1606
     },
@@ -66,6 +73,7 @@
       "src": "images/gallery/mercedes-amg-wheel-polished.webp",
       "alt": "Polished Mercedes-AMG alloy wheel and tire after wheel detailing in Newton, MA",
       "category": "wheels",
+      "town": "",
       "w": 1061,
       "h": 1060
     },
@@ -76,6 +84,7 @@
       "duration": "PT2S",
       "alt": "Video of a Nissan Rogue rear door open showing a cleaned and conditioned interior, Newton MA",
       "category": "interior",
+      "town": "",
       "w": 832,
       "h": 464
     },
@@ -84,6 +93,7 @@
       "src": "images/gallery/bmw-x3m-interior-dashboard.webp",
       "alt": "Detailed BMW X3 M black leather interior, steering wheel and dashboard, Newton MA",
       "category": "interior",
+      "town": "",
       "w": 1206,
       "h": 888
     },
@@ -92,6 +102,7 @@
       "src": "images/gallery/audi-cargo-area-clean.webp",
       "alt": "Spotless black Audi SUV cargo area after interior detailing, Newton MA",
       "category": "interior",
+      "town": "",
       "w": 1206,
       "h": 1554
     },
@@ -102,6 +113,7 @@
       "duration": "PT4S",
       "alt": "Walkthrough video of a Mercedes-Benz beige leather interior after detailing, Newton MA",
       "category": "interior",
+      "town": "",
       "w": 464,
       "h": 832
     },
@@ -110,6 +122,7 @@
       "src": "images/gallery/acura-mdx-snow-foam-wash.webp",
       "alt": "Acura MDX covered in snow foam during a mobile exterior wash in Newton, MA",
       "category": "exterior",
+      "town": "",
       "w": 1206,
       "h": 1029
     },
@@ -118,6 +131,7 @@
       "src": "images/gallery/mercedes-amg-wheel-closeup.webp",
       "alt": "Close-up of a cleaned Mercedes-AMG alloy wheel and tire after detailing, Newton MA",
       "category": "wheels",
+      "town": "",
       "w": 1206,
       "h": 1699
     },
@@ -128,6 +142,7 @@
       "duration": "PT2S",
       "alt": "Video of a red Nissan Rogue front end with a clean, glossy finish after detailing, Newton MA",
       "category": "exterior",
+      "town": "",
       "w": 832,
       "h": 464
     },
@@ -136,6 +151,7 @@
       "src": "images/gallery/mercedes-beige-rear-seats.webp",
       "alt": "Mercedes-Benz beige leather rear seats during an interior detail in Newton, MA",
       "category": "interior",
+      "town": "",
       "w": 768,
       "h": 1024
     },
@@ -144,6 +160,7 @@
       "src": "images/gallery/weathertech-mat-restoration.webp",
       "alt": "Before and after plastic restoration of faded WeatherTech floor liners back to deep black, Newton MA",
       "category": "interior",
+      "town": "",
       "w": 1206,
       "h": 1399
     },
@@ -152,6 +169,7 @@
       "src": "images/gallery/audi-blue-cargo-area.webp",
       "alt": "Blue Audi SUV cargo area cleaned with rear seats folded, Newton MA mobile detailing",
       "category": "interior",
+      "town": "",
       "w": 768,
       "h": 1024
     },
@@ -160,6 +178,7 @@
       "src": "images/gallery/chevy-snow-foam-wash.webp",
       "alt": "Chevrolet SUV covered in snow foam during a mobile hand wash in Newton, MA",
       "category": "exterior",
+      "town": "",
       "w": 1206,
       "h": 1084
     },
@@ -168,6 +187,7 @@
       "src": "images/gallery/mercedes-beige-interior-cleaned.webp",
       "alt": "Cleaned Mercedes-Benz beige leather interior and detailed carpets, Newton MA",
       "category": "interior",
+      "town": "",
       "w": 768,
       "h": 1024
     },
@@ -176,6 +196,7 @@
       "src": "images/gallery/suv-cargo-liner-clean.webp",
       "alt": "Detailed SUV cargo area with a freshly cleaned rubber floor liner, Newton MA",
       "category": "interior",
+      "town": "",
       "w": 768,
       "h": 1024
     },
@@ -184,6 +205,7 @@
       "src": "images/gallery/mobile-detailing-setup-driveway.webp",
       "alt": "Euro Detailing mobile setup with equipment and signage at a Newton, MA driveway",
       "category": "exterior",
+      "town": "",
       "w": 1086,
       "h": 1448
     }

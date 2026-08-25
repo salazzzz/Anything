@@ -3,9 +3,11 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import seo, shell
 
 PATH = "/reviews"
-TITLE = "Reviews — 5.0 Stars from 10 Google Reviews | Euro Detailing"
-DESC = ("Every Google review for Euro Detailing, mobile car detailing in Newton, MA. "
-        "5.0 stars across 10 reviews, with Eric's replies.")
+TITLE = ("Reviews — 5.0 Stars from %d Google Reviews | Euro Detailing"
+         % seo.BIZ["review_count"])
+DESC = ("Google reviews for Euro Detailing, mobile car detailing in Newton, MA. "
+        "5.0 stars across %d reviews, with Eric's replies."
+        % seo.BIZ["review_count"])
 
 
 def schema():
@@ -152,8 +154,9 @@ html = """<!DOCTYPE html>
     <div>
       <span class="sec-rule" aria-hidden="true"></span>
       <h1>What people say</h1>
-      <p class="lede">Every review below is on our Google Business Profile. Nothing here is written by us,
-         and nothing has been left out &mdash; this is all of them.</p>
+      <p class="lede">Every review below is on our Google Business Profile. Nothing here is written by us.
+         We hold 5.0 stars across %(total)d reviews, and every one that came with a written
+         comment is reproduced below word for word.</p>
     </div>
 
     <aside class="score">
@@ -192,9 +195,11 @@ html = """<!DOCTYPE html>
 """ % dict(
   head=seo.head(TITLE, DESC, PATH, css=("/styles.css", "/tpl.css", "/reviews.css")),
   schema=schema(), skip=shell.SKIP, header=shell.header(), footer=shell.footer(),
-  n=len(R), cards=COLUMNS, profile=G_PROFILE, write=G_WRITE,
+  n=seo.BIZ["review_count"], total=seo.BIZ["review_count"], written=len(R),
+  cards=COLUMNS, profile=G_PROFILE, write=G_WRITE,
   bars="".join('<div><dt>%d<span aria-hidden="true">★</span></dt><dd><span class="bar"><i style="width:%d%%"></i></span><b>%d</b></dd></div>'
-               % (s, 100 if s == 5 else 0, len(R) if s == 5 else 0) for s in (5,4,3,2,1)))
+               % (s, 100 if s == 5 else 0, seo.BIZ["review_count"] if s == 5 else 0)
+               for s in (5,4,3,2,1)))
 
 open("reviews.html","w",encoding="utf-8").write(html)
 print("wrote reviews.html")

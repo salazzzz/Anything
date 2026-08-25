@@ -13,6 +13,11 @@
       "permanent": true
     },
     {
+      "source": "/PremiumCombo.html",
+      "destination": "/services/bundle",
+      "permanent": true
+    },
+    {
       "source": "/testimonials",
       "destination": "/reviews",
       "permanent": true
